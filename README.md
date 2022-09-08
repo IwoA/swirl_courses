@@ -9,13 +9,6 @@ Here are our current offerings, organized by level of difficulty:
 #### Beginner
 
 - **R Programming**: The basics of programming in R
-- [**R Programming E**](https://github.com/swirldev/R_Programming_E): Same as the original, but modified slightly for in-class use (see below ***)
-- [**The R Programming Environment**](https://swirlstats.com/scn/rpe.html)
-<!-- - **Data Analysis**: Basic ideas in statistics and data visualization -->
-<!-- - **Mathematical Biostatistics Boot Camp**: One- and two-sample t-tests, power, and sample size -->
-<!-- - **Open Intro**: A very basic introduction to statistics, data analysis, and data visualization -->
-
-\*\*\* *R Programming E is identical to R Programming, except we've eliminated the prompts for Coursera credentials at the end of each lesson and instead give students the option to send an email to their instructor notifying them of completion. Admittedly, it's sort of a hack until we come up with a more robust solution for in-class use (i.e. an instructor "dashboard").*
 
 #### Intermediate
 
@@ -34,13 +27,6 @@ relevance to big data, issues of multiple testing and resampling.
 - [**Advanced R Programming**](https://swirlstats.com/scn/arp.html)
 
 Since our users come from a variety backgrounds, it's very hard to label material as **Beginner**, **Intermediate**, or **Advanced**. If you find something that is labelled **Beginner** to be challenging, please don't be discouraged. The first step of learning anything is to acknowledge that you are capable of understanding it. True understanding will come with time and practice.
-
-#### Course Authors
-
-- **Writing swirl Courses**: An interactive guides and example 
-  for swirl course authors. The first group of lessons cover basics. The rest cover 
-  special topics useful primarily as samples--points of departure for one's own material.
-  For more comprehensive documentation about writing your own swirl courses see http://swirlstats.com/swirlify/.
 
 ## Install and run a course automatically from swirl
 

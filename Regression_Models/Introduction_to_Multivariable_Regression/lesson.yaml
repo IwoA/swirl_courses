@@ -143,9 +143,8 @@
   Output: "We have illustrated that regression in many variables amounts to a series of regressions in one. The actual algorithms used by functions such as lm are more efficient, but are computationally equivalent to what we have done. That is, the algorithms use equivalent steps but combine them more efficiently and abstractly. This completes the lesson."
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""

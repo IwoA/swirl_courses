@@ -16,33 +16,20 @@ getExpr <- function(){
   getState()$expr
 }
 
-coursera_on_demand <- function(){
-  selection <- getState()$val
-  if(selection == "Yes"){
-    email <- readline("What is your email address? ")
-    token <- readline("What is your assignment token? ")
-    
-    payload <- sprintf('{  
-      "assignmentKey": "-ACWUq8VEeWyvg4disSh_Q",
-      "submitterEmail": "%s",  
-      "secret": "%s",  
-      "parts": {  
-        "bMOHi": {  
-          "output": "correct"  
-        }  
-      }  
-    }', email, token)
-    url <- 'https://www.coursera.org/api/onDemandProgrammingScriptSubmissions.v1'
-  
-    respone <- httr::POST(url, body = payload)
-    if(respone$status_code >= 200 && respone$status_code < 300){
-      message("Grade submission succeeded!")
-    } else {
-      message("Grade submission failed.")
-      message("Press ESC if you want to exit this lesson and you")
-      message("want to try to submit your grade at a later time.")
-      return(FALSE)
-    }
-  }
-  TRUE
+save_credit <- function(){
+     selection <- getState()$val
+     if(selection == "Yes"){
+          name <- readline("What is your name? (first name and surname) ")
+          id <- readline("What is your student's number? ")
+          lesson <- "Vectors"
+          if (file.exists("results.RDS")) {
+               tmp <- readRDS('results.RDS')
+               new <- data.frame(name = name, id = id, lesson = lesson, time = Sys.time())
+               tmp <- rbind(tmp,new)
+          } else {
+               tmp <- data.frame(name = name, id = id, lesson = lesson, time = Sys.time()) 
+          }
+          saveRDS(tmp, "results.RDS")
+     }
+     TRUE
 }

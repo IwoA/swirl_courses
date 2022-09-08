@@ -301,9 +301,8 @@
   Output: In this lesson, you learned how to manipulate data using dplyr's five main functions. In the next lesson, we'll look at how to take advantage of some other useful features of dplyr to make your life as a data analyst much easier.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""

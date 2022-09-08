@@ -172,10 +172,9 @@
   Output: Simulation is practically a field of its own and we've only skimmed the surface of what's possible. I encourage you to explore these and other functions further on your own.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""
 

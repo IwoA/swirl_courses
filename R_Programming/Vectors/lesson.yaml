@@ -258,9 +258,8 @@
     characters "1", "2", "3", and "4".
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""
