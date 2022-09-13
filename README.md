@@ -1,32 +1,18 @@
-# swirl courses
+# swirl courses for **Programming in R and Python** course at Wroclaw University of Economics and Business
 
-This is a collection of interactive courses for use with the [swirl R package](http://swirlstats.com). You'll find instructions for installing courses further down on this page. Some courses are still in development and we'd love to hear any [suggestions](https://github.com/swirldev/swirl_courses/issues/new) you have as you work through them.
+This is a collection of interactive courses for use with the [swirl R package](http://swirlstats.com). 
 
-For more information regarding swirl, visit [swirlstats.com](http://swirlstats.com) or the [swirl GitHub repository](https://github.com/swirldev/swirl). If you'd like to write your own interactive content, please visit the [Instructors page](http://swirlstats.com/instructors.html) of our website.
 
-Here are our current offerings, organized by level of difficulty:
+For more information regarding swirl, visit [swirlstats.com](http://swirlstats.com) or the [swirl GitHub repository](https://github.com/swirldev/swirl).
 
-#### Beginner
+There are following courses to finish, organized by level of difficulty:
 
-- **R Programming**: The basics of programming in R
 
-#### Intermediate
+1. **R Programming**: The basics of programming in R
+2. **Regression Models**: The basics of regression modeling in R
+3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my!
 
-- **Regression Models**: The basics of regression modeling in R
-- **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my!
 
-#### Advanced
-
-- **Statistical Inference**: This intermediate to advanced level course closely follows the
-[Statistical Inference course](https://www.coursera.org/course/statinference) of the Johns Hopkins 
-[Data Science Specialization](https://www.coursera.org/specialization/jhudatascience/1) on Coursera. It
-introduces the student to basic concepts of statistical inference
-including probability, hypothesis testing, confidence intervals and
-p-values. It concludes with an initiation to topics of particular
-relevance to big data, issues of multiple testing and resampling.
-- [**Advanced R Programming**](https://swirlstats.com/scn/arp.html)
-
-Since our users come from a variety backgrounds, it's very hard to label material as **Beginner**, **Intermediate**, or **Advanced**. If you find something that is labelled **Beginner** to be challenging, please don't be discouraged. The first step of learning anything is to acknowledge that you are capable of understanding it. True understanding will come with time and practice.
 
 ## Install and run a course automatically from swirl
 
@@ -38,35 +24,22 @@ Since our users come from a variety backgrounds, it's very hard to label materia
 install.packages("swirl")
 ```
 
-2) Enter the following from the R console, **substituting the name of the course** that you wish to install:
+2) Enter the following from the R console:
 
 ```
 library(swirl)
-install_course("Course Name Here")
+install_course_github("IwoA", "Course Name Here")
 swirl()
 ```
 
-For example, `install_course("R Programming")` will install the R Programming course. **Please note that course names are case sensitive!**
+For example, `install_course_github("IwoA", "R Programming")` will install the R Programming course. **Please note that course names are case sensitive!**
 
-If that doesn't work for you...
+## Submit results
 
-## Install and run a course manually
-
-If the automatic course installation method outlined above does not work for you, then there's a simple alternative.
-
-1. Find the course you want to install on the [Swirl Course network website](https://swirlstats.com/scn/title.html).
-2. Follow the manual installation instructions on the course page.
-
-If that does not work for you, consider taking a look at the 
-[legacy manual install instructions](https://github.com/swirldev/swirl_courses/wiki/Legacy-Manual-Install-Instructions-for-Swirl-Courses).
+After completing part of the course you will be asked if you wish to save your progress. If you confirm your progress will be saved to file `results.RDS` which you can send to your instructor.
 
 ## Uninstall a course
 
 If you'd like to remove a course at any time, you can use `uninstall_course("Course Name Here")`.
 
-## Using swirl in the classroom
 
-Instructors around the world are using swirl in their classrooms. We think this is awesome. If you're an instructor, please feel free to do the same -- free of charge. While your students may be paying to take your course or attend your institution, we simply ask that you don't charge people *directly* for the use of our software or instructional content.
-
-If you are not sure about a particular use case, don't hesitate to post a
-question to our [Google Group](https://groups.google.com/forum/#!forum/swirl-discuss).
