@@ -28,11 +28,9 @@ install.packages("swirl")
 
 ```
 library(swirl)
-install_course_github("IwoA", "Course Name Here")
+install_course_github("IwoA", "swirl_courses", multi = TRUE)
 swirl()
 ```
-
-For example, `install_course_github("IwoA", "R Programming")` will install the R Programming course. **Please note that course names are case sensitive!**
 
 ## Submit results
 
@@ -40,6 +38,6 @@ After completing part of the course you will be asked if you wish to save your p
 
 ## Uninstall a course
 
-If you'd like to remove a course at any time, you can use `uninstall_course("Course Name Here")`.
+If you'd like to remove a course at any time, you can use `uninstall_course("swirl_courses")`.
 
 
