@@ -1,11 +1,11 @@
-# Repeat your calls to gather() and separate(), but this time
+# Repeat your calls to pivot_longer() and separate(), but this time
 # use the %>% operator to chain the commands together without
 # storing an intermediate result.
 #
 # If this is your first time seeing the %>% operator, check
 # out ?chain, which will bring up the relevant documentation.
 # You can also look at the Examples section at the bottom
-# of ?gather and ?separate.
+# of ?pivot_longer and ?separate.
 #
 # The main idea is that the result to the left of %>%
 # takes the place of the first argument of the function to
@@ -13,6 +13,6 @@
 # function.
 #
 students2 %>%
-  gather(sex_class, count, -grade) %>%
-  separate(sex_class, c("sex", "class")) %>%
-  print
+     pivot_longer(cols = -grade, names_to = "sex_class", values_to = "count") %>%
+     separate(sex_class, c("sex", "class")) %>%
+     print

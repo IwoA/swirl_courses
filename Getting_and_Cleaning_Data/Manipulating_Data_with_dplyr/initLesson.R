@@ -1,5 +1,5 @@
 ### Code used to download and save data
-# logurl <- 'http://cran-logs.rstudio.com/2014/2014-07-08.csv.gz'
+# logurl <- 'http://cran-logs.rstudio.com/2022/2022-09-21.csv.gz'
 # filepath <- paste0('~/', basename(logurl))
 # download.file(logurl, filepath)
 # cranlog <- read.csv(filepath)

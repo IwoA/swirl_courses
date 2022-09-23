@@ -7,12 +7,13 @@
 # cranlog <- read.csv(filepath)
 # write.csv(cranlog, '~/Desktop/2014-07-08.csv')
 # unlink(filepath)
-
+# 
 path2csv <- file.path('~/Desktop/2014-07-08.csv')
 
 
 ### Intro
 df <- read.csv(path2csv, as.is = TRUE)
+#df <- read.csv("https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data/Manipulating_Data_with_dplyr/2014-07-08.csv", as.is = T)
 dim(df)
 head(df)
 library(dplyr)

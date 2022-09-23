@@ -12,8 +12,8 @@ library(dplyr)
 
 # column headers are values, not variable names
 
-?gather
-gather(students, sex, count, -grade)
+?pivot_longer
+pivot_longer(students, cols = -grade, names_to = sex, values_to = count)
 
 # multiple variables are stored in one column
 
@@ -21,23 +21,23 @@ gather(students, sex, count, -grade)
 # variables are stored in both rows and columns
 
 students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE)
+     pivot_longer(class, cols = class1:class5, names_to = grade,na.rm = TRUE)
 
 # res2 <- students3 %>%
-#   gather(class, grade, class1:class5, na.rm = TRUE) %>%
+#   pivot_longer(class, cols = class1:class5, names_to = grade,na.rm = TRUE) %>%
 #   mutate(class = parse_numeric(class)) %>%
 #   select(name, class, test, grade) %>%
 #   arrange(name, class)
 
-# res2 %>% spread(test, grade)
+# res2 %>% pivot_wider(names_from = test, values_from = grade)
 
 students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE) %>%
-  spread(test, grade)
+     pivot_longer(class, cols = class1:class5, names_to = grade,na.rm = TRUE) %>%
+     pivot_wider(names_from = test, values_from = grade)
 
 students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE) %>%
-  spread(test, grade) %>%
+     pivot_longer(class, cols = class1:class5, names_to = grade,na.rm = TRUE) %>%
+     pivot_wider(names_from = test, values_from = grade) %>%
   mutate(class = parse_numeric(class))
 
 
@@ -67,7 +67,7 @@ rbind_list(passed, failed) %>%
 # real data examples
 
 sat1 <- select(sat, -contains("total"))
-sat1 <- gather(sat1, column, count, -score_range)
+sat1 <- pivot_longer(sat1, cols = -score_range, names_to = column, values_to = count)
 sat1 <- separate(sat1, column, c("part", "sex"))
 sat1
 
@@ -80,13 +80,13 @@ sat2 <- mutate(by_part,
 arrange(sat1, desc(count))
 
 sat %>%
-  gather("column", "count", -score_range) %>%
+     pivot_longer(cols = -score_range, names_to = column, values_to = count) %>%
   separate(column, c("part", "sex"))
 	
 	
 sat %>%
   select(-contains("total")) %>%
-  gather(column, count, -score_range) %>%
+     pivot_longer(cols = -score_range, names_to = column, values_to = count) %>%
   separate(column, c("part", "sex")) %>%
   group_by(part, sex) %>%
   mutate(total = sum(count),

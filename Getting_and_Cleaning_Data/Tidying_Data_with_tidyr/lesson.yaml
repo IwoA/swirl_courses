@@ -47,22 +47,22 @@
   Output: "This dataset actually has three variables: grade, sex, and count. The first variable, grade, is already a column, so that should remain as it is. The second variable, sex, is captured by the second and third column headings. The third variable, count, is the number of students for each combination of grade and sex."
 
 - Class: cmd_question
-  Output: To tidy the students data, we need to have one column for each of these three variables. We'll use the gather() function from tidyr to accomplish this. Pull up the documentation for this function with ?gather.
-  CorrectAnswer: ?gather
-  AnswerTests: gets_help('gather')
-  Hint: Use ?gather to pull up the documentation.
+  Output: To tidy the students data, we need to have one column for each of these three variables. We'll use the pivot_longer() function from tidyr to accomplish this. Pull up the documentation for this function with ?pivot_longer.
+  CorrectAnswer: ?pivot_longer
+  AnswerTests: gets_help('pivot_longer')
+  Hint: Use ?pivot_longer to pull up the documentation.
 
 - Class: cmd_question
-  Output: "Using the help file as a guide, call gather() with the following arguments (in order): students, sex, count, -grade. Note the minus sign before grade, which says we want to gather all columns EXCEPT grade."
-  CorrectAnswer: gather(students, sex, count, -grade)
-  AnswerTests: match_call('gather(students, sex, count, -grade)')
-  Hint: "gather(students, sex, count, -grade) will properly tidy the students data, so that it has three columns: grade, sex, and count."
+  Output: "Using the help file as a guide, call pivot_longer() with the following arguments: -grade, 'sex', 'count'. "
+  CorrectAnswer: pivot_longer(students, cols = -grade, names_to = "sex", values_to = "count")
+  AnswerTests: match_call('pivot_longer(students, cols = -grade, names_to = "sex", values_to = "count")')
+  Hint: "pivot_longer(students, cols = -grade, names_to = 'sex', values_to = 'count') will properly tidy the students data, so that it has three columns: grade, sex, and count."
 
 - Class: text
   Output: Each row of the data now represents exactly one observation, characterized by a unique combination of the grade and sex variables. Each of our variables (grade, sex, and count) occupies exactly one column. That's tidy data!
 
 - Class: text
-  Output: It's important to understand what each argument to gather() means. The data argument, students, gives the name of the original dataset. The key and value arguments -- sex and count, respectively -- give the column names for our tidy dataset. The final argument, -grade, says that we want to gather all columns EXCEPT the grade column (since grade is already a proper column variable.)
+  Output: It's important to understand what each argument to pivot_longer() means. The data argument, students, gives the name of the original dataset. The key and value arguments -- sex and count, respectively -- give the column names for our tidy dataset. The first argument, -grade, says that we want to gather all columns EXCEPT the grade column (since grade is already a proper column variable.)
 
 - Class: cmd_question
   Output: The second messy data case we'll look at is when multiple variables are stored in one column. Type students2 to see an example of this.
@@ -77,10 +77,10 @@
   Output: However, it also has multiple variables stored in each column (sex and class), which is another common symptom of messy data. Tidying this dataset will be a two step process.
 
 - Class: cmd_question
-  Output: Let's start by using gather() to stack the columns of students2, like we just did with students. This time, name the 'key' column sex_class and the 'value' column count. Save the result to a new variable called res. Consult ?gather again if you need help.
-  CorrectAnswer: res <- gather(students2, sex_class, count, -grade)
-  AnswerTests: match_call('res <- gather(students2, sex_class, count, -grade)')
-  Hint: "Call gather() with the following arguments (in order): students2, sex_class, count, -grade). Store the result in a variable called res."
+  Output: Let's start by using pivot_longer() to stack the columns of students2, like we just did with students. This time, name the 'key' column sex_class and the 'value' column count. Save the result to a new variable called res. Consult ?pivot_longer again if you need help.
+  CorrectAnswer: res <- pivot_longer(students2, cols = -grade, names_to = "sex_class", values_to = "count")
+  AnswerTests: match_call('res <- pivot_longer(students2, cols = -grade, names_to = "sex_class", values_to = "count")')
+  Hint: "Call pivot_longer() with the following arguments (in order): students2, cols = -grade, names_to = sex_class, values_to = count). Store the result in a variable called res."
 
 - Class: cmd_question
   Output: Print res to the console to see what we accomplished.
@@ -104,7 +104,7 @@
   Output: Conveniently, separate() was able to figure out on its own how to separate the sex_class column. Unless you request otherwise with the 'sep' argument, it splits on non-alphanumeric values. In other words, it assumes that the values are separated by something other than a letter or number (in this case, an underscore.)
 
 - Class: text
-  Output: Tidying students2 required both gather() and separate(), causing us to save an intermediate result (res). However, just like with dplyr, you can use the %>% operator to chain multiple function calls together.
+  Output: Tidying students2 required both pivot_longer() and separate(), causing us to save an intermediate result (res). However, just like with dplyr, you can use the %>% operator to chain multiple function calls together.
 
 - Class: script
   Output: I've opened an R script for you to give this a try. Follow the directions in the script, then save the script and type submit() at the prompt when you are ready. If you get stuck and want to start over, you can type reset() to reset the script to its original state.
@@ -131,10 +131,10 @@
   Script: script2.R
 
 - Class: cmd_question
-  Output: The next step will require the use of spread(). Pull up the documentation for spread() now.
-  CorrectAnswer: ?spread
-  AnswerTests: gets_help('spread')
-  Hint: Type ?spread to pull up the documentation.
+  Output: The next step will require the use of pivot_wider(). Pull up the documentation for pivot_wider() now.
+  CorrectAnswer: ?pivot_wider
+  AnswerTests: gets_help('pivot_wider')
+  Hint: Type ?pivot_wider to pull up the documentation.
 
 - Class: script
   Output: Edit the R script, then save it and type submit() when you are ready. Type reset() to reset the script to its original state.

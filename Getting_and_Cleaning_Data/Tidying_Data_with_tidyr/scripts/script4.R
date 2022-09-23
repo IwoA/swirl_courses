@@ -10,7 +10,7 @@
 # a refresher.
 #
 students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE) %>%
-  spread(test, grade) %>%
-  ### Call to mutate() goes here %>%
-  print
+     pivot_longer(cols = class1:class5, names_to = "class", values_to = "grade",  values_drop_na = TRUE) %>%
+     pivot_wider(names_from = test, values_from = grade) %>%
+     ### Call to mutate() goes here %>%
+     print

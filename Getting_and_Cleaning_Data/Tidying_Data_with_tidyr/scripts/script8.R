@@ -6,8 +6,8 @@
 # Hint: Use the contains() function, which you'll
 # find detailed in 'Special functions' section of ?select.
 #
-# 2. gather() all columns EXCEPT score_range, using
-# key = part_sex and value = count.
+# 2. pivot_longer() all columns EXCEPT score_range, using
+# names_to = part_sex and values_to = count.
 #
 # 3. separate() part_sex into two separate variables (columns),
 # called "part" and "sex", respectively. You may need to check
@@ -16,6 +16,6 @@
 #
 sat %>%
   select(-contains(###)) %>%
-  gather(###, ###, -###) %>%
+  pivot_longer(###, ###, ###) %>%
   ### <Your call to separate()> %>%
   print

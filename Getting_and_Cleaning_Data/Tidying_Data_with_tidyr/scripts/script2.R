@@ -1,4 +1,4 @@
-# Call gather() to gather the columns class1
+# Call pivot_longer() to gather the columns class1
 # through class5 into a new variable called class.
 # The 'key' should be class, and the 'value'
 # should be grade.
@@ -16,8 +16,8 @@
 # the value to the left of it gets inserted as the
 # first argument to the function on the right.
 #
-# Consult ?gather and/or ?chain if you get stuck.
+# Consult ?pivot_longer and/or ?chain if you get stuck.
 #
 students3 %>%
-  gather( , , : , = TRUE) %>%
+     pivot_longer( , , : , = TRUE) %>%
   print

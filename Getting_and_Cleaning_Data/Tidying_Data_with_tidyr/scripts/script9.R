@@ -11,7 +11,7 @@
 #
 sat %>%
   select(-contains("total")) %>%
-  gather(part_sex, count, -score_range) %>%
+  pivot_longer(cols = -score_range, names_to = part_sex, values_to = count) %>%
   separate(part_sex, c("part", "sex")) %>%
   ### <Your call to group_by()> %>%
   mutate(###,
