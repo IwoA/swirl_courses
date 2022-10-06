@@ -29,8 +29,10 @@ install.packages("swirl")
 ```
 library(swirl)
 install_course_github("IwoA", "swirl_courses", multi = TRUE)
-swirl()
 ```
+
+Ignore errors and type `swirl()` 
+
 
 ## Submit results
 
