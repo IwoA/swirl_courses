@@ -38,6 +38,6 @@ After completing part of the course you will be asked if you wish to save your p
 
 ## Uninstall a course
 
-If you'd like to remove a course at any time, you can use `uninstall_course("swirl_courses")`.
+If you'd like to remove a course at any time, you can use `uninstall_all_courses()`.
 
 
