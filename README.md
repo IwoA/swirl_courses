@@ -23,15 +23,30 @@ There are following courses to finish, organized by level of difficulty:
 ```
 install.packages("swirl")
 ```
+If there pops out a window with three answers "Tak", "Nie", "Anuluj" choose "Nie"
+
 
 2) Enter the following from the R console:
 
 ```
 library(swirl)
+```
+```
 install_course_github("IwoA", "swirl_courses", multi = TRUE)
 ```
 
 Ignore errors and type `swirl()` 
+
+If the answers for the question "Would you like to continue with one of these lessons?" are following:
+
+1: Exploratory Data Analysis Principles of Analytic Graphs
+
+2: R Programming Basic Building Blocks
+
+3: No. Let me start something new.
+
+Then choose "3: No. Let me start something new." and in the next menu one of R Programming, Regression Models or Getting and Cleaning Data.
+
 
 
 ## Submit results
