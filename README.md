@@ -8,9 +8,9 @@ For more information regarding swirl, visit [swirlstats.com](http://swirlstats.c
 There are following courses to finish, organized by level of difficulty:
 
 
-1. **R Programming**: The basics of programming in R
-2. **Regression Models**: The basics of regression modeling in R
-3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my!
+1. **R Programming**: The basics of programming in R [Download a course](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
+2. **Regression Models**: The basics of regression modeling in R [Download a course](https://github.com/IwoA/swirl_courses/raw/master/Regression_Models.swc)
+3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download a course](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
 
 
 
@@ -32,11 +32,11 @@ If there pops out a window with three answers "Tak", "Nie", "Anuluj" choose "Nie
 library(swirl)
 ```
 ```
-install_course_github("IwoA", "swirl_courses", multi = TRUE)
+install_course()
 ```
-[Download a course](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
+You will be prompted to interactively select the file(s) you downloaded.
 
-Ignore errors and type `swirl()` 
+Type `swirl()` 
 
 If the answers for the question "Would you like to continue with one of these lessons?" are following:
 
