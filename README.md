@@ -34,6 +34,7 @@ library(swirl)
 ```
 install_course_github("IwoA", "swirl_courses", multi = TRUE)
 ```
+[Download a course](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
 
 Ignore errors and type `swirl()` 
 
