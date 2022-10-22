@@ -58,7 +58,7 @@ Then choose "3: No. Let me start something new." and in the next menu pick one o
 
 ## Submit results
 
-After completing a lesson you will be asked if you wish to save your progress. If you confirm your progress will be saved to file `results.RDS` which you can send to your instructor or to other computer if you wish to continue work at home. In such case copy the file to the swirl directory.
+After completing a lesson you will be asked if you wish to save your progress. If you confirm your progress will be saved to file `results.RDS` which you can send to your instructor or to other computer if you wish to continue work at home. In such case copy the file to your documents directory.
 
 ## Uninstall a course
 
