@@ -17,19 +17,22 @@ getExpr <- function(){
 }
 
 save_credit <- function(){
-     selection <- getState()$val
-     if(selection == "Yes"){
-          name <- readline("What is your name? (first name and surname) ")
+     e <- get("e", parent.frame())
+     if(e$val == "No") return(TRUE)
+     if(e$val == "Yes"){
+          name <- readline("What is your full name? ")
           id <- readline("What is your student's number? ")
-          lesson <- "Workspace and files"
+          # Get course and lesson names
+          course_name <- attr(e$les, "course_name")
+          lesson_name <- attr(e$les, "lesson_name")
+          
           if (file.exists("results.RDS")) {
                tmp <- readRDS('results.RDS')
-               new <- data.frame(name = name, id = id, lesson = lesson, time = Sys.time())
+               new <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time())
                tmp <- rbind(tmp,new)
           } else {
-               tmp <- data.frame(name = name, id = id, lesson = lesson, time = Sys.time()) 
+               tmp <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time()) 
           }
           saveRDS(tmp, "results.RDS")
      }
-     TRUE
 }
