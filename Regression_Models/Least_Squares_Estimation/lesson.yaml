@@ -105,7 +105,7 @@
 
 - Class: mult_question
   Output: "Would you like to receive credit for completing this course?"
-  CorrectAnswer: NULL
+  CorrectAnswer: Yes
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
   Hint: ""

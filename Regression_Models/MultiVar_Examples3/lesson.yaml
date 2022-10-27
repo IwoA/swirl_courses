@@ -209,9 +209,8 @@
   Output: Congratulations! You've finished this final lesson in multivariable regression models.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
-  CorrectAnswer: NULL
+  Output: Would you like to receive credit for completing this course?
+  CorrectAnswer: Yes
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""

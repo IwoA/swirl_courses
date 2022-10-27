@@ -139,7 +139,7 @@
   Output: The R function relevel does precisely this. It re-orders the levels of a factor. We'll do this now. We'll call relevel with two arguments. The first is the factor, in this case InsectSprays$spray,  and the second is the level that we want to be first,  in this case "C". Store the result in a new variable spray2.
   CorrectAnswer: spray2 <- relevel(InsectSprays$spray,"C")
   AnswerTests: omnitest(correctExpr='spray2 <- relevel(InsectSprays$spray,"C")')
-  Hint: Type "spray2 <- relevel(InsectSprays$spray,\"C\")" at the R prompt.
+  Hint: Type "spray2 <- relevel(InsectSprays$spray,"C")" at the R prompt.
 
 - Class: cmd_question
   Output: Now generate a new linear model and put the result in the variable fit2.
@@ -188,9 +188,8 @@
   Output: We glossed over some details in this lesson. For instance, counts can never be 0 so the assumption of normality is violated. We'll explore this issue more when we discuss Poisson GLMs. For now be glad that you've concluded this second lesson on multivariable linear models.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
-  CorrectAnswer: NULL
+  Output: Would you like to receive credit for completing this course?
+  CorrectAnswer: Yes
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""

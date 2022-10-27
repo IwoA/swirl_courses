@@ -7,17 +7,7 @@
   Version: 2.2.0
 
 - Class: text
-  Output: "MultiVar_Examples. (Slides for this and other Data Science courses may be found at github https://github.com/DataScienceSpecialization/courses. If you care to use them, they must be downloaded as a zip file and viewed locally. This lesson corresponds to Regression_Models/02_02_multivariateExamples.)"
-
-- Class: text
-  Output: In this lesson, we'll look at some examples of regression models with more than one variable. We'll begin with the Swiss data which we've taken the liberty to load for you. This data is part of R's datasets package. It was gathered in 1888, a time of demographic change in Switzerland, and measured six quantities in 47 French-speaking provinces of Switzerland. We used the code from the slides (the R function pairs) to display here a 6 by 6 array of scatterplots showing pairwise relationships between the variables. All of the variables, except for fertility, are proportions of population. For example, "Examination" shows the percentage of draftees receiving the highest mark on an army exam, and "Education" the percentage of draftees with education beyond primary school.
-
-- Class: mult_question  
-  Output: From the plot, which is NOT one of the factors measured?
-  AnswerChoices: Obesity; Catholic; Fertility; Infant Mortality
-  CorrectAnswer: Obesity
-  AnswerTests: omnitest(correctVal='Obesity')
-  Hint: Which of the choices doesn't appear on the plot at all?
+  Output: "MultiVar_Examples."
 
 - Class: cmd_question
   Output: First, use the R function lm to generate the linear model "all" in which Fertility is the variable dependent on all the others. Use the R shorthand "." to represent the five independent variables in the formula passed to lm.  Remember the data is "swiss". 
@@ -53,7 +43,6 @@
   CorrectAnswer: 0.19420
   AnswerTests: omnitest(correctVal='0.19420')
   Hint: Look at the "Estimate" column and "Agriculture" row of the summary data you just generated.
-
 
 - Class: text  
   Output: The interesting point is that the sign of the Agriculture coefficient changed from negative (when all the variables were included in the model) to positive (when the model only considered Agriculture). Obviously the presence of the other factors affects the influence Agriculture has on Fertility.
@@ -106,7 +95,7 @@
   Hint: Type "efit <- lm(Fertility ~ . + ec, swiss)" at the R prompt.
 
 - Class: text  
-  Output: We'll see that R ignores this new term since it doesn't add any information to the model.
+  Output: "We'll see that R ignores this new term since it doesn't add any information to the model."
 
 - Class: cmd_question  
   Output: Subtract the efit coefficients from the coefficients of the first model you created, all.
@@ -134,7 +123,7 @@
 
 - Class: mult_question
   Output: "Would you like to receive credit for completing this course?"
-  CorrectAnswer: NULL
+  CorrectAnswer: Yes
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
   Hint: ""
