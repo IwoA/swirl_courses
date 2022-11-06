@@ -10,13 +10,13 @@ library(datasets)
 
 # Put initialization code in this file.
 path_to_course <- file.path(.get_course_path(),
-	"Exploratory_Data_Analysis","GGPlot2_Part1")
+	"R_Graphics","GGPlot2_Part1")
 try(dev.off(),silent=TRUE)
 plot.new()
 
 pathtofile <- function(fileName){
   mypath <- file.path(.get_course_path(),
-  	"Exploratory_Data_Analysis","GGPlot2_Extras/",
+  	"R_Graphics","GGPlot2_Extras/",
                       fileName)
 }
 fxfer <- function(fileName){

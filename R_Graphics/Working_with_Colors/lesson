@@ -347,9 +347,8 @@
   Output: Congratulations! We hope this lesson didn't make you see red. We're green with envy that you blue through it.  
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""

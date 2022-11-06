@@ -15,5 +15,5 @@ data(mpg)
 state <- data.frame(state.x77, region = state.region)
 # Put initialization code in this file.
 path_to_course <- file.path(.get_course_path(),
-	"Exploratory_Data_Analysis","Plotting_Systems")
+	"R_Graphics","Plotting_Systems")
 plot.new()

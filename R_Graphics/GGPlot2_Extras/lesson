@@ -269,9 +269,8 @@
   Output: Yes! A boxplot looking like marshmallows about to be roasted. Well done and  congratulations! You've finished this jewel of a lesson. Hope it paid off!
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "Would you like to receive credit for completing this course?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: save_credit()
   Hint: ""
