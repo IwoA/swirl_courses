@@ -5,12 +5,13 @@ This is a collection of interactive courses for use with the [swirl R package](h
 
 For more information regarding swirl, visit [swirlstats.com](http://swirlstats.com) or the [swirl GitHub repository](https://github.com/swirldev/swirl).
 
-There are following courses to finish, organized by level of difficulty:
+There are following modules to finish, organized by level of difficulty:
 
 
-1. **R Programming**: The basics of programming in R [Download the course](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
-2. **Regression Models**: The basics of regression modeling in R [Download the course](https://github.com/IwoA/swirl_courses/raw/master/Regression_Models.swc)
-3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the course](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
+1. **R Programming**: The basics of programming in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
+2. **Regression Models**: The basics of regression modeling in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Regression_Models.swc)
+3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
+4. **R Graphics**[Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Graphics.swc)
 
 
 
