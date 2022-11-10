@@ -39,7 +39,7 @@
   Output: As you can see it consists of 1860 rows (days).
 
 - Class: text
-  Output: It is important to know what class of data this dataset is. Different functions accept different types (classes) of input. Other functions behave differently depends on type of input.
+  Output: It is important to know what class of data this dataset is. Different functions accept different types (classes) of input. Other functions behave differently depending on type of input.
 
 - Class: cmd_question
   Output: To check class of any R object just type class(nameofobject). Please check class of our EuStockMarkets object.
@@ -67,10 +67,10 @@
   Output: As you can see plot() correctly recognised structure of our matrix and presented it in very convinient way.
 
 - Class: text
-  Output: But we want much more! What about colors, annotations or maybe it would be better to have all lines in one graph?
+  Output: But we want much more! What about colors, annotations or maybe it would be better to have all lines in single plot?
 
 - Class: text
-  Output: To have it all we need to switch to the ggplot package. It is already installed and loaded.
+  Output: To have it all we need to switch to the ggplot2 package. It is already installed and loaded.
 
 - Class: text
   Output: Unfortunately ggplot doesn't accept 'ts' objects. Therefore we must transform it to the data.frame class object (or tibble class object).
@@ -82,10 +82,10 @@
   Hint: Type data <- data.frame(as.matrix(EuStockMarkets), date = time(EuStockMarkets))
 
 - Class: text
-  Output: Few words of explanation what you have done. Such nested commands are working from inside-out. First 'ts' object was transformed to the simple matrix and new column 'date' was added which consist all dates in the time-series form (time command did it). Then data.frame function just changed class of this new matrix to dataframe.
+  Output: A few words of explanation what you did. Such nested commands work from inside-out. First 'ts' object was converted to a simple matrix and a new column 'date' was added that contains all dates as time-series (this was done by the 'time' command). Then the function data.frame just changed class of this new matrix to dataframe.
 
 - Class: text
-  Output: We are almost ready to work with ggplot. To have smooth and easy experience with ggplot we need data in the long form.
+  Output: We are almost ready to work with ggplot. To have a smooth and easy experience, we need data in a long form.
 
 - Class: mult_question
   Output: Right now our table is in the wide form. That means we have separate column for each indice. That is four columns plus one with dates. How many columns should we have in a long form?
@@ -98,34 +98,34 @@
   Output: For such transformation we need function pivot_longer from the 'tidyr' package. The problem is that it isn't loaded and we need it only once. 
 
 - Class: cmd_question
-  Output: In such situation it is better to call package directly with the name of desired function. In R we do it using two colons. Let's create new variable data_long from the data with use of tidyr::pivot_longer function. Put names to "Indices" column.
+  Output: In this case, it is better to call the package directly with the name of the function you want. In R we do it using two colons. Let's create new variable data_long from the data with use of tidyr::pivot_longer function. Put names to "Indices" column.
   CorrectAnswer: data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")
   AnswerTests: any_of_exprs('data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")','data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to = "Indices")', 'data_long <- tidyr::pivot_longer(data, cols=1:4, names_to="Indices")')
   Hint: Type data_long <- tidyr::pivot_longer(data, cols = firstcolumn:lastcolumn, names_to="Indices"). 'firstcolumn:lastcolumn' of course means columns which we want to collapse to the new 'Indices' column.
 
 - Class: cmd_question
-  Output: Did it work correctly? Let's 'View()' result.
+  Output: What if the result is wrong? Let's 'View()' result.
   CorrectAnswer: View(data_long)
   AnswerTests: omnitest(correctExpr='View(data_long)')
   Hint: R is case sensitive. 'view' doesn't work. 
 
 - Class: text
-  Output: As you can see 'View()' function creates very convenient excel-like table which columns are sortable! 
+  Output: As you can see 'View()' function creates very convenient Excel-like table which columns are sortable! 
 
 - Class: text
-  Output: Ok. We are ready to go! Let's start from the simple line graph. Look at the cheat sheet and check what is the name of appropriate geometry.
+  Output: Ok. We are ready to go! Let's start from the simple line graph. Look at the cheat sheet and check what is the name of the appropriate geometry.
 
 - Class: text
   Output: First, we must prepare our canvas using the ggplot() function. Then we can add our geometries. We must decide what aesthetics we will use. 
 
 - Class: text
-  Output: It is good to think about it before actual plotting because we have to options 1) we will use the same columns in all geometries or 2) we will use different columns in different geometries. 
+  Output: It is worth thinking about this before actual plotting as we have two options 1) we will use the same columns in all geometries or 2) we will use different columns in different geometries. 
 
 - Class: text
   Output: In our case we opt for option 2. Therefore we start from empty canvas using ggplot() and add aesthetics arguments in the geometry calls.
 
 - Class: cmd_question
-  Output: Recall that in ggplot we add new elements with + sign. So let's use geom_line where x = date and y = value. Our data = data_long of course so we start with ggplot(data_long).
+  Output: Recall that in ggplot we add new elements with + sign. So let's use geom_line where x = date and y = value. Our data is data_long of course so we start with ggplot(data_long). Don't forget about aes()!
   CorrectAnswer: ggplot(data_long) + geom_line(aes(x = date, y = value))
   AnswerTests: any_of_exprs('ggplot(data_long) + geom_line(aes(x = date, y = value))','ggplot(data_long)+geom_line(aes(x = date, y = value))','ggplot(data_long) + geom_line(aes(x=date, y=value))','ggplot(data_long)+geom_line(aes(x=date, y=value))')
   Hint: Type ggplot(data_long) + geom_line(aes(x = date, y = value)
@@ -139,18 +139,18 @@
   CorrectAnswer: ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
   AnswerTests: any_of_exprs('ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))','ggplot(data_long)+geom_line(aes(x = date, y = value, col = Indices))','ggplot(data_long) + geom_line(aes(x=date, y=value, col=Indices))','ggplot(data_long)+geom_line(aes(x=date, y=value, col=Indices))')
   Hint: Type ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices)
-
+  
 - Class: text
-  Output: It is much better now. But what if we would like to show what was the maximum value of indices?
+  Output: It is much better now. But what if we wanted to show what was the maximum value of the indices?
 
 - Class: script
   Output: First we need to adjust our data. This will require multiple steps, which we will build up gradually using %>%. Edit the R script, save it, then type submit() when you are ready. Type reset() to reset the script to its original state.
-  AnswerTests: script_vals_identical()
+  AnswerTests: script_results_identical('data_long')
   Hint:  Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Use ? to get help.
   Script: Script1.R
-
+  
 - Class: cmd_question
-  Output: plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
+  Output: Before we go any further, assign our plot to the 'plt' variable. That would save us lot of typing. 
   CorrectAnswer: plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
   AnswerTests: omnitest(correctExpr='plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))')
   Hint: Type plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
@@ -163,7 +163,7 @@
   Hint: Cheet sheet is your friend.
 
 - Class: cmd_question
-  Output: plt variable holds now our previous plot. Now we only need to add a new layer - plt + geom_text(aes(x = date, y = ?, label = ?))
+  Output: The plt variable holds our previous plot. Now we only need to add a new layer with + geom_text(aes(x = date, y = ?, label = ?))
   CorrectAnswer: plt + geom_text(aes(x = date, y = max_val, label = max_val))
   AnswerTests: omnitest(correctExpr='plt + geom_text(aes(x = date, y = max_val, label = max_val))')
   Hint: Try plt + geom_text(aes(x = date, y = max_val, label = max_val)
@@ -175,7 +175,7 @@
   Hint: It's enough to type y = max_val + 100 in the geom_text.
 
 - Class: text
-  Output: Better but there is still issue with overlapping texts. Luckily one smart guy had the same problem and solved it! To share his solution he created package called ggrepel.
+  Output: Better but there is still issue with overlapping texts. Luckily, one smart guy had the same problem and he solved it! To share his solution he created the package called ggrepel.
 
 - Class: cmd_question
   Output: It is already installed so we can use it. Just replace geom_text with geom_text_repel. Ignore warning messages.
@@ -185,7 +185,7 @@
 
 
 - Class: text
-  Output: Don't you think it would be better if the text would have the same color as corresponding line?
+  Output: Don't you think it would be better if the text had the same color as the corresponding line?
 
 - Class: cmd_question
   Output: Let's do it! Scroll back and add col argument to geom_text_repel as you did in geom_line.
@@ -209,7 +209,7 @@
   Hint: Check arguments of geom_point in the cheat sheet.
 
 - Class: text
-  Output: Now everybody knows what is most important in our figure. Or would know if we added labels to axes and title. We can do it very simply using functions xlab(), ylab() and ggtitle() or labs(). But it's time to finish our journey.
+  Output: Now everybody knows what is most important in our figure. Or he or she would know if we added labels to the axis and title. We can do this very easily with the xlab(), ylab() and ggtitle() or labs() functions. But it's time to end our journey.
 
 - Class: text
   Output: We can change colors, fonts, sizes, scale and all elements of our plots with help of the cheat sheet and plenty of additional packages.
@@ -218,7 +218,7 @@
   Output: But as a final touch just change this awful grey background and improve other elements as well. Preferably in one go!
 
 - Class: text
-  Output: To achieve it we'll use different themes.
+  Output: To achieve this we'll use different themes.
 
 - Class: mult_question
   Output: How many themes offers ggplot2?
