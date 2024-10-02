@@ -35,7 +35,8 @@ library(swirl)
 ```
 install_course()
 ```
-You will be prompted to interactively select the file(s) you downloaded.
+You will be prompted to interactively select the file you downloaded.
+Repeat this step until you install all four courses.
 
 Type `swirl()` and choose R Programming as  the first course.
 
