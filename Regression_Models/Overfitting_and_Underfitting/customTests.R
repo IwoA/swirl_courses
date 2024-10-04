@@ -102,7 +102,7 @@ save_credit <- function(){
           if (file.exists("results.RDS")) {
                tmp <- readRDS('results.RDS')
                new <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time())
-               tmp <- rbind(tmp,new)
+               tmp <- dplyr::bind_rows(tmp,new)
           } else {
                tmp <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time()) 
           }
