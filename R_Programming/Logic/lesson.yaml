@@ -121,8 +121,7 @@
     This is where the AND operator and the OR operator come in.
 
 - Class: cmd_question
-  Output: Let's look at how the AND operator works. There are two AND operators in R, `&` and `&&`.
-    Both operators work similarly, if the right and left operands of AND are both TRUE the entire
+  Output: Let's look at how the AND operator works. If the right and left operands of AND are both TRUE the entire
     expression is TRUE, otherwise it is FALSE. For example, TRUE & TRUE evaluates to TRUE. Try typing 
     FALSE & FALSE to how it is evaluated.
   CorrectAnswer: FALSE & FALSE
@@ -130,8 +129,7 @@
   Hint: "Just to illustrate how the AND operator works type: FALSE & FALSE"
 
 - Class: cmd_question
-  Output: "You can use the `&` operator to evaluate AND across a vector. The `&&` version of AND only evaluates 
-    the first member of a vector. Let's test both for practice. Type the expression TRUE & c(TRUE, FALSE, FALSE)."
+  Output: "You can use the `&` operator to evaluate AND across a vector. Let's test both for practice. Type the expression TRUE & c(TRUE, FALSE, FALSE)."
   CorrectAnswer: "TRUE & c(TRUE, FALSE, FALSE)"
   AnswerTests: omnitest(correctExpr='TRUE & c(TRUE, FALSE, FALSE)')
   Hint: "Now to see how the AND operator works with a vector, type: 
@@ -142,18 +140,6 @@
     across every element in the vector of the right operand. This is the equivalent
     statement as c(TRUE, TRUE, TRUE) & c(TRUE, FALSE, FALSE). 
 
-- Class: cmd_question
-  Output: "Now we'll type the same expression except we'll use the `&&` operator. Type the expression TRUE && c(TRUE, FALSE, FALSE)."
-  CorrectAnswer: "TRUE && c(TRUE, FALSE, FALSE)"
-  AnswerTests: omnitest(correctExpr='TRUE && c(TRUE, FALSE, FALSE)')
-  Hint: "As you'll see, the && version of AND works differently. Type: 
-    TRUE && c(TRUE, FALSE, FALSE)"
-
-- Class: text
-  Output: "In this case, the left operand is only evaluated with the first member
-    of the right operand (the vector). The rest of the elements in the vector
-    aren't evaluated at all in this expression."
-    
 - Class : text
   Output: The OR operator follows a similar set of rules. The `|` version of OR
     evaluates OR across an entire vector, while the `||` version of OR only evaluates
