@@ -56,10 +56,10 @@
   Output: The last R expression to be evaluated in a function will become the 
     return value of that function. We want this function to take one argument, 
     x, and return x without modifying it. Delete the pound
-    sign so that x is returned without any modification. Make sure to save your
+    sign (#) so that x is returned without any modification. Make sure to save your
     script before you type submit().
   AnswerTests: test_func1()
-  Hint: Make sure to delete the pound sign so the last expression in the function is just x.
+  Hint: Make sure to delete the pound sign (#) so the last expression in the function is just x.
   Script: boring_function.R
 
 - Class: cmd_question
@@ -188,7 +188,8 @@
   Output: Make sure to save your script before you type submit().
   AnswerTests: test_func4()
   Hint: "Make sure that when you pass a function as an argument you pass the
-    name of the function without parentheses!"
+    name of the function without parentheses! To solve this puzzle you need only 
+    one line of code with three objects: func, dat and parentheses"
   Script: evaluate.R
 
 - Class: cmd_question
@@ -284,49 +285,6 @@
   CorrectAnswer: telegram()
   AnswerTests: expr_uses_func('telegram')
   Hint: 'Use the telegram function with whatever arguments you want to use.'
-
-- Class: script
-  Output: Make sure to save your script before you type submit().
-  AnswerTests: test_func6()
-  Hint: "Your function should have three sections: capture the ellipsis in a 
-    list(), unpack the arguments from the ellipsis and assign them to variables,
-    then pass those variables to paste()."
-  Script: mad_libs.R
-
-- Class: cmd_question
-  Output: "Time to use your mad_libs function. Make sure to name the place, 
-    adjective, and noun arguments in order for your function to work."
-  CorrectAnswer: mad_libs(adjective = "", place = "", noun = "")
-  AnswerTests: expr_uses_func('mad_libs')
-  Hint: 'Use the mad_libs function and be sure to name place, adjective, and 
-  noun arguments.'
-
-- Class: text
-  Output: "We're coming to the end of this lesson, but there's still one more
-    idea you should be made aware of."
-
-- Class: text
-  Output: "You're familiar with adding, subtracting, multiplying, and dividing
-    numbers in R. To do this you use the +, -, *, and / symbols. These symbols
-    are called binary operators because they take two inputs, an input from the
-    left and an input from the right."  
-
-- Class: text
-  Output: "In R you can define your own binary operators. In the next script
-    I'll show you how."
-
-- Class: script
-  Output: Make sure to save your script before you type submit().
-  AnswerTests: test_func7()
-  Hint: "Remember: 'Hello' %p% 'student!' is how you use the binary operator."
-  Script: bin_op.R
-
-- Class: cmd_question
-  Output: "You made your own binary operator! Let's test it out. Paste together
-    the strings: 'I', 'love', 'R!' using your new binary operator."
-  CorrectAnswer: "'I' %p% 'love' %p% 'R!'"
-  AnswerTests: omnitest(correctExpr="'I' %p% 'love' %p% 'R!'")
-  Hint: 'Use %p% in between each string.'
 
 - Class: text
   Output: "We've come to the end of our lesson! Go out there and write some
