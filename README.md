@@ -9,9 +9,8 @@ There are following modules to finish, organized by level of difficulty:
 
 
 1. **R Programming**: The basics of programming in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
-2. **Regression Models**: The basics of regression modeling in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Regression_Models.swc)
-3. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
-4. **R Graphics** [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Graphics.swc)
+2. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
+3. **R Graphics** [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Graphics.swc)
 
 
 
