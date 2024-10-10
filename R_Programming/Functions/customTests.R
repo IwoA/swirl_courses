@@ -139,6 +139,10 @@ save_credit <- function(){
           course_name <- attr(e$les, "course_name")
           lesson_name <- attr(e$les, "lesson_name")
           
+          if (!requireNamespace("dplyr", quietly = TRUE)) {
+            install.packages("dplyr")
+          }
+          
           if (file.exists("results.RDS")) {
                tmp <- readRDS('results.RDS')
                new <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time())
