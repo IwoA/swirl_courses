@@ -5,7 +5,7 @@ This is a collection of interactive courses for use with the [swirl R package](h
 
 For more information regarding swirl, visit [swirlstats.com](http://swirlstats.com) or the [swirl GitHub repository](https://github.com/swirldev/swirl).
 
-There are following modules to finish, organized by level of difficulty:
+## There are following modules to finish, **organized by level of difficulty**:
 
 
 1. **R Programming**: The basics of programming in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
@@ -29,17 +29,21 @@ If a window pops up with question "Do you want to install from sources the packa
 2) Enter the following from the R console:
 
 ```
-library(swirl)
+library(swirl) # loads the swirl package into your current R session
 ```
 ```
-install_course()
+uninstall_all_courses() # removes all built-in courses
 ```
-You will be prompted to interactively select the file you downloaded.
-Repeat this step until you install all four courses.
 
-Type `swirl()` and choose R Programming as  the first course.
+```
+install_course() # installs the downloaded course. 
+```
+You will be prompted to interactively select the file you downloaded. The pop-up window could be hidden behind the RStudio window.
+You can install one file at once therefore repeat this step until you install all four courses.
 
-As you will see each of these three courses consist of many lessons. 
+Type `swirl()` and **choose R Programming as the first course**.
+
+As you will see each of these three courses consist of many lessons. Finish all of them in the order they are presented in the menu.
 
 
 
@@ -51,7 +55,7 @@ If the answers for the question "Would you like to continue with one of these le
 
 3: No. Let me start something new.
 
-Then choose "3: No. Let me start something new." and in the next menu pick one of R Programming, Regression Models or Getting and Cleaning Data.
+Then choose "3: No. Let me start something new." and in the next menu pick one of R Programming, Getting and Cleaning Data or R Graphics.
 
 
 
