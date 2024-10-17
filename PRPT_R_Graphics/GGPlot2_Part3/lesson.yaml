@@ -1,0 +1,241 @@
+- Class: meta
+  Course: R_Graphics
+  Lesson: GGPlot2_Part3
+  Author: Iwo Augustynski
+  Type: Standard
+  Organization: Wroclaw University of Economics and Business
+  Version: 2.4.5
+  
+
+- Class: text
+  Output: In this part we finally use some financial data. We will focus on using layers in ggplot2. We will plot time series of some stock exchanges' indexes and then tweak it and add some annotations.
+  
+
+- Class: text
+  Output: Capabilities of the ggplot package are enormous. What is more, additional features are made available thanks to another packages like ggrepel which we'll be using here as well.
+  
+
+- Class: text
+  Output: To help you better understand what you can do with ggplot download a cheatsheet from the Help menu and Cheat Sheets submenu.
+
+- Class: mult_question
+  Output: In how many ways you can plot one continuous variable?
+  AnswerChoices: 1;4;6;10
+  CorrectAnswer: 6
+  AnswerTests: omnitest(correctVal='6')
+  Hint: Check the second column on the first page of the cheat sheet.
+
+- Class: text
+  Output: But before we will move to visualisation lets first have a look at our data. We will be using EuStockMarkets dataset containing the daily closing prices of major European stock indices - Germany DAX (Ibis), Switzerland SMI, France CAC, and UK FTSE. The data are sampled in business time, i.e., weekends and holidays are omitted.
+
+
+- Class: cmd_question
+  Output: First check the size of the dataset 'EuStockMarkets'.
+  CorrectAnswer: dim(EuStockMarkets)
+  AnswerTests: omnitest(correctExpr='dim(EuStockMarkets)')
+  Hint: You should use the dim command.
+
+- Class: text
+  Output: As you can see it consists of 1860 rows (days).
+
+- Class: text
+  Output: It is important to know what class of data this dataset is. Different functions accept different types (classes) of input. Other functions behave differently depending on type of input.
+
+- Class: cmd_question
+  Output: To check class of any R object just type class(nameofobject). Please check class of our EuStockMarkets object.
+  CorrectAnswer: class(EuStockMarkets)
+  AnswerTests: omnitest(correctExpr='class(EuStockMarkets)')
+  Hint: Remember that size of letters matters.
+
+- Class: text
+  Output: It says that the class is matrix of the 'ts' type. 'ts' stands for time series.
+
+- Class: cmd_question
+  Output: Now let's have a look inside this dataset. Please show first 6 rows of this matrix. 
+  CorrectAnswer: head(EuStockMarkets)
+  AnswerTests: omnitest(correctExpr='head(EuStockMarkets)')
+  Hint: Use head() command to show first 6 rows. You can use tail() command to see last six rows by the way.
+
+
+- Class: cmd_question
+  Output: The 'ts' objects are treated in special way by the plot() function. Try it now. You will be surprised what simple plot() could do.
+  CorrectAnswer: plot(EuStockMarkets)
+  AnswerTests: omnitest(correctExpr='plot(EuStockMarkets)')
+  Hint: Type plot(EuStockMarkets)
+
+- Class: text
+  Output: As you can see plot() correctly recognised structure of our matrix and presented it in very convinient way.
+
+- Class: text
+  Output: But we want much more! What about colors, annotations or maybe it would be better to have all lines in single plot?
+
+- Class: text
+  Output: To have it all we need to switch to the ggplot2 package. It is already installed and loaded.
+
+- Class: text
+  Output: Unfortunately ggplot doesn't accept 'ts' objects. Therefore we must transform it to the data.frame class object (or tibble class object).
+
+- Class: cmd_question
+  Output: Let's create new variable data consisting our transformed table. To tranform 'ts' object to 'data.frame' object and preserve all time functionalities please type data.frame(as.matrix(EuStockMarkets), date = time(EuStockMarkets)). Assign it to the variable 'data'.
+  CorrectAnswer: data <- data.frame(as.matrix(EuStockMarkets), date = time(EuStockMarkets))
+  AnswerTests: any_of_exprs('data <- data.frame(as.matrix(EuStockMarkets), date = time(EuStockMarkets))', 'data <- data.frame(as.matrix(EuStockMarkets), date=time(EuStockMarkets))' )
+  Hint: Type data <- data.frame(as.matrix(EuStockMarkets), date = time(EuStockMarkets))
+
+- Class: text
+  Output: A few words of explanation what you did. Such nested commands work from inside-out. First 'ts' object was converted to a simple matrix and a new column 'date' was added that contains all dates as time-series (this was done by the 'time' command). Then the function data.frame just changed class of this new matrix to dataframe.
+
+- Class: text
+  Output: We are almost ready to work with ggplot. To have a smooth and easy experience, we need data in a long form.
+
+- Class: mult_question
+  Output: Right now our table is in the wide form. That means we have separate column for each indice. That is four columns plus one with dates. How many columns should we have in a long form?
+  AnswerChoices: 2;3;4;5;6
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal='3')
+  Hint: We should have column with indices' names, values and dates. That's three columns.
+
+- Class: text
+  Output: For such transformation we need function pivot_longer from the 'tidyr' package. The problem is that it isn't loaded and we need it only once. 
+
+- Class: cmd_question
+  Output: In this case, it is better to call the package directly with the name of the function you want. In R we do it using two colons. Let's create new variable data_long from the data with use of tidyr::pivot_longer function. Put names to "Indices" column.
+  CorrectAnswer: data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")
+  AnswerTests: any_of_exprs('data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")','data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to = "Indices")', 'data_long <- tidyr::pivot_longer(data, cols=1:4, names_to="Indices")')
+  Hint: Type data_long <- tidyr::pivot_longer(data, cols = firstcolumn:lastcolumn, names_to="Indices"). 'firstcolumn:lastcolumn' of course means columns which we want to collapse to the new 'Indices' column.
+
+- Class: cmd_question
+  Output: What if the result is wrong? Let's 'View()' result.
+  CorrectAnswer: View(data_long)
+  AnswerTests: omnitest(correctExpr='View(data_long)')
+  Hint: R is case sensitive. 'view' doesn't work. 
+
+- Class: text
+  Output: As you can see 'View()' function creates very convenient Excel-like table which columns are sortable! 
+
+- Class: text
+  Output: Ok. We are ready to go! Let's start from the simple line graph. Look at the cheat sheet and check what is the name of the appropriate geometry.
+
+- Class: text
+  Output: First, we must prepare our canvas using the ggplot() function. Then we can add our geometries. We must decide what aesthetics we will use. 
+
+- Class: text
+  Output: It is worth thinking about this before actual plotting as we have two options 1) we will use the same columns in all geometries or 2) we will use different columns in different geometries. 
+
+- Class: text
+  Output: In our case we opt for option 2. Therefore we start from empty canvas using ggplot() and add aesthetics arguments in the geometry calls.
+
+- Class: cmd_question
+  Output: Recall that in ggplot we add new elements with + sign. So let's use geom_line where x = date and y = value. Our data is data_long of course so we start with ggplot(data_long). Don't forget about aes()!
+  CorrectAnswer: ggplot(data_long) + geom_line(aes(x = date, y = value))
+  AnswerTests: any_of_exprs('ggplot(data_long) + geom_line(aes(x = date, y = value))','ggplot(data_long)+geom_line(aes(x = date, y = value))','ggplot(data_long) + geom_line(aes(x=date, y=value))','ggplot(data_long)+geom_line(aes(x=date, y=value))')
+  Hint: Type ggplot(data_long) + geom_line(aes(x = date, y = value)
+
+
+- Class: text
+  Output: Definitely there is something. Something black. Without color the graph is rather useless. 
+
+- Class: cmd_question
+  Output: Let's add a color to differentiate indices. Use arrow key to scroll back and add col = Indices after comma to aes()
+  CorrectAnswer: ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
+  AnswerTests: any_of_exprs('ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))','ggplot(data_long)+geom_line(aes(x = date, y = value, col = Indices))','ggplot(data_long) + geom_line(aes(x=date, y=value, col=Indices))','ggplot(data_long)+geom_line(aes(x=date, y=value, col=Indices))')
+  Hint: Type ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices)
+  
+- Class: text
+  Output: It is much better now. But what if we wanted to show what was the maximum value of the indices?
+
+- Class: script
+  Output: First we need to adjust our data. This will require multiple steps, which we will build up gradually using %>%. Edit the R script, save it, then type submit() when you are ready. Type reset() to reset the script to its original state.
+  AnswerTests: script_results_identical('data_long')
+  Hint:  Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Use ? to get help.
+  Script: Script1.R
+  
+- Class: cmd_question
+  Output: Before we go any further, assign our plot to the 'plt' variable. That would save us lot of typing. 
+  CorrectAnswer: plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
+  AnswerTests: omnitest(correctExpr='plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))')
+  Hint: Type plt <- ggplot(data_long) + geom_line(aes(x = date, y = value, col = Indices))
+
+- Class: mult_question
+  Output: To add a text to figure we need to use additional geometry called geom_text. Which arguments it requires?
+  AnswerChoices: x,y,label;x,y,z; x,y,text;x,y,annotation
+  CorrectAnswer: x,y,label
+  AnswerTests: omnitest(correctVal='x,y,label')
+  Hint: Cheet sheet is your friend.
+
+- Class: cmd_question
+  Output: The plt variable holds our previous plot. Now we only need to add a new layer with + geom_text(aes(x = date, y = ?, label = ?))
+  CorrectAnswer: plt + geom_text(aes(x = date, y = max_val, label = max_val))
+  AnswerTests: omnitest(correctExpr='plt + geom_text(aes(x = date, y = max_val, label = max_val))')
+  Hint: Try plt + geom_text(aes(x = date, y = max_val, label = max_val)
+
+- Class: cmd_question
+  Output: We almost have it but text should be above lines. Shouldn't it? Lets move it 100 points up.
+  CorrectAnswer: plt + geom_text(aes(x = date, y = max_val+100, label = max_val))
+  AnswerTests: omnitest(correctExpr='plt + geom_text(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text(aes(x = date, y = max_val + 100, label = max_val))')
+  Hint: It's enough to type y = max_val + 100 in the geom_text.
+
+- Class: text
+  Output: Better but there is still issue with overlapping texts. Luckily, one smart guy had the same problem and he solved it! To share his solution he created the package called ggrepel.
+
+- Class: cmd_question
+  Output: It is already installed so we can use it. Just replace geom_text with geom_text_repel. Ignore warning messages.
+  CorrectAnswer: plt + geom_text_repel(aes(x = date, y = max_val+100, label = max_val))
+  AnswerTests: omnitest(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val))')
+  Hint: Use arrow to scroll back once replace text and voila!
+
+
+- Class: text
+  Output: Don't you think it would be better if the text had the same color as the corresponding line?
+
+- Class: cmd_question
+  Output: Let's do it! Scroll back and add col argument to geom_text_repel as you did in geom_line.
+  CorrectAnswer: plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))
+  AnswerTests: omnitest(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col=Indices))')
+  Hint: add 'col = Indices' to aes part.
+
+- Class: text
+  Output: We can't stop here! Let's add another layer with red point indicating our max values.
+
+- Class: cmd_question
+  Output: First update our plt variable. Type plt <- plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))
+  CorrectAnswer: plt <- plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))
+  AnswerTests: omnitest(correctExpr='plt <- plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))')
+  Hint: Type plt <- plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))
+
+- Class: cmd_question
+  Output: Now add to our new plt geom_point geometry with argument col = "red" but AFTER the aes() part. We want all points to be red.
+  CorrectAnswer: plt + geom_point(aes(x = date, y = max_val), col = "red")
+  AnswerTests: omnitest(correctExpr='plt + geom_point(aes(x = date, y = max_val), col = "red")','plt + geom_point(aes(x = date, y = max_val), col="red")','plt + geom_point(aes(x=date, y=max_val), col="red")')
+  Hint: Check arguments of geom_point in the cheat sheet.
+
+- Class: text
+  Output: Now everybody knows what is most important in our figure. Or he or she would know if we added labels to the axis and title. We can do this very easily with the xlab(), ylab() and ggtitle() or labs() functions. But it's time to end our journey.
+
+- Class: text
+  Output: We can change colors, fonts, sizes, scale and all elements of our plots with help of the cheat sheet and plenty of additional packages.
+
+- Class: text
+  Output: But as a final touch just change this awful grey background and improve other elements as well. Preferably in one go!
+
+- Class: text
+  Output: To achieve this we'll use different themes.
+
+- Class: mult_question
+  Output: How many themes offers ggplot2?
+  AnswerChoices: 2;4;6;8;10
+  CorrectAnswer: 8
+  AnswerTests: omnitest(correctVal='8')
+  Hint: Check the cheat sheet again.
+
+- Class: cmd_question
+  Output: We put also package 'ggthemes' at your disposal. You can play with them now. Finally use plt + theme_economist() to finish this lesson.
+  CorrectAnswer: plt + theme_economist()
+  AnswerTests: omnitest(correctExpr='plt + theme_economist()')
+  Hint: Type plt + theme_economist() to finish.
+
+- Class: mult_question
+  Output: "Would you like to receive credit for completing this course?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

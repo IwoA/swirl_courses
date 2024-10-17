@@ -1,0 +1,37 @@
+- Class: meta
+  Course: Python_Programming
+  Lesson: Basic_Building_Block
+  Author: Iwo Augustyński
+  Type: Standard
+  Organization: Wroclaw University of Economics and Business
+  Version: 2.4.5
+
+- Class: text
+  Output: In this lesson, we will explore some basic building blocks of the Python programming
+    language.
+    
+- Class: text
+  Output: Parts which basically repeat R Programming course will be summarised.
+  
+- Class: text
+  Output: It is assumed that you already have installed Python from the Anaconda distribution
+  
+- Class: text
+  Output: To use Python in RStudio (and with R) first you need to install appropriate package called "reticulate". You should already know how to do it
+
+- Class: cmd_question
+  Output: In this course you will be using Python in console. To achieve this type reticulate::repl_python(). "reticulate::" means you want a function from package reticulate. It works the same way as if you first type "library(reticulate)" and then "repl_python()"
+  CorrectAnswer: reticulate::repl_python()
+  AnswerTests: omnitest(correctExpr='reticulate::repl_python()')
+  Hint: Type reticulate::repl_python() and press Enter.
+  
+- Class: text
+  Output: To exit the Python session type "exit"
+  
+- Class: cmd_question
+  Output: As a warm-up try assign the result of 5 + 7 to a new variable called x, you type x =
+    5 + 7.
+  CorrectAnswer: x = 5 + 7
+  AnswerTests: any_of_exprs('x = 5 + 7', 'x = 7 + 5')
+  Hint: Type x = 5 + 7. It's important to include a single space on each side of
+    the assignment operator.
