@@ -8,9 +8,9 @@ For more information regarding swirl, visit [swirlstats.com](http://swirlstats.c
 ## There are following modules to finish, **organized by level of difficulty**:
 
 
-1. **R Programming**: The basics of programming in R [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Programming.swc)
-2. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the module](https://github.com/IwoA/swirl_courses/raw/master/Getting_and_Cleaning_Data.swc)
-3. **R Graphics** [Download the module](https://github.com/IwoA/swirl_courses/raw/master/R_Graphics.swc)
+1. **R Programming**: The basics of programming in R [Download the module](https://github.com/IwoA/swirl_courses/blob/master/PRPT_R_Programming.swc)
+2. **Getting and Cleaning Data**: dplyr, tidyr, lubridate, oh my! [Download the module](https://github.com/IwoA/swirl_courses/blob/master/PRPT_Getting_and_Cleaning_Data.swc)
+3. **R Graphics** [Download the module](https://github.com/IwoA/swirl_courses/blob/master/PRPT_R_Graphics.swc)
 
 
 
@@ -41,9 +41,9 @@ install_course() # installs the downloaded course.
 You will be prompted to interactively select the file you downloaded. The pop-up window could be hidden behind the RStudio window.
 You can install one file at once therefore repeat this step until you install all four courses.
 
-Type `swirl()` and **choose R Programming as the first course**.
+Type `swirl()` and **choose PRPT R Programming as the first course**.
 
-As you will see each of these three courses consist of many lessons. Finish all of them in the order they are presented in the menu.
+As you will see the name of each of these three courses starts from 'PRPT' and consist of many lessons. Finish all of them in the order they are presented in the menu.
 
 
 
@@ -55,7 +55,7 @@ If the answers for the question "Would you like to continue with one of these le
 
 3: No. Let me start something new.
 
-Then choose "3: No. Let me start something new." and in the next menu pick one of R Programming, Getting and Cleaning Data or R Graphics.
+Then choose "3: No. Let me start something new." and in the next menu pick one of PRPT R Programming, PRPT Getting and Cleaning Data or PRPT R Graphics.
 
 
 
