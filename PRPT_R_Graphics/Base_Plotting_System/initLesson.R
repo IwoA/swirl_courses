@@ -13,6 +13,6 @@ data(mpg)
 state <- data.frame(state.x77, region = state.region)
 # Put initialization code in this file.
 path_to_course <- file.path(.get_course_path(),
-	"R_Graphics","Base_Plotting_System")
+	"PRPT_R_Graphics","Base_Plotting_System")
 try(dev.off(), silent=TRUE)
 plot.new()
