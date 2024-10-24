@@ -9,7 +9,7 @@ library(datasets)
 }
 
 path_to_course <- file.path(.get_course_path(),
-	"R_Graphics","Graphics_Devices_in_R")
+	"PRPT_R_Graphics","Graphics_Devices_in_R")
 
 try(dev.off(),silent=TRUE)
 plot.new()
