@@ -100,7 +100,7 @@
 - Class: cmd_question
   Output: In this case, it is better to call the package directly with the name of the function you want. In R we do it using two colons. Let's create new variable data_long from the data with use of tidyr::pivot_longer function. Put names to "Indices" column.
   CorrectAnswer: data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")
-  AnswerTests: any_of_exprs('data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")','data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to = "Indices")', 'data_long <- tidyr::pivot_longer(data, cols=1:4, names_to="Indices")')
+  AnswerTests: any_of_exprs('data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")','data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to = "Indices")', 'data_long <- tidyr::pivot_longer(data, cols=DAX:FTSE, names_to="Indices")', 'tidyr::pivot_longer(data, cols = DAX:FTSE, names_to = "Indices")')
   Hint: Type data_long <- tidyr::pivot_longer(data, cols = firstcolumn:lastcolumn, names_to="Indices"). 'firstcolumn:lastcolumn' of course means columns which we want to collapse to the new 'Indices' column.
 
 - Class: cmd_question
@@ -171,7 +171,7 @@
 - Class: cmd_question
   Output: We almost have it but text should be above lines. Shouldn't it? Lets move it 100 points up.
   CorrectAnswer: plt + geom_text(aes(x = date, y = max_val+100, label = max_val))
-  AnswerTests: omnitest(correctExpr='plt + geom_text(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text(aes(x = date, y = max_val + 100, label = max_val))')
+  AnswerTests: any_of_exprs(correctExpr='plt + geom_text(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text(aes(x = date, y = max_val + 100, label = max_val))')
   Hint: It's enough to type y = max_val + 100 in the geom_text.
 
 - Class: text
@@ -180,7 +180,7 @@
 - Class: cmd_question
   Output: It is already installed so we can use it. Just replace geom_text with geom_text_repel. Ignore warning messages.
   CorrectAnswer: plt + geom_text_repel(aes(x = date, y = max_val+100, label = max_val))
-  AnswerTests: omnitest(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val))')
+  AnswerTests: any_of_exprs(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val+100, label = max_val))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val))')
   Hint: Use arrow to scroll back once replace text and voila!
 
 
@@ -190,7 +190,7 @@
 - Class: cmd_question
   Output: Let's do it! Scroll back and add col argument to geom_text_repel as you did in geom_line.
   CorrectAnswer: plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))
-  AnswerTests: omnitest(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col=Indices))')
+  AnswerTests: any_of_exprs(correctExpr='plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col = Indices))','plt + geom_text_repel(aes(x = date, y = max_val + 100, label = max_val, col=Indices))')
   Hint: add 'col = Indices' to aes part.
 
 - Class: text
@@ -205,7 +205,7 @@
 - Class: cmd_question
   Output: Now add to our new plt geom_point geometry with argument col = "red" but AFTER the aes() part. We want all points to be red.
   CorrectAnswer: plt + geom_point(aes(x = date, y = max_val), col = "red")
-  AnswerTests: omnitest(correctExpr='plt + geom_point(aes(x = date, y = max_val), col = "red")','plt + geom_point(aes(x = date, y = max_val), col="red")','plt + geom_point(aes(x=date, y=max_val), col="red")')
+  AnswerTests: any_of_exprs(correctExpr='plt + geom_point(aes(x = date, y = max_val), col = "red")','plt + geom_point(aes(x = date, y = max_val), col="red")','plt + geom_point(aes(x=date, y=max_val), col="red")')
   Hint: Check arguments of geom_point in the cheat sheet.
 
 - Class: text
