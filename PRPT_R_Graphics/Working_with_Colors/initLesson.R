@@ -10,13 +10,13 @@ library(datasets)
 
 # Put initialization code in this file.
 path_to_course <- file.path(.get_course_path(),
-  "R_Graphics","Working_with_Colors")
+  "PRPT_R_Graphics","Working_with_Colors")
 try(dev.off(),silent=TRUE)
 plot.new()
 
 pathtofile <- function(fileName){
   mypath <- file.path(.get_course_path(),
-    "R_Graphics","Working_with_Colors/",
+    "PRPT_R_Graphics","Working_with_Colors/",
                       fileName)
 }
 fxfer <- function(fileName){
