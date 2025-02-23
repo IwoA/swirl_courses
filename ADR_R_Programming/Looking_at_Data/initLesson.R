@@ -7,7 +7,7 @@
 
 # Path to data
 .datapath <- file.path(.get_course_path(),
-                      'PRPT_R_Programming', 'Looking_at_Data',
+                      'ADR_R_Programming', 'Looking_at_Data',
                       'plant-data.txt')
 # Read in data
 plants <- read.csv(.datapath, strip.white=TRUE, na.strings="")
