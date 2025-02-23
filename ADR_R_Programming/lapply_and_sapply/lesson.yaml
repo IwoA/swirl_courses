@@ -1,0 +1,242 @@
+- Class: meta
+  Course: R Programming
+  Lesson: lapply and sapply
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.11
+
+- Class: text
+  Output: W tej lekcji nauczysz się używać funkcji lapply() i sapply() — dwóch najważniejszych członków rodziny funkcji *apply języka R, znanych również jako funkcje pętlowe.
+
+- Class: text
+  Output: Te potężne funkcje, wraz ze swoimi bliskimi krewnymi (m.in. vapply() i tapply()), oferują zwięzły i wygodny sposób wdrażania strategii Split-Apply-Combine w analizie danych.
+
+- Class: text
+  Output: Każda z funkcji *apply rozbije dane na mniejsze części, stosuje funkcję do każdej części, a następnie połączy wyniki. Bardziej szczegółową dyskusję na temat tej strategii można znaleźć w artykule Hadleya Wickhama w Journal of Statistical Software zatytułowanym „The Split-Apply-Combine Strategy for Data Analysis”.
+
+- Class: text
+  Output: "Tw tej lekcji będziemy używać zestawu danych Flags z UCI Machine Learning Repository. Ten zestaw danych zawiera szczegóły dotyczące różnych krajów i ich flag. Więcej informacji można znaleźć tutaj: http://archive.ics.uci.edu/ml/datasets/Flags"
+
+- Class: text
+  Output: Przejdźmy od razu do konkretów, abyś mógł zapoznać się z działaniem tych funkcji specjalnych!
+
+- Class: cmd_question
+  Output: Zapisałem zbiór danych w zmiennej o nazwie flags. Wpisz head(flags), aby wyświetlić podgląd pierwszych sześciu wierszy (tzn. „head”) zbioru danych.
+  CorrectAnswer: head(flags)
+  AnswerTests: omnitest(correctExpr='head(flags)')
+  Hint: Wpisz head(flags), aby wyświetlić „nagłówek” zestawu danych.
+
+- Class: cmd_question
+  Output: Teraz sprawdźmy wymiary zestawu danych za pomocą dim(flags).
+  CorrectAnswer: dim(flags)
+  AnswerTests: omnitest(correctExpr='dim(flags)')
+  Hint: Wpisz dim(flags), aby wyświetlić wymiary zestawu danych.
+
+- Class: text
+  Output: To mówi nam, że jest 194 wierszy, czyli obserwacji, i 30 kolumn, czyli zmiennych. Każda obserwacja to kraj, a każda zmienna opisuje pewne cechy charakterystyczne tego kraju lub jego flagi. Aby otworzyć pełniejszy opis zestawu danych w osobnym pliku tekstowym, wpisz viewinfo(), gdy wrócisz do wiersza poleceń (>).
+
+- Class: cmd_question
+  Output: Jak w przypadku każdego zestawu danych, chcielibyśmy wiedzieć, w jakim formacie zmienne zostały zapisane. Innymi słowy, jaka jest „klasa” każdej zmiennej? Co się stanie, jeśli użyjemy class(flags)? Spróbuj.
+  CorrectAnswer: class(flags)
+  AnswerTests: omnitest(correctExpr='class(flags)')
+  Hint: Wpisz class(flags), aby zobaczyć, co się stanie.
+
+- Class: text
+  Output: To tylko mówi nam, że cały zestaw danych jest przechowywany jako 'data.frame', co nie odpowiada na nasze pytanie. Tak naprawdę potrzebujemy wywołać funkcję class() dla każdej pojedynczej kolumny. Chociaż moglibyśmy to zrobić ręcznie (tj. po jednej kolumnie na raz), jest będzie znacznie szybciej, jeśli zautomatyzujemy ten proces. Brzmi jak pętla!
+
+- Class: text
+  Output: Funkcja lapply() przyjmuje listę jako dane wejściowe, stosuje funkcję do każdego elementu listy, a następnie zwraca listę o tej samej długości co oryginalna. Ponieważ ramka danych jest w rzeczywistości po prostu listą wektorów (możesz to zobaczyć za pomocą as.list(flags)), możemy użyć lapply(), aby zastosować funkcję class() do każdej kolumny zestawu danych flags. Zobaczmy to w akcji!
+
+- Class: cmd_question
+  Output: Wpisz cls_list <- lapply(flags, class), aby zastosować funkcję class() do każdej kolumny zestawu danych flags i zapisać wynik w zmiennej o nazwie cls_list. Zwróć uwagę, że po prostu podajesz nazwę funkcji, którą chcesz zastosować (tj. class), bez zwykłych nawiasów po niej.
+  CorrectAnswer: cls_list <- lapply(flags, class)
+  AnswerTests: omnitest(correctExpr='cls_list <- lapply(flags, class)')
+  Hint: Wpisz cls_list <- lapply(flags, class), aby zastosować funkcję class() do każdej kolumny naszego zestawu danych i zapisać wynik w zmiennej o nazwie cls_list.
+
+- Class: cmd_question
+  Output: Wpisz cls_list, aby wyświetlić wynik.
+  CorrectAnswer: cls_list
+  AnswerTests: omnitest(correctExpr='cls_list')
+  Hint: Wpisz cls_list, aby wyświetlić wynik.
+
+- Class: cmd_question
+  Output: „L” w „lapply” oznacza „list”. Wpisz class(cls_list), aby potwierdzić, że lapply() zwróciło listę.
+  CorrectAnswer: class(cls_list)
+  AnswerTests: omnitest(correctExpr='class(cls_list)')
+  Hint: Wpisz class(cls_list), aby potwierdzić, że lapply() zwróciło listę.
+
+- Class: text
+  Output: Zgodnie z oczekiwaniami otrzymaliśmy listę o długości 30 -- jeden element dla każdej zmiennej/kolumny. Wynik byłby znacznie bardziej zwarty, gdybyśmy mogli przedstawić go jako wektor, a nie listę.
+
+- Class: cmd_question
+  Output: Możesz pamiętać z poprzedniej lekcji, że listy są najbardziej pomocne w przechowywaniu wielu klas danych. W tym przypadku, ponieważ każdy element listy zwróconej przez lapply() jest wektorem znaków o długości jeden (tj. „integer” i „vector”), cls_list można uprościć do wektora znaków. Aby zrobić to ręcznie, wpisz as.character(cls_list).
+  CorrectAnswer: as.character(cls_list)
+  AnswerTests: omnitest(correctExpr='as.character(cls_list)')
+  Hint: Wpisz as.character(cls_list), aby wymusić przekształcenie cls_list na wektor znaków.
+
+- Class: cmd_question
+  Output: sapply() pozwala zautomatyzować ten proces poprzez wywołanie lapply() w tle, ale następnie próbuje uprościć (stąd „s” w „sapply”) wynik za Ciebie. Użyj sapply() w ten sam sposób, w jaki użyłeś lapply(), aby uzyskać klasę każdej kolumny zestawu danych flags i zapisać wynik w cls_vect. Jeśli potrzebujesz pomocy, wpisz ?sapply, aby wyświetlić dokumentację.
+  CorrectAnswer: cls_vect <- sapply(flags, class)
+  AnswerTests: omnitest(correctExpr='cls_vect <- sapply(flags, class)')
+  Hint: Wpisz cls_vect <- sapply(flags, class), aby zapisać klasy kolumn w wektorze znaków o nazwie cls_vect.
+
+- Class: cmd_question
+  Output: Użyj class(cls_vect), aby potwierdzić, że sapply() uprościło wynik do wektora znaków.
+  CorrectAnswer: class(cls_vect)
+  AnswerTests: omnitest(correctExpr='class(cls_vect)')
+  Hint: Wpisz class(cls_vect), aby potwierdzić, że sapply() zwrócił wektor znaków.
+
+- Class: text
+  Output: Ogólnie rzecz biorąc, jeśli wynik jest listą, w której każdy element ma długość jeden, sapply() zwraca wektor. Jeśli wynik jest listą, w której każdy element jest wektorem o tej samej długości (> 1), sapply() zwraca macierz. Jeśli sapply() nie potrafi czegoś wymyślić, zwraca po prostu listę, niczym nie różniącą się od tej, którą dałoby lapply().
+
+- Class: text
+  Output: Poćwiczmy jeszcze trochę używanie lapply() i sapply()!
+
+- Class: text
+  Output: Kolumny od 11 do 17 naszego zestawu danych to zmienne wskaźnikowe, z których każda reprezentuje inny kolor. Wartość zmiennej wskaźnikowej wynosi 1, jeśli kolor jest obecny na fladze kraju, i 0 w przeciwnym razie.
+
+- Class: cmd_question
+  Output:  Dlatego jeśli chcemy poznać całkowitą liczbę krajów (w naszym zestawie danych) z, na przykład, kolorem pomarańczowym na fladze, możemy po prostu dodać wszystkie 1 i 0 w kolumnie „orange”. Spróbuj sum(flags$orange), aby sprawdzić rezultat.
+  CorrectAnswer: sum(flags$orange)
+  AnswerTests: omnitest(correctExpr='sum(flags$orange)')
+  Hint: Użyj sum(flags$orange), aby dodać wszystkie 1 i 0 w kolumnie „orange”.
+
+- Class: text
+  Output: Teraz chcemy powtórzyć tę operację dla każdego koloru zarejestrowanego w zestawie danych.
+
+- Class: cmd_question
+  Output: Najpierw użyj flag_colors <- flags[, 11:17], aby wyodrębnić kolumny zawierające dane o kolorze i zapisać je w nowej ramce danych o nazwie flag_colors. (Zwróć uwagę na przecinek przed 11:17. To polecenie podzbioru mówi R, że chcemy wszystkich wierszy, ale tylko kolumn od 11 do 17.)
+  CorrectAnswer: flag_colors <- flags[, 11:17]
+  AnswerTests: omnitest(correctExpr='flag_colors <- flags[, 11:17]')
+  Hint: flag_colors <- flags[, 11:17] wykona zadanie!
+
+- Class: cmd_question
+  Output: Użyj funkcji head(), aby sprawdzić pierwsze 6 wierszy flag_colors.
+  CorrectAnswer: head(flag_colors)
+  AnswerTests: omnitest(correctExpr='head(flag_colors)')
+  Hint: head(flag_colors) wyświetli pierwsze sześć wierszy flag_colors.
+
+- Class: cmd_question
+  Output: Aby uzyskać listę zawierającą sumę każdej kolumny flag_colors, wywołaj funkcję lapply() z dwoma argumentami. Pierwszy argument to obiekt, po którym wykonujemy pętlę (tj. flag_colors), a drugi argument to nazwa funkcji, którą chcemy zastosować do każdej kolumny (tj. sum). Pamiętaj, że drugi argument to po prostu nazwa funkcji bez nawiasów itp.
+  CorrectAnswer: lapply(flag_colors, sum)
+  AnswerTests: omnitest(correctExpr='lapply(flag_colors, sum)')
+  Hint: Użyj lapply(flag_colors, nazwa_funkcji), aby zwrócić sumę każdej kolumny.
+
+- Class: text
+  Output: Oznacza to, że spośród 194 flag w naszym zestawie danych, 153 zawierają kolor czerwony, 91 zawiera kolor zielony, 99 zawiera kolor niebieski itd.
+
+- Class: cmd_question
+  Output: Wynikiem jest lista, ponieważ lapply() zawsze zwraca listę. Każdy element tej listy ma długość jeden, więc wynik można uprościć do wektora, wywołując sapply() zamiast lapply(). Wypróbuj teraz.
+  CorrectAnswer: sapply(flag_colors, sum)
+  AnswerTests: omnitest(correctExpr='sapply(flag_colors, sum)')
+  Hint: Użyj sapply(flag_colors, nazwa_funkcji), aby zwrócić sumę każdej kolumny.
+
+- Class: text
+  Output: Być może bardziej pouczające jest znalezienie proporcji flag (spośród 194) zawierających każdy kolor. Ponieważ każda kolumna to po prostu zbiór 1 i 0, średnia arytmetyczna każdej kolumny da nam proporcję 1. (Jeśli nie jest jasne dlaczego, pomyśl o prostszej sytuacji, w której masz trzy 1 i dwa 0 -- (1 + 1 + 1 + 0 + 0)/5 = 3/5 = 0,6).
+
+- Class: cmd_question
+  Output: Użyj sapply(), aby zastosować funkcję mean() do każdej kolumny flag_colors. Pamiętaj, że drugi argument sapply() powinien po prostu określać nazwę funkcji (tj. mean), którą chcesz zastosować.
+  CorrectAnswer: sapply(flag_colors, mean)
+  AnswerTests: omnitest(correctExpr='sapply(flag_colors, mean)')
+  Hint: sapply(flag_colors, mean) załatwi sprawę!
+
+- Class: text
+  Output: W dotychczasowych przykładach sapply() było w stanie uprościć wynik do wektora. Dzieje się tak, ponieważ każdy element listy zwróconej przez lapply() był wektorem o długości jeden. Przypomnijmy, że sapply() zamiast tego zwraca macierz, gdy każdy element listy zwróconej przez lapply() jest wektorem o tej samej długości (> 1).
+
+- Class: cmd_question
+  Output: Aby to zobrazować, wyodrębnijmy kolumny od 19 do 23 ze zbioru danych flag i zapiszmy wynik w nowej ramce danych o nazwie flag_shapes. Wpisz flag_shapes <- flags[, 19:23] .
+  CorrectAnswer: flag_shapes <- flags[, 19:23]
+  AnswerTests: omnitest(correctExpr='flag_shapes <- flags[, 19:23]')
+  Hint: flag_shapes <- flags[, 19:23] zapisze kolumny od 19 do 23 w nowej zmiennej.
+
+- Class: text
+  Output: Każda z tych kolumn (tj. zmiennych) przedstawia liczbę wystąpień danego kształtu lub wzoru na fladze kraju. Interesuje nas minimalna i maksymalna liczba wystąpień każdego kształtu lub wzoru.
+
+- Class: cmd_question
+  Output: Funkcja range() zwraca minimum i maksimum swojego pierwszego argumentu, który powinien być wektorem liczbowym. Użyj lapply(), aby zastosować funkcję range do każdej kolumny flag_shapes. Nie martw się o przechowywanie wyniku w nowej zmiennej. Teraz wiemy, że lapply() zawsze zwraca listę.
+  CorrectAnswer: lapply(flag_shapes, range)
+  AnswerTests: omnitest(correctExpr='lapply(flag_shapes, range)')
+  Hint: Wypróbuj lapply(flag_shapes, range), aby zastosować funkcję range() do każdej kolumny flag_shapes.
+
+- Class: cmd_question
+  Output: Wykonaj tę samą operację, ale używając sapply(), a wynik zapisz w zmiennej o nazwie shape_mat.
+  CorrectAnswer: shape_mat <- sapply(flag_shapes, range)
+  AnswerTests: omnitest(correctExpr='shape_mat <- sapply(flag_shapes, range)')
+  Hint: shape_mat <- sapply(flag_shapes, range) zastosuje funkcję range() do każdej kolumny flag_shapes i zapisze wynik w shape_mat.
+
+- Class: cmd_question
+  Output: Wyświetl zawartość shape_mat.
+  CorrectAnswer: shape_mat
+  AnswerTests: any_of_exprs('shape_mat', 'print(shape_mat)')
+  Hint: Wpisz shape_mat, aby zobaczyć jego zawartość.
+
+- Class: text
+  Output: Każda kolumna shape_mat podaje minimalną (wiersz 1) i maksymalną (wiersz 2) liczbę wystąpień danego kształtu w różnych flagach.
+
+- Class: cmd_question
+  Output: Użyj funkcji class(), aby potwierdzić, że shape_mat jest macierzą.
+  CorrectAnswer: class(shape_mat)
+  AnswerTests: omnitest(correctExpr='class(shape_mat)')
+  Hint: class(shape_mat) zwraca klasę shape_mat.
+
+- Class: text
+  Output: Jak widzieliśmy, sapply() zawsze próbuje uprościć wynik podany przez lapply(). Udało mu się to zrobić w każdym z przykładów, które do tej pory omówiliśmy. Przyjrzyjmy się przykładowi, w którym sapply() nie potrafi uprościć wyniku i zwraca listę, niczym nie różniącą się od lapply().
+
+- Class: cmd_question
+  Output: Gdy podano wektor, funkcja unique() zwraca wektor z usuniętymi wszystkimi duplikatami elementów. Innymi słowy, unique() zwraca wektor zawierający tylko „unikalne” elementy. Aby zobaczyć, jak to działa, wypróbuj unique(c(3, 4, 5, 5, 5, 6, 6)).
+  CorrectAnswer: unique(c(3, 4, 5, 5, 5, 6, 6))
+  AnswerTests: omnitest(correctExpr='unique(c(3, 4, 5, 5, 5, 6, 6))')
+  Hint: Aby zobaczyć jak działa funkcja unique(), wykonaj unique(c(3, 4, 5, 5, 5, 6, 6)).
+
+- Class: cmd_question
+  Output: Chcemy poznać unikalne wartości dla każdej zmiennej w zestawie danych flags. Aby to osiągnąć, użyj lapply(), aby zastosować funkcję unique() do każdej kolumny w zestawie danych flags, przechowując wynik w zmiennej o nazwie unique_vals.
+  CorrectAnswer: unique_vals <- lapply(flags, unique)
+  AnswerTests: omnitest(correctExpr='unique_vals <- lapply(flags, unique)')
+  Hint: Wypróbuj unique_vals <- lapply(flags, unique).
+
+- Class: cmd_question
+  Output: Pokaż wartość unique_vals na konsoli.
+  CorrectAnswer: unique_vals
+  AnswerTests: any_of_exprs('unique_vals', 'print(unique_vals)')
+  Hint: Wpisz unique_vals, aby wyświetlić jego zawartość.
+
+- Class: cmd_question
+  Output: "Ponieważ unique_vals jest listą, możesz wykorzystać to, czego się nauczyłeś, aby określić długość każdego elementu unique_vals (tj. liczbę unikalnych wartości dla każdej zmiennej). Uprość wynik, jeśli to możliwe. Wskazówka: Zastosuj funkcję length() do każdego elementu unique_vals."
+  CorrectAnswer: sapply(unique_vals, length)
+  AnswerTests: omnitest(correctExpr='sapply(unique_vals, length)')
+  Hint: Zastosuj funkcję length() do każdego elementu listy unique_vals za pomocą sapply(). Pamiętaj, nie umieszczaj nawiasów po nazwie funkcji, którą stosujesz (tj. length).
+
+- Class: text
+  Output: Fakt, że elementy listy unique_vals są wektorami o *różnej* długości, stwarza problem dla sapply(), ponieważ nie ma oczywistego sposobu na uproszczenie wyniku.
+
+- Class: cmd_question
+  Output: Za pomocą funkcji sapply() zastosuj funkcję unique() do każdej kolumny zestawu danych flags, aby uzyskać taką samą nieskomplikowaną listę, jaką uzyskałeś za pomocą funkcji lapply().
+  CorrectAnswer: sapply(flags, unique)
+  AnswerTests: omnitest(correctExpr='sapply(flags, unique)')
+  Hint: Użyj sapply(flags, unique), aby zastosować funkcję unique do każdej kolumny flag, ale nie uda ci się uprościć wyniku.
+
+- Class: text
+  Output: Czasami może zaistnieć potrzeba zastosowania funkcji, która nie jest jeszcze zdefiniowana, co wymaga napisania własnej. Pisanie funkcji w R wykracza poza zakres tej lekcji, ale przyjrzyjmy się krótkiemu przykładowi, jak można to zrobić w kontekście funkcji pętli.
+
+- Class: text
+  Output: Wyobraź sobie, że interesuje Cię tylko drugi element z każdego elementu listy unique_vals, którą właśnie utworzyłeś. Ponieważ każdy element listy unique_vals jest wektorem i nie znamy żadnej wbudowanej funkcji w R, która zwraca drugi element wektora, skonstruujemy własną funkcję.
+
+- Class: cmd_question
+  Output: lapply(unique_vals, function(elem) elem[2]) zwróci listę zawierającą drugi element z każdego elementu listy unique_vals. Należy zauważyć, że nasza funkcja przyjmuje jeden argument, elem, który jest po prostu „zmienną fikcyjną”, która przyjmuje wartość każdego elementu listy unique_vals, po kolei.
+  CorrectAnswer: lapply(unique_vals, function(elem) elem[2])
+  AnswerTests: calculates_same_value('lapply(unique_vals, function(elem) elem[2])')
+  Hint: Użyj lapply(unique_vals, function(elem) elem[2]), aby zwrócić listę zawierającą drugi element z każdego elementu listy unique_vals.
+
+- Class: text
+  Output: Jedyną różnicą między poprzednimi przykładami a tym jest to, że definiujemy i używamy własnej funkcji bezpośrednio w wywołaniu lapply(). Nasza funkcja nie ma nazwy i znika, gdy tylko lapply() zakończy jej używanie. Tak zwane „anonimowe funkcje” mogą być bardzo przydatne, gdy nie ma pasującej funkcji w R.
+
+- Class: text
+  Output: W tej lekcji nauczyłeś się, jak używać potężnych funkcji lapply() i sapply(), aby zastosować operację na elementach listy. W następnej lekcji przyjrzymy się niektórym bliskim krewnym funkcji lapply() i sapply().
+
+- Class: mult_question
+  Output: "Chcesz dostać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

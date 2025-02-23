@@ -1,0 +1,260 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Basic Building Blocks
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: W tej lekcji przyjrzymy się podstawowym elementom języka programowania R.
+
+- Class: text
+  Output: Jeśli w dowolnym momencie będziesz chciał uzyskać więcej informacji na temat 
+    jakiegoś zagadnienia związanego z R, możesz wpisać help.start() w wierszu poleceń, 
+    co otworzy menu zasobów (albo w RStudio, albo w domyślnej przeglądarce internetowej, 
+    w zależności od ustawień). Alternatywnie, proste wyszukiwanie w internecie często 
+    przynosi odpowiedź, której szukasz.
+
+- Class: cmd_question
+  Output: W najprostszej formie, R może być używane jako interaktywny kalkulator. Wpisz 5 + 7 i naciśnij Enter.
+  CorrectAnswer: 5 + 7
+  AnswerTests: omnitest(correctExpr='5 + 7')
+  Hint: Wpisz 5 + 7 i naciśnij Enter.
+
+- Class: text
+  Output: R po prostu wypisuje wynik 12 domyślnie. Jednak R jest językiem programowania, 
+    a często powód, dla którego używamy języka programowania zamiast kalkulatora, 
+    to automatyzacja jakiegoś procesu lub unikanie niepotrzebnej powtarzalności.
+
+- Class: text
+  Output: W tym przypadku możemy chcieć użyć wyniku powyżej w kolejnych obliczeniach. 
+    Zamiast za każdym razem wpisywać 5 + 7, możemy po prostu stworzyć nową zmienną, 
+    która przechowa wynik.
+
+- Class: text
+  Output: 'Sposób przypisywania wartości do zmiennej w R polega na użyciu operatora przypisania, 
+    który jest symbolem "mniejsze niż" ( `<` ) a następnie "minus" ( `-` ). Wygląda to tak: <-.
+    W RStudio dla ułatwienia można skorzystać ze skrótu `lewy alt` i `-`'
+
+- Class: text
+  Output: Myśl o operatorze przypisania jako o strzałce. 
+    Przypisujesz wartość po prawej stronie strzałki do nazwy zmiennej po lewej stronie strzałki.
+
+- Class: cmd_question
+  Output: Aby przypisać wynik 5 + 7 do nowej zmiennej o nazwie x, wpisz x <- 5 + 7. 
+    Można to odczytać jako "x dostaje wynik 5 plus 7". Spróbuj teraz.
+  CorrectAnswer: x <- 5 + 7
+  AnswerTests: any_of_exprs('x <- 5 + 7', 'x <- 7 + 5')
+  Hint: Wpisz x <- 5 + 7. Ważne jest, aby dodać pojedynczą spację po każdej stronie operatora przypisania, 
+    ale nie wstawiaj spacji między `<` a `-`, które tworzą strzałkę.
+
+- Class: text
+  Output: Zauważysz, że tym razem R nie wypisało wyniku 12. Kiedy używasz operatora przypisania, 
+    R zakłada, że nie chcesz od razu zobaczyć wyniku, ale raczej zamierzasz użyć tego wyniku 
+    do czegoś innego później.
+
+- Class: cmd_question
+  Output: Aby zobaczyć zawartość zmiennej x, wystarczy wpisać x i nacisnąć Enter. Spróbuj teraz.
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr='x')
+  Hint: Wpisz x i naciśnij Enter. To automatycznie pokaże wartość zmiennej x.
+
+- Class: cmd_question
+  Output: Teraz przechowaj wynik x - 3 w nowej zmiennej o nazwie y. 
+  CorrectAnswer: y <- x - 3
+  AnswerTests: omnitest(correctExpr='y <- x - 3')
+  Hint: Wpisz y <- x - 3 i naciśnij Enter. Niezależnie od tego, czy użyjesz x - 3, czy x-3, 
+    to kwestia osobistych preferencji, ale warto przyzwyczaić się do dodawania spacji 
+    po obu stronach operatora przypisania.
+
+- Class: cmd_question
+  Output: Jaka jest wartość y? Wpisz y, aby się dowiedzieć.
+  CorrectAnswer: 'y'
+  AnswerTests: omnitest(correctExpr='y')
+  Hint: Wpisz y i naciśnij Enter.
+
+- Class: text
+  Output: Teraz stwórzmy małą kolekcję liczb nazwaną wektorem. 
+    Każdy obiekt, który zawiera dane, nazywany jest strukturą danych, 
+    a wektory numeryczne to najprostszy typ struktury danych w R. 
+    W rzeczywistości nawet pojedyncza liczba jest uważana za wektor o długości jeden.
+
+- Class: cmd_question
+  Output: Najłatwiejszym sposobem stworzenia wektora jest użycie funkcji c(), 
+    która oznacza "sklej" lub "połącz" (ang. "concatenate" lub "combine"). 
+    Aby stworzyć wektor zawierający liczby 1.1, 9 i 3.14, 
+    wpisz c(1.1, 9, 3.14). Spróbuj teraz i przechowaj wynik w zmiennej o nazwie z.
+  CorrectAnswer: z <- c(1.1, 9, 3.14)
+  AnswerTests: omnitest(correctExpr='z <- c(1.1, 9, 3.14)')
+  Hint: Wpisanie z <- c(1.1, 9, 3.14) przypisze wektor (1.1, 9, 3.14) do nowej zmiennej 
+    o nazwie z. Dodanie pojedynczych spacji po przecinkach w wektorze nie jest wymagane, 
+    ale pomaga uczynić kod mniej zagraconym i bardziej czytelnym.
+
+- Class: cmd_question
+  Output: Kiedy masz pytania dotyczące konkretnej funkcji, możesz uzyskać dostęp 
+    do wbudowanych plików pomocy R za pomocą komendy `?`. 
+    Na przykład, jeśli chcesz uzyskać więcej informacji na temat funkcji c(), 
+    wpisz ?c, bez nawiasów, które zazwyczaj występują po nazwie funkcji. Spróbuj teraz.
+  CorrectAnswer: ?c
+  AnswerTests: omnitest(correctExpr='?c')
+  Hint: Wpisz ?c i naciśnij Enter. Spowoduje to otwarcie pliku pomocy dla funkcji c().
+
+- Class: cmd_question
+  Output: Wpisz z, aby zobaczyć zawartość tej zmiennej. 
+    Zauważ, że w wynikach nie ma przecinków oddzielających wartości.
+  CorrectAnswer: z
+  AnswerTests: omnitest(correctExpr='z')
+  Hint: Wpisz z i naciśnij Enter, aby zobaczyć zawartość tej zmiennej.
+
+- Class: cmd_question
+  Output: Możesz połączyć wektory, aby stworzyć nowy wektor. Stwórz nowy wektor, 
+    który zawiera z, 555, a następnie z, w tej kolejności. Nie przypisuj tego wektora 
+    do nowej zmiennej, abyśmy mogli od razu zobaczyć wynik.
+  CorrectAnswer: c(z, 555, z)
+  AnswerTests: omnitest(correctExpr='c(z, 555, z)')
+  Hint: Wpisz c(z, 555, z). Nie twórz nowej zmiennej. Chcemy tylko zobaczyć wynik.
+
+- Class: cmd_question
+  Output: 'Numeryczne wektory mogą być używane w wyrażeniach arytmetycznych. 
+    Wpisz następujące polecenie, aby zobaczyć, co się stanie: z * 2 + 100.'
+  CorrectAnswer: z * 2 + 100
+  AnswerTests: omnitest(correctExpr='z * 2 + 100')
+  Hint: Wpisz z * 2 + 100, nie przypisując wyniku do zmiennej. 
+    Symbol `*` jest używany do mnożenia i znajduje się na tym samym klawiszu 
+    co cyfra 8 na wielu klawiaturach.
+
+- Class: text
+  Output: Najpierw R pomnożył każdy z trzech elementów wektora z przez 2. 
+    Następnie dodał 100 do każdego elementu, aby uzyskać widoczny powyżej wynik.
+
+- Class: text
+  Output: Inne popularne operatory arytmetyczne to `+`, `-`, `/` i `^` 
+    (gdzie x^2 oznacza „x do kwadratu”). Aby obliczyć pierwiastek kwadratowy, 
+    użyj funkcji sqrt(), a aby obliczyć wartość bezwzględną, użyj funkcji abs().
+
+- Class: cmd_question
+  Output: Oblicz pierwiastek kwadratowy z z - 1 i przypisz wynik do nowej zmiennej o nazwie my_sqrt.
+  CorrectAnswer: my_sqrt <- sqrt(z - 1)
+  AnswerTests: omnitest(correctExpr='my_sqrt <- sqrt(z - 1)')
+  Hint: Przypisz wynik działania sqrt(z - 1) do zmiennej o nazwie my_sqrt.
+
+- Class: mult_question
+  Output: Zanim zobaczymy zawartość zmiennej my_sqrt, jak myślisz, co się w niej znajduje?
+  CorrectAnswer: Wektor o długości 3
+  AnswerChoices: Wektor o długości 3; Pojedyncza liczba (tzn. wektor o długości 1);
+    Wektor o długości 0 (tzn. pusty wektor).
+  AnswerTests: omnitest(correctVal='Wektor o długości 3')
+  Hint: 'Pomyśl, jak R obsługiwał inne operacje "wektorowe": element po elemencie.'
+
+- Class: cmd_question
+  Output: Wyświetl zawartość zmiennej my_sqrt.
+  CorrectAnswer: my_sqrt
+  AnswerTests: omnitest(correctExpr='my_sqrt')
+  Hint: Po prostu wpisz my_sqrt i naciśnij Enter, aby zobaczyć jej wartość.
+
+- Class: text
+  Output: Jak się domyślasz, R najpierw odjął 1 od każdego elementu wektora z, 
+    a następnie obliczył pierwiastek kwadratowy z każdego elementu. 
+    W rezultacie otrzymujemy wektor o tej samej długości co oryginalny wektor z.
+
+- Class: cmd_question
+  Output: Teraz stwórz nową zmienną o nazwie my_div, która będzie zawierać wynik 
+    dzielenia z przez my_sqrt.
+  CorrectAnswer: my_div <- z / my_sqrt
+  AnswerTests: omnitest(correctExpr='my_div <- z / my_sqrt')
+  Hint: Wpisz my_div <- z / my_sqrt. Spacje po obu stronach znaku `/` nie są wymagane, 
+    ale mogą poprawić czytelność kodu, sprawiając, że będzie on wyglądał na mniej zagracony. 
+    Na koniec to kwestia osobistych preferencji.
+
+- Class: mult_question
+  Output: Które stwierdzenie, twoim zdaniem, jest prawdziwe?
+  CorrectAnswer: Pierwszy element my_div jest równy pierwszemu elementowi z 
+    podzielonemu przez pierwszy element my_sqrt, i tak dalej...
+  AnswerChoices: Pierwszy element my_div jest równy pierwszemu elementowi z 
+    podzielonemu przez pierwszy element my_sqrt, i tak dalej...; my_div to pojedyncza liczba (czyli wektor o długości 1); my_div jest niezdefiniowany
+  AnswerTests: omnitest(correctVal='Pierwszy element my_div jest równy pierwszemu elementowi z 
+    podzielonemu przez pierwszy element my_sqrt, i tak dalej...')
+  Hint: Pomyśl o tym, jak R obsługiwał inne operacje "wektoryzowane", takie jak `+` i `*`.
+
+- Class: cmd_question
+  Output: Proszę, pokaż zawartość my_div.
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: Napisz my_div i naciśnij Enter, aby zobaczyć jego zawartość.
+
+- Class: text
+  Output: Kiedy R otrzymuje dwa wektory o tej samej długości, 
+    po prostu wykonuje określoną operację arytmetyczną (np. `+`, `-`, `*` itd.) 
+    element po elemencie. Jeśli wektory mają różną długość, R "recykluje" krótszy wektor, 
+    powtarzając go, aż osiągnie długość dłuższego wektora.
+
+- Class: text
+  Output: Kiedy robiliśmy z * 2 + 100 w poprzednim przykładzie, z był wektorem o długości 3, 
+    ale technicznie 2 i 100 to wektory o długości 1.
+
+- Class: text
+  Output: 'Za kulisami R "recyklinguje" 2, tworząc wektor złożony z samych dwójek, oraz 100, 
+    tworząc wektor z samych setek. Innymi słowy, kiedy prosisz R o obliczenie z * 2 + 100, 
+    tak naprawdę R oblicza to w ten sposób: z * c(2, 2, 2) + c(100, 100, 100).'
+
+- Class: cmd_question
+  Output: Aby zobaczyć kolejny przykład, jak działa "recykling" wektorów, 
+    spróbuj dodać c(1, 2, 3, 4) i c(0, 10). Nie musisz zapisywać wyniku w nowej zmiennej.
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10)')
+  Hint: Wprowadź c(1, 2, 3, 4) + c(0, 10) w konsoli, aby zobaczyć, 
+    jak R dodaje dwa wektory o różnej długości. Nie przypisuj wyniku do zmiennej.
+
+- Class: text
+  Output: Jeśli długość krótszego wektora nie dzieli się równo przez długość dłuższego wektora, 
+    R nadal zastosuje metodę "recyklingu", ale wyświetli ostrzeżenie, informując, 
+    że może dziać się coś dziwnego.
+
+- Class: cmd_question
+  Output: Spróbuj na przykład c(1, 2, 3, 4) + c(0, 10, 100).
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10, 100)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10, 100)')
+  Hint: Wpisz `c(1, 2, 3, 4) + c(0, 10, 100)`, aby zobaczyć, jak R obsługuje dodawanie 
+    dwóch wektorów, gdy długość krótszego wektora nie dzieli się równomiernie na długość 
+    dłuższego wektora. Nie musisz przypisywać wyniku do zmiennej.
+
+- Class: text
+  Output: Zanim zakończymy tę lekcję, chciałbym pokazać ci kilka trików oszczędzających czas.
+
+- Class: text
+  Output: Wcześniej w lekcji obliczyłeś z * 2 + 100. Załóżmy, że popełniłeś błąd 
+    i chciałeś dodać 1000 zamiast 100. Możesz albo ponownie wpisać wyrażenie, albo...
+
+- Class: cmd_question
+  Output: W wielu środowiskach programistycznych strzałka w górę pozwala przechodzić 
+    przez poprzednie polecenia. Spróbuj nacisnąć strzałkę w górę na swojej klawiaturze, 
+    aż pojawi się poprzednie polecenie (z * 2 + 100), a następnie zmień 100 na 1000 
+    i naciśnij Enter. Jeśli strzałka w górę nie działa, po prostu wpisz poprawione polecenie.
+  CorrectAnswer: z * 2 + 1000
+  AnswerTests: omnitest(correctExpr='z * 2 + 1000')
+  Hint: Jeśli Twoje środowisko nie obsługuje funkcji strzałki w górę, po prostu wpisz poprawione polecenie, aby kontynuować.
+
+- Class: text
+  Output: Na końcu, załóżmy, że chcesz wyświetlić zawartość zmiennej, którą stworzyłeś wcześniej, 
+    ale nie możesz sobie przypomnieć, czy nazwałeś ją `my_div` czy `myDiv`. 
+    Możesz spróbować obu nazw i zobaczyć, która działa, albo...
+
+- Class: cmd_question
+  Output: Możesz wpisać pierwsze dwie litery nazwy zmiennej, a następnie nacisnąć klawisz Tab 
+    (możliwe, że więcej niż raz). Większość środowisk programistycznych wyświetli 
+    listę zmiennych, które zaczynają się od "my". To nazywa się automatycznym uzupełnianiem 
+    i może być bardzo przydatne, gdy masz wiele zmiennych w swoim obszarze roboczym. 
+    Spróbuj tego. (Jeśli automatyczne uzupełnianie nie działa w Twoim przypadku, 
+    po prostu wpisz `my_div` i naciśnij Enter.)
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: Jeśli twoje środowisko programistyczne nie obsługuje automatycznego uzupełniania, 
+    po prostu wpisz `my_div` i naciśnij Enter, aby przejść dalej.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

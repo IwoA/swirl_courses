@@ -1,0 +1,294 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Functions
+  Author: Sean Kross
+  Type: Standard
+  Organization: swirlstats
+  Version: 2.2.14
+
+- Class: text
+  Output: Funkcje są jednym z podstawowych elementów składowych języka R. Są to małe
+    fragmenty wielokrotnego użytku kodu, które można traktować jak każdy inny obiekt R.
+
+- Class: text
+  Output: "Jeśli zrobiłeś jakąkolwiek inną część tego kursu, prawdopodobnie
+    już użyłeś niektórych funkcji. Funkcje są zazwyczaj charakteryzowane przez nazwę
+    funkcji, po której następują NAWIASY OKRĄGŁE."
+
+- Class: cmd_question
+  Output: "Spróbujmy użyć kilku podstawowych funkcji, po prostu dla zabawy. Funkcja Sys.Date()
+    zwraca ciąg znaków reprezentujący dzisiejszą datę. Wpisz Sys.Date() poniżej
+    i zobacz, co się stanie."
+  CorrectAnswer: Sys.Date()
+  AnswerTests: omnitest(correctExpr='Sys.Date()')
+  Hint: "Wyświetl dzisiejszą datę wpisując: Sys.Date()"
+
+- Class: text
+  Output: "Większość funkcji w R zwraca wartość. Funkcje takie jak Sys.Date() zwracają
+    wartość na podstawie środowiska komputera, podczas gdy inne funkcje manipulują
+    danymi wejściowymi w celu obliczenia  zwracanej wartości."
+
+- Class: cmd_question
+  Output: "Funkcja mean() przyjmuje wektor liczb jako dane wejściowe i zwraca
+    średnią wszystkich liczb w wektorze wejściowym. Dane wejściowe funkcji
+    są często nazywane argumentami. Podawanie argumentów do funkcji jest również
+    czasami nazywane przekazywaniem argumentów do tej funkcji. Argumenty, które chcesz
+    przekazać do funkcji, znajdują się w nawiasach funkcji. Spróbuj przekazać argument
+    c(2, 4, 5) do funkcji mean()."
+  CorrectAnswer: mean(c(2, 4, 5))
+  AnswerTests: omnitest(correctExpr='mean(c(2, 4, 5))')
+  Hint: "Oblicz średnią 2, 4 i 5 wpisując: mean(c(2, 4, 5))"
+
+- Class: text
+  Output: Funkcje zazwyczaj przyjmują argumenty, które są zmiennymi, na których funkcja działa. Na przykład
+    funkcja mean() przyjmuje wektor jako argument, jak w przypadku mean(c(2,6,8)). Następnie funkcja mean()
+    dodaje wszystkie liczby w wektorze i dzieli tę sumę przez
+    długość wektora.
+
+- Class: text
+  Output: W poniższym pytaniu zostaniesz poproszony o zmodyfikowanie skryptu, który
+    pojawi się, gdy tylko przejdziesz dalej od tego pytania. Po zakończeniu modyfikowania
+    zapisz zmiany w skrypcie i wpisz submit(), a skrypt
+    zostanie oceniony. W otwartym dokumencie będą pewne komentarze, więc
+    koniecznie je przeczytaj!
+
+- Class: script
+  Output: Ostatnie wyrażenie R, które zostanie ocenione w funkcji, stanie się
+    wartością zwracaną tej funkcji. Chcemy, aby przyjmowała ona jeden argument,
+    x, i zwracała x bez modyfikowania go. Usuń znak funta (#), aby x zostało zwrócone bez żadnych modyfikacji. 
+    Upewnij się, że zapisałeś skrypt przed wpisaniem submit().
+  AnswerTests: test_func1()
+  Hint: Pamiętaj o usunięciu znaku funta (#), tak aby ostatnie wyrażenie w funkcji składało się z x.
+  Script: boring_function.R
+
+- Class: cmd_question
+  Output: "Teraz, gdy utworzyłeś swoją pierwszą funkcję, przetestujmy ją! Wpisz:
+    boring_function('Moja pierwsza funkcja!'). Jeśli Twoja funkcja działa, powinna
+    po prostu zwrócić ciąg: 'Moja pierwsza funkcja!'"
+  CorrectAnswer: "boring_function('Moja pierwsza funkcja!')"
+  AnswerTests: omnitest(correctExpr="boring_function('Moja pierwsza funkcja!')")
+  Hint: "Przetestuj boring_function wpisując: boring_function('Moja pierwsza funkcja!')"
+
+- Class: text
+  Output: "Gratulacje z okazji napisania pierwszej funkcji. Pisząc funkcje,
+    możesz uzyskać istotny wgląd w sposób działania R. Jak powiedział kiedyś John Chambers, twórca
+    R:\n\n Aby zrozumieć obliczenia w R, pomocne są dwa hasła:
+    1. Wszystko, co istnieje, jest obiektem. 2. Wszystko, co się dzieje, jest wywołaniem funkcji."
+
+- Class: cmd_question
+  Output: "Jeśli chcesz zobaczyć kod źródłowy dowolnej funkcji, po prostu wpisz
+    nazwę funkcji bez żadnych argumentów ani nawiasów. Wypróbujmy to z
+    funkcją, którą właśnie utworzyłeś. Wpisz: boring_function, aby zobaczyć jej kod źródłowy."
+  CorrectAnswer: boring_function
+  AnswerTests: omnitest(correctExpr='boring_function')
+  Hint: "Aby zobaczyć kod źródłowy dla boring_function, wpisz: boring_function"
+
+- Class: text
+  Output: "Czas stworzyć bardziej użyteczną funkcję! Powtórzymy
+    funkcjonalność funkcji mean() poprzez utworzenie funkcji o nazwie: my_mean().
+    Pamiętaj, że aby obliczyć średnią wszystkich liczb w wektorze,
+    musisz znaleźć sumę wszystkich liczb w wektorze, a następnie podzielić tę sumę przez
+    liczbę liczb w wektorze." 
+
+- Class: script
+  Output: Make sure to save your script before you type submit().
+  AnswerTests: test_func2()
+  Hint: "Użyj funkcji sum(), aby znaleźć sumę wszystkich liczb w wektorze. Użyj
+    funkcji length(), aby znaleźć rozmiar wektora."
+  Script: my_mean.R
+  
+- Class: cmd_question
+  Output: "Teraz przetestuj swoją funkcję my_mean() poprzez znalezienie średniej wektora
+    c(4, 5, 10)."
+  CorrectAnswer: my_mean(c(4, 5, 10))
+  AnswerTests: omnitest(correctExpr='my_mean(c(4, 5, 10))')
+  Hint: "Uruchom polecenie my_mean(c(4, 5, 10)), aby przetestować nową funkcję." 
+
+- Class: text
+  Output: "Następnie spróbujmy napisać funkcję z domyślnymi argumentami. Możesz ustawić
+    wartości domyślne dla argumentów funkcji, co może być przydatne, jeśli uważasz, że
+    ktoś, kto używa Twojej funkcji, ustawi pewien argument na tę samą wartość
+    przez większość czasu."
+
+- Class: script
+  Output: Przed wpisaniem submit() pamiętaj o zapisaniu skryptu.
+  AnswerTests: test_func3()
+  Hint: "Pamiętaj o ustawieniu odpowiednich wartości domyślnych!"
+  Script: remainder.R
+
+- Class: cmd_question
+  Output: "Przetestujmy funkcję remainder. Wpisz remainder(5)
+    i zobaczmy, co się stanie."
+  CorrectAnswer: remainder(5)
+  AnswerTests: omnitest(correctExpr='remainder(5)')
+  Hint: "Przetestujmy Twoją funkcję remainder, uruchamiając: remainder(5)"
+
+- Class: text
+  Output: "Przyjrzyjmy się temu, co się właśnie wydarzyło. Podałeś jeden
+    argument do funkcji, a R dopasował ten argument do 'num', ponieważ 'num'
+    jest pierwszym argumentem. Domyślna wartość dla 'divisor' to 2, więc funkcja
+    użyła domyślnej wartości, którą podałeś."
+
+- Class: cmd_question
+  Output: "Teraz przetestujmy funkcję remainder, podając dwa argumenty.
+    Typ: remainder(11, 5) i zobaczmy, co się stanie."
+  CorrectAnswer: remainder(11, 5)
+  AnswerTests: omnitest(correctExpr='remainder(11, 5)')
+  Hint: "Przetestujmy Twoją funkcję remainder, uruchamiając: remainder(11, 5)"
+
+- Class: text
+  Output: "Po raz kolejny argumenty zostały odpowiednio dopasowane."
+
+- Class: cmd_question
+  Output: "Możesz również jawnie określić argumenty w funkcji. Kiedy
+    jawnie określisz wartości argumentów według nazwy, kolejność argumentów
+    staje się nieistotna. Możesz to wypróbować, wpisując:
+    remainder(divisor = 11, num = 5)."
+  CorrectAnswer: remainder(divisor = 11, num = 5)
+  AnswerTests: omnitest(correctExpr='remainder(divisor = 11, num = 5)')
+  Hint: "Kolejność nie ma już znaczenia, gdy jawnie określasz wartości argumentów! 
+    Sprawdź to, wpisując: remainder(divisor = 11, num = 5)"
+
+- Class: text
+  Output: "Jak widać, istnieje znacząca różnica między
+    remainder(11, 5) a remainder(divisor = 11, num = 5)!"
+
+- Class: cmd_question
+  Output: "R może również częściowo dopasowywać argumenty. Spróbuj wpisać remainder(4, div = 2)
+    aby zobaczyć tę funkcję w działaniu."
+  CorrectAnswer: remainder(4, div = 2)
+  AnswerTests: omnitest(correctExpr='remainder(4, div = 2)')
+  Hint: "Przetestuj częściowe dopasowanie, wpisując: remainder(4, div = 2)"
+
+- Class: text
+  Output: "Słowo ostrzeżenia: generalnie chcesz, aby Twój kod był możliwie 
+    najłatwiejszy do zrozumienia. Zmiana kolejności argumentów poprzez
+    określenie ich nazw lub używanie tylko częściowych nazw argumentów 
+    może być mylące, więc używaj tych możliwości ostrożnie!"
+
+- Class: cmd_question
+  Output: "Przy całej tej dyskusji o argumentach, możesz się zastanawiać, czy istnieje
+    sposób, aby zobaczyć argumenty funkcji (oprócz przejrzenia
+    dokumentacji). Na szczęście możesz użyć funkcji args()! Wpisz:
+    args(remainder) aby zbadać argumenty dla funkcji remainder."
+  CorrectAnswer: args(remainder)
+  AnswerTests: omnitest(correctExpr='args(remainder)')
+  Hint: "Spójrz na argumenty funkcji reszty, wpisując:
+    args(remainder)"
+
+- Class: text
+  Output: "Możesz nie zdawać sobie z tego sprawy, ale właśnie cię oszukałem, żebyś zrobił coś
+    całkiem interesującego! args() to funkcja, remainder() to funkcja, ale
+    remainder to argument dla args(). Tak, to prawda: możesz przekazywać funkcje
+    jako argumenty! To bardzo potężna koncepcja. Napiszmy skrypt, żeby zobaczyć
+    jak to działa."
+
+- Class: script
+  Output: Przed wpisaniem submit() pamiętaj o zapisaniu skryptu.
+  AnswerTests: test_func4()
+  Hint: "Upewnij się, że przekazując funkcję jako argument przekazujesz
+    nazwę funkcji bez nawiasów! Aby rozwiązać tę zagadkę, potrzebujesz tylko
+    jednej linii kodu z trzema obiektami: func, dat i nawiasami"
+  Script: evaluate.R
+
+- Class: cmd_question
+  Output: "Wypróbujmy nową funkcję evaluate()! Użyj evaluate, aby
+    znaleźć odchylenie standardowe wektora c(1.4, 3.6, 7.9, 8.8)."
+  CorrectAnswer: evaluate(sd, c(1.4, 3.6, 7.9, 8.8))
+  AnswerTests: omnitest(correctExpr='evaluate(sd, c(1.4, 3.6, 7.9, 8.8))')
+  Hint: "Funkcja odchylenia standardowego nazywa się sd(). Upewnij się, że kiedy
+    przekazujesz funkcję jako argument, przekazujesz
+    nazwę funkcji bez nawiasów!"
+
+- Class: text
+  Output: "Pomysł przekazywania funkcji jako argumentów innym funkcjom jest
+    ważną koncepcją w programowaniu."
+
+- Class: text
+  Output: "Możesz być zaskoczony, dowiadując się, że możesz przekazać funkcję jako
+    argument bez wcześniejszego zdefiniowania przekazanej funkcji. Funkcje, które nie są
+    nazwane, są właściwie znane jako funkcje anonimowe."
+
+- Class: text
+  Output: "Użyjmy funkcji evaluate, aby zbadać, jak działają anonimowe funkcje. 
+    Jako pierwszy argument funkcji evaluate napiszemy małą funkcję, 
+    która zmieści się w jednym wierszu. W drugim argumencie przekażemy pewne
+    dane do małej anonimowej funkcji w pierwszym argumencie."
+
+- Class: cmd_question
+  Output: "Wpisz poniższe polecenie, a następnie omówimy jego działanie:
+    evaluate(function(x){x+1}, 6)"
+  CorrectAnswer: evaluate(function(x){x+1}, 6)
+  AnswerTests: test_eval1()
+  Hint: "Wystarczy wpisać polecenie evaluate(function(x){x+1}, 6)"
+
+- Class: text
+  Output: "Pierwszy argument to mała anonimowa funkcja, która przyjmuje jeden argument
+    `x` i zwraca `x+1`. Przekazaliśmy liczbę 6 do tej funkcji, więc całe
+    wyrażenie jest oceniane na 7."
+
+- Class: cmd_question
+  Output: "Spróbuj użyć evaluate() wraz z anonimową funkcją, aby zwrócić
+    pierwszy element wektora c(8, 4, 0). Twoja anonimowa funkcja powinna
+    przyjmować tylko jeden argument, którym powinna być zmienna `x`."
+  CorrectAnswer: evaluate(function(x){x[1]}, c(8, 4, 0))
+  AnswerTests: test_eval2()
+  Hint: "Być może będziesz musiał przypomnieć sobie, jak indeksować elementy wektora. Pamiętaj, że
+    Twoja funkcja anonimowa powinna mieć tylko jeden argument, a ten argument powinien
+    być nazwany `x`."
+
+- Class: cmd_question
+  Output: "Teraz spróbuj użyć evaluate() wraz z anonimową funkcją, aby zwrócić
+    ostatni element wektora c(8, 4, 0). Twoja anonimowa funkcja powinna
+    przyjmować tylko jeden argument, którym powinna być zmienna `x`."
+  CorrectAnswer: evaluate(function(x){x[length(x)]}, c(8, 4, 0))
+  AnswerTests: test_eval3()
+  Hint: "Być może będziesz musiał przypomnieć sobie, jak indeksować elementy wektora. Pamiętaj, że twoja
+    anonimowa funkcja powinna mieć tylko jeden argument, a ten argument powinien
+    być nazwany `x`. Użycie funkcji length() w twojej anonimowej funkcji może ci pomóc."
+
+- Class: cmd_question
+  Output: "Przez resztę kursu będziemy często używać funkcji paste(). Wpisz ?paste, 
+    abyśmy mogli przejrzeć dokumentację funkcji paste."
+  CorrectAnswer: ?paste
+  AnswerTests: omnitest(correctExpr='?paste')
+  Hint: "Po prostu wpisz: ?paste"
+
+- Class: text
+  Output: "Jak widać, pierwszym argumentem paste() jest `...`, który jest określany
+    jako wielokropek lub po prostu kropka-kropka-kropka. Wielokropek pozwala na przekazanie 
+    do funkcji nieokreślonej     liczby argumentów. W przypadku paste() można przekazać dowolną
+    liczbę ciągów jako argumenty, a paste() zwróci wszystkie ciągi połączone w jeden ciąg."
+
+- Class: cmd_question
+  Output: 'Żeby zobaczyć jak działa paste(), wpisz paste("Programowanie", "jest", "fajne!")'
+  CorrectAnswer: paste("Programowanie", "jest", "fajne!")
+  AnswerTests: omnitest(correctExpr='paste("Programowanie", "jest", "fajne!")')
+  Hint: 'Po prostu wpisz: paste("Programowanie", "jest", "fajne!")'
+
+- Class: text
+  Output: "Czas napisać własną zmodyfikowaną wersję funkcji paste()."
+
+- Class: script 
+  Output: Pamiętaj o zapisaniu skryptu przed wpisaniem submit().
+  AnswerTests: test_func5()
+  Hint: "Pamiętaj, że argumenty mogą występować po ..."
+  Script: telegram.R
+
+- Class: cmd_question
+  Output: "Teraz przetestujmy twoją funkcję telegram. Użyj jej
+    przekazując dowolne argumenty!"
+  CorrectAnswer: telegram()
+  AnswerTests: expr_uses_func('telegram')
+  Hint: 'Użyj funkcji telegram z dowolnymi argumentami.'
+
+- Class: text
+  Output: "Dotarliśmy do końca naszej lekcji! Idź i napisz kilka
+    świetnych funkcji!"
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

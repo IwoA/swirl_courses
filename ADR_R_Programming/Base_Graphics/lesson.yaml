@@ -1,0 +1,213 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Base Graphics
+  Author: David Kane
+  Type: Standard
+  Organization: Williams College
+  Version: 0.1.1
+
+- Class: text
+  Output: Jedną z największych zalet R w porównaniu z innymi językami programowania jest łatwość, z jaką możemy tworzyć grafiki o jakości publikacyjnej. W tej lekcji poznasz podstawowe grafiki w R.
+
+- Class: text
+  Output: 'W tej lekcji nie omawiamy bardziej zaawansowanych kwestii tworzenia grafiki w R. Należą do nich: lattice, ggplot2 i ggvis.'
+
+- Class: text
+  Output: Podstawowe funkcje graficzne są bardzo przydatne przy wstępnym przeglądzie danych i prototypowaniu. 
+
+- Class: cmd_question
+  Output: Załaduj dołączoną ramkę danych cars za pomocą data(cars).
+  CorrectAnswer: data(cars)
+  AnswerTests: omnitest(correctExpr='data(cars)')
+  Hint: Wpisz po prostu data(cars)
+
+- Class: text
+  Output: Będziemy pracować z prostymi ramkami danych. Naszym głównym celem jest wprowadzenie różnych funkcji wykresu i ich argumentów. Wszystkie dane wyjściowe będą wyglądać ciekawiej przy większych, bardziej złożonych zestawach danych.
+
+- Class: cmd_question
+  Output: Otwórz stronę pomocy dla cars.
+  CorrectAnswer: ?cars
+  AnswerTests: any_of_exprs('?cars', 'help(cars)', 'help("plot")')
+  Hint: Wpisz ?cars lub help(cars), aby wyświetlić stronę pomocy ze szczegółami na temat ramki danych samochodu.
+
+- Class: text
+  Output: "Jak widać na stronie pomocy, zbiór danych o samochodach zawiera tylko dwie zmienne: prędkość i drogę hamowania. Należy zauważyć, że dane pochodzą z lat 20. XX wieku."
+
+- Class: cmd_question
+  Output: Pokaż nagłówek tabeli
+  CorrectAnswer: head(cars)
+  AnswerTests: omnitest(correctExpr='head(cars)')
+  Hint: Szukasz funkcji head()
+
+- Class: text
+  Output: Przed rysowaniem zawsze warto zorientować się w danych. Kluczowe polecenia R do tego celu to dim(), names(), head(), tail() i summary().
+
+- Class: cmd_question
+  Output: Uruchom polecenie plot() na ramce danych cars.
+  CorrectAnswer: plot(cars)
+  AnswerTests: omnitest(correctExpr='plot(cars)')
+  Hint: Wpisz plot(cars)
+
+- Class: text
+  Output: Jak zawsze, R bardzo się stara dać ci coś sensownego, biorąc pod uwagę informacje, które mu dostarczyłeś. Po pierwsze, R zauważa, że ramka danych, którą mu podałeś, ma tylko dwie kolumny, więc zakłada, że chcesz wykreślić jedną kolumnę w porównaniu z drugą.
+
+- Class: text
+  Output: Po drugie, ponieważ nie podajemy etykiet dla żadnej z osi, R używa nazw kolumn. Po trzecie, tworzy znaczniki osi przy ładnych okrągłych liczbach i odpowiednio je etykietuje. Po czwarte, używa innych domyślnych wartości dostarczonych w plot().
+
+- Class: text
+  Output: Teraz poświęcimy trochę czasu na zbadanie plot, ale wiele tematów poruszanych tutaj będzie miało zastosowanie do większości innych funkcji graficznych R. Należy zauważyć, że „plot” to skrót od scatterplot.
+
+- Class: cmd_question
+  Output: Poszukaj strony pomocy dla plot().
+  CorrectAnswer: ?plot
+  AnswerTests: any_of_exprs('?plot', 'help(plot)')
+  Hint: ?...
+
+- Class: text
+  Output: Strona pomocy dla funkcji plot() wyróżnia różne argumenty, które może przyjąć funkcja. Dwa najważniejsze to x i y, zmienne, które zostaną wykreślone. W przypadku następnego zestawu pytań uwzględnij nazwy argumentów w swoich odpowiedziach. To znaczy, nie wpisuj plot(cars$speed, cars$dist), chociaż to zadziała. Zamiast tego użyj plot(x = cars$speed, y = cars$dist).
+
+- Class: cmd_question
+  Output: Użyj polecenia plot(), aby wyświetlić prędkość na osi x i dist na osi y z ramki danych samochodu. Użyj formy polecenia plot, w której wektory są jawnie przekazywane jako argumenty dla x i y.
+  CorrectAnswer: plot(x = cars$speed, y = cars$dist)
+  AnswerTests: omnitest(correctExpr='plot(x = cars$speed, y = cars$dist)')
+  Hint: Wpisz plot(x = cars$speed, y = cars$dist) aby otrzymać wykres.
+
+- Class: text
+  Output: Zauważ, że to daje nieco inną odpowiedź niż plot(cars). W tym przypadku R nie jest pewne, co chcesz użyć jako etykiety na osiach, więc po prostu używa argumentów, które przekazujesz, łącznie z nazwą ramki danych i znakami dolara.
+
+- Class: text
+  Output: Należy zauważyć, że istnieją inne sposoby wywołania polecenia plot, tj. użycie interfejsu „formula”. Na przykład otrzymujemy podobny wykres do powyższego za pomocą plot(dist ~ speed, cars). Jednak poczekamy do późniejszej części lekcji, zanim użyjemy interfejsu formula.
+  
+- Class: cmd_question
+  Output: Użyj polecenia plot(), aby pokazać dist na osi x i speed na osi y z ramki danych cars. Jest to przeciwieństwo tego, co zrobiliśmy powyżej.
+  CorrectAnswer: plot(x = cars$dist, y = cars$speed)
+  AnswerTests: omnitest(correctExpr='plot(x = cars$dist, y = cars$speed)')
+  Hint: Wpisz plot(x = cars$dist, y = cars$speed)
+
+- Class: text
+  Output: Prawdopodobnie bardziej sensowne jest, aby prędkość była na osi x, ponieważ droga zatrzymania jest funkcją prędkości bardziej niż odwrotnie. Tak więc w przypadku pozostałych pytań w tej części lekcji zawsze przypisuj odpowiednio argumenty .
+
+- Class: text
+  Output: W rzeczywistości możesz założyć, że odpowiedzi na kilka następnych pytań mają postać plot(x = cars$speed, y = cars$dist, ...), ale z różnymi argumentami użytymi w miejsce ...
+
+- Class: cmd_question
+  Output: Utwórz ponownie wykres z etykietą osi x ustawioną na „Prędkość”.
+  CorrectAnswer: plot(x = cars$speed, y = cars$dist, xlab = "Prędkość")
+  AnswerTests: omnitest(correctExpr='plot(x = cars$speed, y = cars$dist, xlab = "Prędkość")')
+  Hint: Uzupełnij plot(x = , y = , xlab = "Prędkość") 
+
+- Class: cmd_question
+  Output: Utwórz ponownie wykres z etykietą osi Y ustawioną na "Odległość hamowania". 
+  CorrectAnswer: plot(x = cars$speed, y = cars$dist, ylab = "Odległość hamowania")
+  AnswerTests: omnitest(correctExpr='plot(x = cars$speed, y = cars$dist, ylab = "Odległość hamowania")')
+  Hint: Uzupełnij plot(x = , y = , ylab = "Odległość hamowania").
+
+- Class: cmd_question
+  Output: Utwórz ponownie wykres. Tym razem z etykietami osi "Prędkość" and "Odległość hamowania".
+  CorrectAnswer: plot(x = cars$speed, y = cars$dist, xlab = "Prędkość", ylab = "Odległość hamowania")
+  AnswerTests: omnitest(correctExpr='plot(x = cars$speed, y = cars$dist, xlab = "Prędkość", ylab = "Odległość hamowania")')
+  Hint: Uzupełnij plot(x = , y = , xlab = , ylab = ).
+
+- Class: text
+  Output: Powodem, dla którego plots(cars) działało na początku lekcji, było to, że R był na tyle inteligentny, aby wiedzieć, że pierwszy element (tj. pierwsza kolumna) w cars powinien zostać przypisany do argumentu x, a drugi element do argumentu y. Aby zaoszczędzić na pisaniu, następny zestaw odpowiedzi będzie miał formę plot(cars, ...) z różnymi dodanymi argumentami.
+
+- Class: text
+  Output: Dla każdego pytania będziemy potrzebować tylko jednego dodatkowego argumentu na raz. Oczywiście, możesz przekazać więcej niż jeden argument podczas wykonywania prawdziwego zadania.
+
+- Class: cmd_question
+  Output: Zrób wykres cars z głównym tytułem „Mój wykres”. Zauważ, że argumentem dla głównego tytułu jest „main”, a nie „title”.
+  CorrectAnswer: plot(cars, main = "Mój wykres")
+  AnswerTests: omnitest(correctExpr='plot(cars, main = "Mój wykres")')
+  Hint: Wpisz plot(cars, main = "Mój wykres")
+
+- Class: cmd_question
+  Output: Zrób wykres cars z podtytułem sub = "Podtytuł mojego wykresu".
+  CorrectAnswer: plot(cars, sub = "Podtytuł mojego wykresu")
+  AnswerTests: omnitest(correctExpr='plot(cars, sub = "Podtytuł mojego wykresu")')
+  Hint: Uzupełnij plot(, sub = "")
+
+- Class: text
+  Output: Strona pomocy plot (?plot) obejmuje tylko niewielką liczbę argumentów, które można przekazać do plot() i innych funkcji graficznych. Aby rozpocząć eksplorację wielu innych opcji, spójrz na ?par. Przyjrzyjmy się niektórym z najczęściej używanych. Kontynuuj używanie plot(cars, ...) jako podstawowej odpowiedzi na te pytania.
+
+- Class: cmd_question
+  Output: Narysuj wykres cars tak, aby zaznaczone punkty były oznaczone kolorem czerwonym. (Aby uzyskać ten efekt, użyj col = 2).
+  CorrectAnswer: plot(cars, col = 2)
+  AnswerTests: omnitest(correctExpr='plot(cars, col = 2)')
+  Hint: Uzupełnij plot(cars, col = )
+
+- Class: cmd_question
+  Output: Narysuj wykres cars, ograniczając oś x do wartości od 10 do 15. (Aby uzyskać ten efekt, użyj xlim = c(10, 15)).
+  CorrectAnswer: plot(cars, xlim = c(10, 15))
+  AnswerTests: omnitest(correctExpr='plot(cars, xlim = c(10, 15))')
+  Hint: Uzupełnij plot(cars, xlim = ).
+
+- Class: text
+  Output: Możesz również zmienić kształt symboli na wykresie. Strona pomocy dla punktów (?points) zawiera szczegóły.
+
+- Class: cmd_question
+  Output: Narysuj wykres cars używając trójkątów  (użyj pch = 2) 
+  CorrectAnswer: plot(cars, pch = 2)
+  AnswerTests: omnitest(correctExpr='plot(cars, pch = 2)')
+  Hint: Uzupełnij plot(cars, )
+
+- Class: text
+  Output: Argumenty takie jak „col” i „pch” mogą wydawać się mało intuicyjne. A to dlatego, że takie są! Dlatego wiele/większość osób używa bardziej nowoczesnych pakietów, takich jak ggplot2, do tworzenia grafiki w R.
+
+- Class: text
+  Output: Przydatne jest jednak zapoznanie się z podstawowymi funkcjami graficznymi ponieważ ich znajomość bardzo przyśpiesza wstępną analizę danych.
+
+- Class: text
+  Output: Przyjrzyjmy się teraz innym funkcjom grafiki bazowej, które mogą być przydatne, zaczynając od wykresów pudełkowych (boxplot).
+
+- Class: cmd_question
+  Output: Załaduj ramkę danych mtcars. 
+  CorrectAnswer: data(mtcars)
+  AnswerTests: omnitest(correctExpr='data(mtcars)')
+  Hint: Wpisz data(mtcars).
+
+- Class: text
+  Output: Za każdym razem, gdy ładujesz nową ramkę danych, powinieneś ją zbadać przed użyciem. W środku lekcji swirl po prostu wpisz play(). To tymczasowo zawiesza lekcję (bez utraty wykonanej już pracy) i pozwala na wydawanie poleceń takich jak dim(mtcars) i head(mtcars). Po zakończeniu badania danych po prostu wpisz nxt(), a lekcja zostanie wznowiona od miejsca, w którym została przerwana.
+
+- Class: cmd_question
+  Output: Poszukaj strony pomocy dla boxplot().
+  CorrectAnswer: ?boxplot
+  AnswerTests: any_of_exprs('?boxplot', 'help(boxplot)')
+  Hint: ?...
+
+- Class: text
+  Output: Zamiast dodawać kolumny danych bezpośrednio jako argumenty wejściowe, jak zrobiliśmy z plot(), często wygodnie jest przekazać całą ramkę danych. Na to pozwala argument „data” w boxplot().
+
+- Class: text
+  Output: boxplot(), podobnie jak wiele funkcji R, przyjmuje również argument „formuła”, zazwyczaj wyrażenie z tyldą („~”), które wskazuje relację między zmiennymi wejściowymi. Pozwala to wprowadzić coś takiego jak mpg ~ cyl, aby wykreślić relację między cyl (liczba cylindrów) na osi x a mpg (mile na galon) na osi y.
+
+- Class: cmd_question
+  Output: Użyj funkcji boxplot() ze wzorem = mpg ~ cyl i danymi = mtcars, aby utworzyć wykres pudełkowy.
+  CorrectAnswer: boxplot(formula = mpg ~ cyl, data = mtcars)
+  AnswerTests: omnitest(correctExpr='boxplot(formula = mpg ~ cyl, data = mtcars)')
+  Hint: Popraw literówki.
+
+- Class: text
+  Output: Wykres pokazuje, że mpg jest znacznie niższe w przypadku samochodów z większą liczbą cylindrów. Zauważ, że możemy użyć tego samego zestawu argumentów, który badaliśmy powyżej z plot(), aby dodać etykiety osi, tytuły itd.
+
+- Class: text
+  Output: Histogramy są przydatnym narzędziem, gdy patrzymy na pojedynczą zmienną. hist() jest powiązaną funkcją R. Podobnie jak plot(), hist() najlepiej używać, przekazując po prostu pojedynczy wektor.
+
+- Class: cmd_question
+  Output: Użyj hist() z wektorem mtcars$mpg, aby utworzyć histogram.
+  CorrectAnswer: hist(mtcars$mpg)
+  AnswerTests: any_of_exprs('hist(mtcars$mpg)', 'hist(x = mtcars$mpg)')
+  Hint: Wpisz hist(mtcars$mpg)
+
+# Not sure what a good lesson length is for this. 
+# Might add some information on saving plots.
+# Other functions that I use include identify().
+
+- Class: text
+  Output: W tej lekcji nauczyłeś się, jak pracować z bazową grafiką w R. Najlepszym miejscem, do którego możesz się udać, jest zapoznanie się z pakietem ggplot2. Jeśli chcesz poznać inne elementy bazowej grafiki, to ta strona internetowa (http://www.ling.upenn.edu/~joseff/rstudy/week4.html) zapewnia przydatny przegląd.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

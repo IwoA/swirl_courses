@@ -1,0 +1,176 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Sequences of Numbers
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: W tej lekcji nauczysz się, jak tworzyć sekwencje liczb w R.
+
+- Class: cmd_question
+  Output: Najprostszym sposobem tworzenia sekwencji liczb w R jest użycie operatora `:`. 
+    Wpisz 1:20, aby zobaczyć, jak to działa.
+  CorrectAnswer: '1:20'
+  AnswerTests: omnitest(correctExpr='1:20')
+  Hint: Wpisz 1:20 bez spacji. Upewnij się, że używasz zwykłego dwukropka, a nie średnika.
+
+- Class: cmd_question
+  Output: To dało nam wszystkie liczby całkowite między (włącznie) 1 a 20. Możemy również 
+    użyć tego operatora do tworzenia sekwencji liczb rzeczywistych. Na przykład, spróbuj pi:10.
+  CorrectAnswer: pi:10
+  AnswerTests: omnitest(correctExpr='pi:10')
+  Hint: Wprowadź pi:10 i zobacz, co się stanie. 
+    pi to stała zdefiniowana w R, która przyjmuje wartość 3.1415....
+
+- Class: text
+  Output: Wynik to wektor liczb rzeczywistych, zaczynający się od pi (3.142...) 
+    i rosnący w krokach o 1. Górna granica 10 nie jest osiągana, ponieważ następna 
+    liczba w naszym ciągu byłaby większa niż 10.
+
+- Class: cmd_question
+  Output: 'Spróbuj wpisać 15:1, aby zobaczyć, co się stanie.'
+  CorrectAnswer: '15:1'
+  AnswerTests: omnitest(correctExpr='15:1')
+  Hint: Wpisz 15:1 i naciśnij Enter.
+
+- Class: text
+  Output: To było zrozumiałe! R automatycznie przechodzi do liczenia wstecz, 
+    jeśli początkowa liczba jest większa niż liczba końcowa. Choć może to rzadko być 
+    przydatne, warto wiedzieć, jak działa ta funkcjonalność!
+
+- Class: text
+  Output: "Pamiętaj, że jeśli masz pytania dotyczące konkretnej funkcji w R, 
+    możesz uzyskać dokumentację, wpisując znak zapytania, a następnie nazwę funkcji: 
+    ?nazwa_funkcji. Jednak w przypadku operatorów, takich jak dwukropek użyty powyżej, 
+    musisz umieścić symbol w odwrotnych cudzysłowach (backticks), na przykład: `?`:`. 
+    Backtick (`) znajduje się zazwyczaj w lewym górnym rogu klawiatury, nad klawiszem Tab. 
+    Jeśli nie masz klawisza backtick, możesz użyć zwykłych cudzysłowów."
+
+- Class: cmd_question
+  Output: Wyświetl teraz dokumentację `:`.
+  CorrectAnswer: ?`:`
+  AnswerTests: any_of_exprs('?`:`', "?':'", '?":"')
+  Hint: "Aby wyświetlić dokumentację dla operatora dwukropka, musisz użyć znaków backtick 
+    lub cudzysłowów. Jest to wymagane, aby R wiedział, że nie próbujesz używać tego 
+    symbolu w poleceniu. Oto jak to wygląda: `?`:`. Pamiętaj, aby dodać znak zapytania na 
+    początku."
+
+- Class: text
+  Output: Często będziemy chcieli mieć większą kontrolę nad tworzoną sekwencją niż to, 
+    co oferuje operator `:`. W tym celu używamy funkcji `seq()`.
+
+- Class: cmd_question
+  Output: Najprostsze użycie funkcji `seq()` działa dokładnie tak samo jak operator `:`. 
+    Spróbuj wpisać `seq(1, 20)`, aby zobaczyć wynik.
+  CorrectAnswer: seq(1, 20)
+  AnswerTests: omnitest(correctExpr='seq(1, 20)')
+  Hint: Wpisz `seq(1, 20)` i naciśnij Enter. Spacja po przecinku nie jest obowiązkowa, 
+    ale zalecana, ponieważ sprawia, że kod jest bardziej czytelny.
+
+- Class: cmd_question
+  Output: Wynik jest taki sam jak dla 1:20. Jednakże załóżmy, że chcemy wektor
+    liczb od 0 do 10, zwiększających się o 0,5. To właśnie robi seq(0, 10,
+    by=0.5). Spróbuj.
+  CorrectAnswer: seq(0, 10, by=0.5)
+  AnswerTests: omnitest(correctExpr='seq(0, 10, by=0.5)')
+  Hint: Wciąż używasz funkcji `seq()`, ale tym razem z dodatkowym argumentem, 
+    który mówi R, że chcesz zwiększać swój ciąg o 0,5. Spróbuj wpisać `seq(0, 10, by=0.5)`.
+
+- Class: cmd_question
+  Output: Albo może nie zależy nam na tym, jaki jest przyrost, a po prostu chcemy ciąg 
+    30 liczb między 5 a 10. `seq(5, 10, length=30)` spełnia to zadanie. Spróbuj teraz, 
+    a wynik zapisz w nowej zmiennej o nazwie `my_seq`.
+  CorrectAnswer: my_seq <- seq(5, 10, length=30)
+  AnswerTests: omnitest(correctExpr='my_seq <- seq(5, 10, length=30)')
+  Hint: 'Używasz tej samej funkcji, ale zmieniając jej argumenty, aby uzyskać różne wyniki. 
+    Upewnij się, że zapiszesz wynik w nowej zmiennej o nazwie my_seq, w ten sposób:
+    my_seq <- seq(5, 10, length=30).'
+
+- Class: cmd_question
+  Output: Aby potwierdzić, że my_seq ma długość 30, możemy użyć funkcji length(). 
+    Wypróbuj to teraz.
+  CorrectAnswer: length(my_seq)
+  AnswerTests: omnitest(correctExpr='length(my_seq)')
+  Hint: Użyj length(my_seq), aby zobaczyć długość zmiennej my_seq.
+
+- Class: text
+  Output: Załóżmy, że nie znamy długości zmiennej `my_seq`, 
+    ale chcielibyśmy wygenerować ciąg liczb całkowitych od 1 do N, gdzie N reprezentuje 
+    długość wektora my_seq. Innymi słowy, chcemy stworzyć nowy wektor (1, 2, 3, ...), 
+    który ma tę samą długość co my_seq.
+
+- Class: cmd_question
+  Output: 'Jest kilka sposobów, aby to zrobić. Jedną z możliwości jest połączenie 
+    operatora `:` z funkcją `length()`, jak tutaj: `1:length(my_seq)`. 
+    Wypróbuj to teraz.'
+  CorrectAnswer: 1:length(my_seq)
+  AnswerTests: omnitest(correctExpr='1:length(my_seq)')
+  Hint: Spróbuj wpisać 1:length(my_seq), nie przypisując wyniku do nowej zmiennej.
+
+- Class: cmd_question
+  Output: Inna opcja to użycie seq(along.with = my_seq). Wypróbuj to teraz.
+  CorrectAnswer: seq(along.with = my_seq)
+  AnswerTests: omnitest(correctExpr='seq(along.with = my_seq)')
+  Hint: Wpisz `seq(along.with = my_seq)`. Zauważ, że używamy tej samej funkcji seq(), 
+    ale z innym argumentem o nazwie along.with. Mówi to R, że chcesz utworzyć sekwencję 
+    "wzdłuż" sekwencji my_seq. Pamiętaj, że możesz wpisać ?seq, jeśli masz pytania 
+    dotyczące funkcji seq().
+
+- Class: cmd_question
+  Output: Jednakże, jak to bywa w przypadku wielu powszechnych zadań, R ma oddzielną wbudowaną 
+    funkcję do tego celu, nazwaną `seq_along()`. Wpisz `seq_along(my_seq)`, aby zobaczyć, 
+    jak działa.
+  CorrectAnswer: seq_along(my_seq)
+  AnswerTests: omnitest(correctExpr='seq_along(my_seq)')
+  Hint: Funkcja seq_along() jest wariantem funkcji seq(). 
+    Wpisz seq_along(my_seq), aby uzyskać ten sam wynik, ale w inny sposób.
+
+- Class: text
+  Output: Często istnieje kilka podejść do rozwiązania tego samego problemu, szczególnie w R. 
+    Proste podejścia, które wymagają mniej pisania, są zazwyczaj najlepsze. 
+    Ważne jest również, aby Twój kod był czytelny, abyś Ty i inni mogli łatwo zrozumieć, 
+    co się dzieje.
+
+- Class: text
+  Output: Jeśli R ma wbudowaną funkcję do wykonywania określonego zadania, to prawdopodobnie 
+    ta funkcja jest mocno zoptymalizowana pod kątem tego zadania i będzie najlepszym wyborem. 
+    W miarę jak będziesz stawać się bardziej zaawansowanym programistą R, zaczniesz projektować 
+    własne funkcje do realizacji zadań, gdy nie będzie lepszych opcji. W przyszłych lekcjach 
+    omówimy, jak pisać własne funkcje.
+
+- Class: text
+  Output: Jedną z funkcji związaną z tworzeniem ciągów liczb jest rep(), która oznacza "replikować". 
+    Zobaczmy kilka przykładów jej użycia.
+
+- Class: cmd_question
+  Output: Jeśli chcemy stworzyć wektor, który zawiera 40 zer, możemy użyć rep(0, times = 40). 
+    Sprawdź to!
+  CorrectAnswer: rep(0, times = 40)
+  AnswerTests: omnitest(correctExpr='rep(0, times = 40)')
+  Hint: Wpisz rep(0, times = 40) aby otrzymać wektor zawierający 40 zer.
+
+- Class: cmd_question
+  Output: Jeśli zamiast tego chcemy, aby nasz wektor zawierał 10 powtórzeń wektora (0, 1, 2), 
+    możemy użyć rep(c(0, 1, 2), times = 10). Spróbuj!
+  CorrectAnswer: rep(c(0, 1, 2), times = 10)
+  AnswerTests: omnitest(correctExpr='rep(c(0, 1, 2), times = 10)')
+  Hint: Spróbuj rep(c(0, 1, 2), times = 10).
+    Pamiętaj, aby użyć funkcji `c()`, aby powiedzieć R, że liczby 0, 1 i 2 tworzą wektor.
+
+- Class: cmd_question
+  Output: Na koniec, załóżmy, że zamiast powtarzać wektor (0, 1, 2) w kółko, chcemy, 
+    aby nasz wektor zawierał 10 zer, potem 10 jedynek, a następnie 10 dwójek. 
+    Możemy to zrobić za pomocą argumentu `each`. Spróbuj wpisać rep(c(0, 1, 2), each = 10).
+  CorrectAnswer: rep(c(0, 1, 2), each = 10)
+  AnswerTests: omnitest(correctExpr='rep(c(0, 1, 2), each = 10)')
+  Hint: Wpisz rep(c(0, 1, 2), each = 10), aby zobaczyć, jak argument `each` w funkcji rep()
+    nieco zmienia jej działanie.
+
+- Class: mult_question
+  Output: "Chcesz dostać punkty za tę lekcję?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

@@ -1,0 +1,112 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Missing Values
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: Brakujące wartości odgrywają ważną rolę w statystyce i analizie danych. Często nie należy ich ignorować, lecz dokładnie zbadać, aby sprawdzić, czy istnieje ukryty wzorzec lub przyczyna ich braku.
+
+- Class: text
+  Output: W R wartość NA jest używana do reprezentowania każdej wartości, która jest „niedostępna” lub „brakująca” (w sensie statystycznym). W tej lekcji przyjrzymy się bliżej brakującym wartościom.
+
+- Class: cmd_question
+  Output: Każda operacja obejmująca NA zazwyczaj zwraca NA jako wynik. Aby to zobaczyć w praktyce, utwórz wektor c(44, NA, 5, NA) i przypisz go do zmiennej x.
+  CorrectAnswer: x <- c(44, NA, 5, NA)
+  AnswerTests: omnitest(correctExpr='x <- c(44, NA, 5, NA)')
+  Hint: Przypisz wektor c(44, NA, 5, NA) do zmiennej x. NA musi być zapisane wielkimi literami.
+
+- Class: cmd_question
+  Output: Teraz pomnóż x przez 3.
+  CorrectAnswer: x * 3
+  AnswerTests: any_of_exprs('x * 3', '3 * x')
+  Hint: Spróbuj x * 3.
+
+- Class: text
+  Output: Zauważ, że elementy wynikowego wektora, które odpowiadają wartościom NA w x, również są NA.
+
+- Class: cmd_question
+  Output: Aby zrobić ćwiczenie trochę bardziej interesującym, stwórz wektor zawierający 1000 losowych wartości z rozkładu normalnego za pomocą y <- rnorm(1000).
+  CorrectAnswer: y <- rnorm(1000)
+  AnswerTests: omnitest(correctExpr='y <- rnorm(1000)')
+  Hint: Funkcja rnorm() generuje losowe liczby z rozkładu normalnego. Wpisz y <- rnorm(1000).
+
+- Class: cmd_question
+  Output: Następnie stwórz wektor zawierający 1000 NA, wpisując z <- rep(NA, 1000).
+  CorrectAnswer: z <- rep(NA, 1000)
+  AnswerTests: omnitest(correctExpr='z <- rep(NA, 1000)')
+  Hint: Wpisz z <- rep(NA, 1000), aby wygenerować wektor składający się z 1000 NA.
+
+- Class: cmd_question
+  Output: Wreszcie, wybierz 100 elementów losowo z tych 2000 wartości (łącząc y i z), tak abyśmy nie wiedzieli, ile NA się pojawi ani w jakich pozycjach będą się znajdować w naszym finalnym wektorze – my_data <- sample(c(y, z), 100).
+  CorrectAnswer: my_data <- sample(c(y, z), 100)
+  AnswerTests: omnitest(correctExpr='my_data <- sample(c(y, z), 100)')
+  Hint: Funkcja sample() losowo wybiera próbkę z danych podanych jako pierwszy argument (w tym przypadku c(y, z)) o rozmiarze określonym przez drugi argument (100). Komenda my_data <- sample(c(y, z), 100) da nam to, czego potrzebujemy.
+
+- Class: cmd_question
+  Output: Funkcja is.na() mówi nam, czy każdy element wektora jest NA. Wywołaj funkcję is.na() na zmiennej my_data i przypisz wynik do zmiennej my_na.
+  CorrectAnswer: my_na <- is.na(my_data)
+  AnswerTests: omnitest(correctExpr='my_na <- is.na(my_data)')
+  Hint: Przypisz wynik funkcji is.na(my_data) do zmiennej my_na.
+
+- Class: cmd_question
+  Output: Teraz pokaż my_na, aby zobaczyć, co udało Ci się uzyskać.
+  CorrectAnswer: my_na
+  AnswerTests: omnitest(correctExpr='my_na')
+  Hint: Wpisz my_na, aby zobaczyć jego zawartość.
+
+- Class: text
+  Output: Gdziekolwiek widzisz wartość TRUE, oznacza to, że odpowiadający jej element w zmiennej my_data to NA. Natomiast gdziekolwiek widzisz FALSE, oznacza to, że dany element w my_data jest jedną z losowych liczb z rozkładu normalnego.
+
+- Class: cmd_question
+  Output: W naszej poprzedniej dyskusji na temat operatorów logicznych wprowadziliśmy operator `==` jako metodę sprawdzania równości między dwoma obiektami. Możesz pomyśleć, że wyrażenie my_data == NA da te same wyniki co is.na(). Sprawdź to teraz.
+  CorrectAnswer: my_data == NA
+  AnswerTests: omnitest(correctExpr='my_data == NA')
+  Hint: Wpisz my_data == NA i zobacz co się stanie.
+
+- Class: text
+  Output: Powodem, dla którego otrzymałeś wektor zawierający same NAs, jest to, że NA nie jest rzeczywiście wartością, a jedynie symbolem reprezentującym brakującą wartość. Dlatego wyrażenie logiczne jest niekompletne i R nie ma innego wyjścia, 
+    jak tylko zwrócić wektor o tej samej długości co my_data, który zawiera same NAs.
+
+- Class: text
+  Output: Nie martw się, jeśli to trochę mylące. Kluczowa uwaga to ostrożność przy używaniu wyrażeń logicznych, gdy w danych mogą występować NAs, ponieważ pojedyncze wystąpienie NA może zepsuć całe wyrażenie.
+
+- Class: text
+  Output: Wracając do naszego zadania. Teraz, kiedy mamy wektor `my_na`, który zawiera TRUE dla każdego NA i FALSE dla każdej wartości numerycznej, możemy obliczyć łączną liczbę NA w naszych danych.
+
+- Class: text
+  Output: Sztuczka polega na tym, że R reprezentuje wartość TRUE jako liczbę 1, a wartość FALSE jako liczbę 0. Dlatego, jeśli zsumujemy wiele wartości TRUE i FALSE, otrzymamy łączną liczbę TRUE.
+
+- Class: cmd_question
+  Output: Spróbujmy to teraz zrobić. Użyj funkcji sum() na my_na, aby policzyć łączną liczbę wartości TRUE w my_na, a tym samym łączną liczbę wartości NA w my_data. Nie przypisuj wyniku do nowej zmiennej.
+  CorrectAnswer: sum(my_na)
+  AnswerTests: omnitest(correctExpr='sum(my_na)')
+  Hint: Użyj sum(my_na), aby policzyć liczbę wartości NA w danych.
+
+- Class: cmd_question
+  Output: Na koniec, spójrzmy na dane, aby upewnić się, że wszystko się zgadza. Pokaż my_data w konsoli.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Wpisz my_data i zatwierdź enterem.
+
+- Class: cmd_question
+  Output: Teraz, gdy opanowaliśmy NAs, przyjrzyjmy się drugiemu typowi brakujących wartości — NaN, co oznacza 'nie jest liczbą'. Aby wygenerować NaN, spróbuj teraz podzielić (używając ukośnika) 0 przez 0.
+  CorrectAnswer: 0/0
+  AnswerTests: omnitest(correctExpr='0/0')
+  Hint: Wpisz 0/0.
+
+- Class: cmd_question
+  Output: Zróbmy jeszcze jedną rzecz, dla zabawy. W R, Inf oznacza nieskończoność. Co się stanie, jeśli odejmiemy Inf od Inf?
+  CorrectAnswer: Inf - Inf
+  AnswerTests: omnitest(correctExpr='Inf - Inf')
+  Hint: Wpisz Inf - Inf. Zgadniesz wynik?
+
+- Class: mult_question
+  Output: "Chcesz uzyskać punkty za ukończenie lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""
+

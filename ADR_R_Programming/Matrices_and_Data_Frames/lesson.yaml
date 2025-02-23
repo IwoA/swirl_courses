@@ -1,0 +1,186 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Matrices and Data Frames
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: W tej lekcji omówimy macierze i ramki danych (data frames). Oba reprezentują „prostokątne” typy danych, co oznacza, że są używane do przechowywania danych tabelarycznych z wierszami i kolumnami.
+
+- Class: text
+  Output: Jak zaraz zobaczysz, główną różnicą jest to, że macierze mogą zawierać tylko jeden typ danych, podczas gdy ramki danych mogą składać się z wielu różnych typów danych.
+
+- Class: cmd_question
+  Output: Utwórzmy wektor zawierający liczby od 1 do 20, używając operatora `:`. Zapisz wynik w zmiennej o nazwie my_vector.
+  CorrectAnswer: my_vector <- 1:20
+  AnswerTests: omnitest(correctExpr='my_vector <- 1:20')
+  Hint: Operator `:` był omówiony na lekcji o sekwencjach. Jeśli chcesz utworzyć wektor zawierający liczby 1, 2 i 3 (w tej kolejności), możesz użyć c(1, 2, 3) lub 1:3. W tym przypadku chcemy, aby liczby od 1 do 20 były przechowywane w zmiennej o nazwie my_vector. Pamiętaj również, że nie potrzebujesz funkcji c() podczas korzystania z `:`.
+
+- Class: cmd_question
+  Output: Wyświetl zawartość wektora, który właśnie utworzyłeś.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Wpisz my_vector, aby zobaczyć jego zawartość.
+
+- Class: cmd_question
+  Output: Funkcja dim() podaje nam „wymiary” obiektu (od ang. dimensions). Co się stanie, jeśli wykonamy dim(my_vector)? Sprawdź.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Po prostu wpisz dim(my_vector).
+
+- Class: cmd_question
+  Output: Jasne, to nie jest zbyt pomocne! Ponieważ my_vector jest wektorem, nie ma atrybutu `dim` (więc jest po prostu NULL), ale możemy znaleźć jego długość za pomocą funkcji length(). Spróbuj tego teraz.
+  CorrectAnswer: length(my_vector)
+  AnswerTests: omnitest(correctExpr='length(my_vector)')
+  Hint: Wpisz length(my_vector), aby wyświetlić długość wektora, który właśnie utworzyłeś.
+
+- Class: cmd_question
+  Output: Ach! To jest to, czego chcieliśmy. Ale co się stanie, jeśli damy my_vector atrybut `dim`? Spróbujmy. Wpisz dim(my_vector) <- c(4, 5).
+  CorrectAnswer: dim(my_vector) <- c(4, 5)
+  AnswerTests: omnitest(correctExpr='dim(my_vector) <- c(4, 5)')
+  Hint: Wpisz dim(my_vector) <- c(4, 5), aby nadać obiektowi my_vector atrybut `dim`.
+
+- Class: text
+  Output: Nic się nie stało, jeśli to ostatnie polecenie wydało Ci się nieco dziwne. Powinno! Funkcja dim() pozwala Ci pobrać lub ustawić atrybut `dim` dla obiektu R. W tym przypadku przypisaliśmy wartość c(4, 5) do atrybutu `dim` obiektu my_vector.
+
+- Class: cmd_question
+  Output: Użyj dim(my_vector), aby sprawdzić, czy atrybut `dim` został poprawnie ustawiony.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Wystarczy wpisać dim(my_vector), aby upewnić się, że atrybut `dim` został ustawiony.
+
+- Class: cmd_question
+  Output: Innym sposobem zobaczenia tego jest wywołanie funkcji attributes() na my_vector. Wypróbuj teraz.
+  CorrectAnswer: attributes(my_vector)
+  AnswerTests: omnitest(correctExpr='attributes(my_vector)')
+  Hint: Polecenie attributes(my_vector) wyświetli wszystkie atrybuty obiektu my_vector.
+
+- Class: text
+  Output: Podobnie jak na lekcjach matematyki, gdy mamy do czynienia z obiektem dwuwymiarowym (pomyśl o prostokątnej tabeli), pierwsza liczba to liczba wierszy, a druga to liczba kolumn. Dlatego właśnie nadaliśmy my_vector 4 wiersze i 5 kolumn.
+
+- Class: cmd_question
+  Output: Ale, czekaj! To już nie brzmi jak wektor. Cóż, nie jest. Teraz to macierz. Zobacz teraz zawartość my_vector, aby zobaczyć, jak to wygląda.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Wpisz my_vector, aby zobaczyć jego zawartość.
+
+- Class: cmd_question
+  Output: Teraz potwierdźmy, że to faktycznie macierz, używając funkcji class(). Wpisz class(my_vector), aby zobaczyć, co mam na myśli.
+  CorrectAnswer: class(my_vector)
+  AnswerTests: omnitest(correctExpr='class(my_vector)')
+  Hint: Wpisz class(my_vector), aby wyświetlić klasę my_vector.
+
+- Class: cmd_question
+  Output: Oczywiście, my_vector jest teraz macierzą. Powinniśmy zapisać ją w nowej zmiennej, która pomoże nam zapamiętać, czym ona jest. Zapisz wartość my_vector w nowej zmiennej o nazwie my_matrix.
+  CorrectAnswer: my_matrix <- my_vector
+  AnswerTests: omnitest(correctExpr='my_matrix <- my_vector')
+  Hint: Ponieważ nie możemy po prostu zmienić nazwy zmiennej my_vector, przypiszemy jej wartość do nowej zmiennej za pomocą my_matrix <- my_vector.
+
+- Class: text
+  Output: Przykład, którego używaliśmy do tej pory, miał na celu zilustrowanie faktu, że macierz jest po prostu wektorem atomowym z atrybutem wymiaru. Bardziej bezpośrednia metoda tworzenia tej samej macierzy wykorzystuje funkcję matrix().
+
+- Class: cmd_question
+  Output: Teraz wywołaj plik pomocy dla funkcji matrix() używając funkcji `?`.
+  CorrectAnswer: ?matrix
+  AnswerTests: omnitest(correctExpr='?matrix')
+  Hint: Polecenie ?matrix załatwi sprawę.
+
+- Class: cmd_question
+  Output: Teraz spójrz na dokumentację funkcji matrix i sprawdź, czy potrafisz wymyślić, jak utworzyć macierz zawierającą te same liczby (1-20) i wymiary (4 wiersze, 5 kolumn) poprzez wywołanie funkcji matrix(). Zapisz wynik w zmiennej o nazwie my_matrix2.
+  CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
+  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
+  Hint: Wywołaj funkcję matrix() z trzema argumentami -- 1:20, liczbą wierszy i liczbą kolumn. Pamiętaj, aby określić argumenty według ich nazw własnych i zapisać wynik w my_matrix2 (nie w my_matrix).
+
+- Class: cmd_question
+  Output: Na koniec potwierdźmy, że my_matrix i my_matrix2 są faktycznie identyczne. Funkcja identical() powie nam, czy jej pierwsze dwa argumenty są takie same. Wypróbuj ją.
+  CorrectAnswer: identical(my_matrix, my_matrix2)
+  AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
+  Hint: Jeśli nie jesteś pewien, zapoznaj się z dokumentacją funkcji identical() korzystając z funkcji `?`.
+
+- Class: text
+  Output: Wyobraźmy sobie teraz, że liczby w naszej tabeli przedstawiają pomiary z eksperymentu klinicznego, gdzie każdy wiersz przedstawia jednego pacjenta, a każda kolumna przedstawia jedną zmienną, dla której wykonano pomiary.
+
+- Class: text
+  Output: Możemy chcieć oznaczyć wiersze, abyśmy wiedzieli, które numery należą do każdego pacjenta w eksperymencie. Jednym ze sposobów, aby to zrobić, jest dodanie kolumny do macierzy, która zawiera nazwiska wszystkich czterech osób.
+
+- Class: cmd_question
+  Output: Zacznijmy od utworzenia wektora znaków zawierającego imiona naszych pacjentów — Jan, Ewa, Piotr i Paweł. Pamiętaj, że cudzysłowy mówią R, że coś jest ciągiem znaków. Zapisz wynik w zmiennej o nazwie pacjenci.
+  CorrectAnswer: pacjenci <- c("Jan", "Ewa", "Piotr", "Paweł")
+  AnswerTests: omnitest(correctExpr='pacjenci <- c("Jan", "Ewa", "Piotr", "Paweł")')
+  Hint: Upewnij się, że imiona są napisane w dużej litery i przechowuj wynik w zmiennej o nazwie pacjenci. Nie pomyl też kolejności pacjentów! To byłaby katastrofa!
+
+- Class: cmd_question
+  Output: Teraz użyjemy funkcji cbind(), aby „połączyć kolumny”. Nie martw się o przechowywanie wyniku w nowej zmiennej. Po prostu wywołaj cbind() z dwoma argumentami — wektorem pacjenci i my_matrix.
+  CorrectAnswer: cbind(pacjenci, my_matrix)
+  AnswerTests: omnitest(correctExpr='cbind(pacjenci, my_matrix)')
+  Hint: Wpisz cbind(pacjenci, my_matrix), aby dodać imiona naszych pacjentów do macierzy liczb.
+
+- Class: text
+  Output: Coś jest podejrzanego w naszym wyniku! Wygląda na to, że połączenie wektora znaków z naszą macierzą liczb spowodowało, że wszystko zostało ujęte w cudzysłowy. Oznacza to, że zostaliśmy z macierzą ciągów znaków, co nie jest dobre.
+
+- Class: text
+  Output: Jeśli pamiętasz początek tej lekcji, powiedziałem ci, że macierze mogą zawierać tylko JEDNĄ klasę danych. Dlatego, gdy próbowaliśmy połączyć wektor znaków z macierzą numeryczną, R był "zmuszony" zamienić liczby na znaki, stąd podwójne cudzysłowy.
+
+- Class: text
+  Output: To się nazywa „ukryte przekształcenie” (ang. "implicit coercion"), ponieważ o to nie prosiliśmy. To po prostu się wydarzyło. Ale dlaczego R po prostu nie zamienił nazwisk naszych pacjentów na liczby? Pozwolę ci samemu zastanowić się nad tym pytaniem.
+
+- Class: cmd_question
+  Output: Pozostaje nam więc pytanie, jak uwzględnić nazwiska naszych pacjentów w tabeli, nie niszcząc integralności naszych danych liczbowych. Wypróbuj następujące -- my_data <- data.frame(pacjenci, my_matrix)
+  CorrectAnswer: my_data <- data.frame(pacjenci, my_matrix)
+  AnswerTests: omnitest(correctExpr='my_data <- data.frame(pacjenci, my_matrix)')
+  Hint: Wpisz my_data <- data.frame(pacjenci, my_matrix), abyśmy mogli sprawdzić, co się stanie.
+
+- Class: cmd_question
+  Output: Teraz przejrzyj zawartość my_data, aby zobaczyć, co udało nam się ustalić.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Wpisz my_data, aby wyświetlić jego zawartość.
+
+- Class: text
+  Output: Wygląda na to, że funkcja data.frame() pozwoliła nam przechowywać nasz wektor znaków nazw tuż obok naszej macierzy liczb. To jest dokładnie to, na co liczyliśmy!
+
+- Class: text
+  Output: W tle funkcja data.frame() przyjmuje dowolną liczbę argumentów i zwraca pojedynczy obiekt klasy `data.frame`, który składa się z oryginalnych obiektów.
+
+- Class: cmd_question
+  Output: Potwierdźmy to, wywołując funkcję class() w naszej nowo utworzonej ramce danych.
+  CorrectAnswer: class(my_data)
+  AnswerTests: omnitest(correctExpr='class(my_data)')
+  Hint: Funkcja klasy przyjmuje jeden argument — obiekt, którego klasę chcesz sprawdzić.
+
+- Class: text
+  Output: Możliwe jest również przypisanie nazw poszczególnym wierszom i kolumnom ramki danych, co przedstawia kolejny sposób ustalenia, który wiersz wartości w naszej tabeli należy do danego pacjenta.
+
+- Class: text
+  Output: Ponieważ jednak rozwiązaliśmy już ten problem, zróbmy coś innego. Przypiszmy nazwy kolumnom naszej ramki danych, aby wiedzieć, jaki typ pomiaru reprezentuje każda kolumna.
+
+- Class: cmd_question
+  Output: Ponieważ mamy sześć kolumn (w tym nazwiska pacjentów), najpierw musimy utworzyć wektor zawierający jeden element dla każdej kolumny. Utwórz wektor znaków o nazwie cnames, który zawiera następujące wartości (w kolejności) -- „pacjent”, „wiek”, „waga”, „bp”, „ocena”, „test”.
+  CorrectAnswer: cnames <- c("pacjent", "wiek", "waga", "bp", "ocena", "test")
+  AnswerTests: omnitest(correctExpr='cnames <- c("pacjent", "wiek", "waga", "bp", "ocena", "test")')
+  Hint: Upewnij się, że wszystkie nazwy są pisane małymi literami, ujęte w cudzysłowy i rozdzielone przecinkami. Nie zapomnij użyć funkcji c().
+
+- Class: cmd_question
+  Output: Teraz użyj funkcji colnames(), aby ustawić atrybut `colnames` dla naszej ramki danych. Jest to podobne do sposobu, w jaki użyliśmy funkcji dim() wcześniej w tej lekcji.
+  CorrectAnswer: colnames(my_data) <- cnames
+  AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
+  Hint: Spróbuj colnames(my_data) <- cnames.
+
+- Class: cmd_question
+  Output: Zobaczmy, czy to zadziałało. Pokaż zawartość my_data.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Wiesz jak to zrobić.
+
+- Class: text
+  Output: W tej lekcji poznałeś podstawy pracy z dwiema bardzo ważnymi i powszechnymi strukturami danych — macierzami i ramkami danych. Jest jeszcze wiele do nauczenia i w przyszłych lekcjach będziemy omawiać bardziej zaawansowane tematy, szczególnie w odniesieniu do ramek danych.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""
+

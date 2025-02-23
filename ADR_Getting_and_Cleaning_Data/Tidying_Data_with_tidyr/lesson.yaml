@@ -1,0 +1,270 @@
+- Class: meta
+  Course: Getting and Cleaning Data
+  Lesson: Tidying Data with tidyr
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.15
+
+- Class: text
+  Output: W tej lekcji dowiesz się, jak uporządkować swoje dane za pomocą pakietu tidyr.
+
+- Class: text
+  Output: Części tej lekcji będą wymagały użycia dplyr. Jeśli nie masz podstawowej wiedzy na temat dplyr, powinieneś opuścić tę lekcję i zacząć od lekcji dplyr z wcześniejszej części kursu.
+
+- Class: cmd_question
+  Output: tidyr został automatycznie zainstalowany (jeśli było to konieczne) i załadowany, gdy zaczynałeś tę lekcję. Aby właściwy wyrobić nawyk, (ponownie) załaduj pakiet z library(tidyr).
+  CorrectAnswer: library(tidyr)
+  AnswerTests: omnitest('library(tidyr)')
+  Hint: Wpisz library(tidyr)
+
+- Class: text
+  Output: "Autor tidyr, Hadley Wickham, omawia swoją filozofię uporządkowanych danych w artykule „Tidy Data”:\n\nhttp://vita.had.co.nz/papers/tidy-data.pdf\n\nArtykuł ten powinien być lekturą obowiązkową dla każdego, kto pracuje z danymi, ale nie jest niezbędny do ukończenia tej lekcji."
+
+- Class: text
+  Output: "Uporządkowane dane są formatowane w standardowy sposób, który ułatwia eksplorację i analizę oraz bezproblemowo współpracuje z innymi narzędziami do uporządkowanych danych. Dokładniej rzecz biorąc, uporządkowane dane spełniają trzy warunki:\n\n1) Każda zmienna tworzy kolumnę\n\n2) Każda obserwacja tworzy wiersz\n\n3) Każdy typ obserwacji tworzy tabelę"
+
+- Class: mult_question
+  Output: Każdy zbiór danych, który nie spełnia tych warunków, jest uważany za dane nieuporządkowane. Dlatego wszystkie poniższe cechy są cechami nieuporządkowanych danych, Z WYJĄTKIEM...
+  AnswerChoices: Każda kolumna zawiera inną zmienną.; Nagłówki kolumn to wartości, a nie nazwy zmiennych.; Wiele zmiennych jest przechowywanych w jednej kolumnie.; Zmienne są przechowywane zarówno w wierszach, jak i kolumnach.; Wiele typów obserwacji jest przechowywanych w tej samej tabeli.; Pojedyncza obserwacja jest przechowywana w wielu tabelach.
+  CorrectAnswer: Każda kolumna zawiera inną zmienną.
+  AnswerTests: omnitest(correctVal= 'Każda kolumna zawiera inną zmienną')
+  Hint: Przewiń w górę, aby przejrzeć trzy cechy uporządkowanych danych. Każdy zbiór danych, który narusza przynajmniej jedną z tych cech, jest uważany za nieuporządkowany. Dlatego wszystkie poniższe cechy są cechami chaotycznych danych, Z WYJĄTKIEM...
+
+- Class: text
+  Output: Nieprawidłowe odpowiedzi na poprzednie pytanie są najczęstszymi objawami bałaganu w danych. Przeanalizujmy prosty przykład każdego z tych pięciu przypadków, a następnie uporządkujmy prawdziwe dane.
+
+- Class: cmd_question
+  Output: Pierwszy problem pojawia się, gdy nagłówki kolumn są wartościami, a nie nazwami zmiennych. Utworzyłem prosty zestaw danych o nazwie „students”, który demonstruje ten scenariusz. Wpisz students, aby rzucić okiem.
+  CorrectAnswer: students
+  AnswerTests: prints_var('students')
+  Hint: Wpisz students żeby zobaczyć dane.
+
+- Class: text
+  Output: Pierwsza kolumna przedstawia każdą z pięciu możliwych ocen, jakie uczniowie mogliby otrzymać w danej klasie. Druga i trzecia kolumna podają odpowiednio liczbę uczniów płci męskiej i żeńskiej, którzy otrzymali daną ocenę.
+
+- Class: text
+  Output: "Ten zestaw danych ma w rzeczywistości trzy zmienne: grade, sex i count. Pierwsza zmienna, grade, jest już kolumną, więc powinna pozostać taka, jaka jest. Druga zmienna, sex, jest ujęta w nagłówkach drugiej i trzeciej kolumny. Trzecia zmienna, count, to liczba uczniów dla każdej kombinacji grade i sex."
+
+- Class: cmd_question
+  Output: Aby uporządkować dane studentów, potrzebujemy jednej kolumny dla każdej z tych trzech zmiennych. Użyjemy funkcji pivot_longer() z tidyr, aby to osiągnąć. Sprawdź dokumentację dla tej funkcji za pomocą ?pivot_longer.
+  CorrectAnswer: ?pivot_longer
+  AnswerTests: gets_help('pivot_longer')
+  Hint: Użyj ?nazwa_funkcji.
+
+- Class: cmd_question
+  Output: "Korzystając z pliku pomocy jako przewodnika, wywołaj pivot_longer() z następującymi argumentami: -grade, 'sex', 'count'."
+  CorrectAnswer: pivot_longer(students, cols = -grade, names_to = "sex", values_to = "count")
+  AnswerTests: match_call('pivot_longer(students, cols = -grade, names_to = "sex", values_to = "count")')
+  Hint: "pivot_longer(students, cols = -grade, names_to = 'sex', values_to = 'count') odpowiednio uporządkuje dane uczniów, tak aby miały trzy kolumny: grade, sex i count."
+
+- Class: text
+  Output: Każdy wiersz danych reprezentuje teraz dokładnie jedną obserwację, charakteryzującą się unikalną kombinacją zmiennych stopnia i płci. Każda z naszych zmiennych (stopień, płeć i liczba) zajmuje dokładnie jedną kolumnę. To są właśnie uporządkowane dane!
+
+- Class: text
+  Output: Ważne jest, aby zrozumieć, co oznacza każdy argument pivot_longer(). Argument data = students, podaje nazwę oryginalnego zestawu danych. Argumenty names_to i values_to — sex i count, odpowiednio — podają nazwy kolumn dla naszego uporządkowanego zestawu danych. Pierwszy argument, cols = -grade, mówi, że chcemy zebrać wszystkie kolumny OPRÓCZ kolumny grade (ponieważ grade jest już właściwą zmienną).
+
+- Class: cmd_question
+  Output: Drugi przypadek bałaganu w danych, który omówimy, to sytuacja, gdy wiele zmiennych jest przechowywanych w jednej kolumnie. Wpisz students2, aby zobaczyć przykład.
+  CorrectAnswer: students2
+  AnswerTests: prints_var('students2')
+  Hint: Wpisz students2
+
+- Class: text
+  Output: Ten zestaw danych jest podobny do pierwszego, z tą różnicą, że teraz istnieją dwie oddzielne klasy, 1 i 2, a my mamy całkowitą liczbę dla każdej płci w każdej klasie. W przypadku students2 występuje ten sam problem bałaganu w danych, ponieważ nagłówki kolumn są wartościami (male_1, female_1 itd.), a nie nazwami zmiennych (sex, class i count).
+
+- Class: text
+  Output: Jednakże ma również wiele zmiennych przechowywanych w każdej kolumnie (płeć i klasa), co jest kolejnym powszechnym objawem nieuporządkowanych danych. Uporządkowanie tego zestawu danych będzie procesem dwuetapowym.
+
+- Class: cmd_question
+  Output: Zacznijmy od użycia pivot_longer(), aby ułożyć kolumny students2, tak jak zrobiliśmy to ze students. Tym razem nazwij kolumnę dla names_to "sex_class", a kolumnę dla values_to "count". Zapisz wynik w nowej zmiennej o nazwie res. Jeśli potrzebujesz pomocy, skonsultuj się ponownie z ?pivot_longer.
+  CorrectAnswer: res <- pivot_longer(students2, cols = -grade, names_to = "sex_class", values_to = "count")
+  AnswerTests: match_call('res <- pivot_longer(students2, cols = -grade, names_to = "sex_class", values_to = "count")')
+  Hint: "Wywołaj pivot_longer() z następującymi argumentami (w kolejności): students2, cols = -grade, names_to = 'sex_class', values_to = 'count'). Zapisz wynik w zmiennej o nazwie res."
+
+- Class: cmd_question
+  Output: Wpisz res na konsoli, aby zobaczyć, co osiągnęliśmy.
+  CorrectAnswer: res
+  AnswerTests: prints_var('res')
+  Hint: Wiesz jak to zrobić.
+
+- Class: cmd_question
+  Output: Jesteśmy już w połowie drogi do uporządkowania danych, ale nadal mamy dwie różne zmienne, sex i class, przechowywane razem w kolumnie sex_class. tidyr oferuje wygodną funkcję separate() w celu rozdzielenia jednej kolumny na wiele kolumn. Pobierz teraz plik pomocy dla separate(). 
+  CorrectAnswer: ?separate
+  AnswerTests: gets_help('separate')
+  Hint: Wpisz ?separate
+
+- Class: cmd_question
+  Output: 'Wywołaj separate() dla res, aby podzielić kolumnę sex_class na sex i class. Musisz określić tylko pierwsze trzy argumenty: data = res, col = sex_class, into = c("sex", "class"). Nie musisz podawać nazw argumentów, o ile są one w odpowiedniej kolejności.'
+  CorrectAnswer: separate(res, sex_class, c("sex", "class"))
+  AnswerTests: match_call('separate(res, sex_class, c("sex", "class"))')
+  Hint: separate(res, sex_class, c("sex", "class")) podzieli kolumnę sex_class na sex i class.
+
+- Class: text
+  Output: Wygodnie, separate() było w stanie samodzielnie ustalić, jak oddzielić kolumnę sex_class. Jeśli nie ustalisz inaczej za pomocą argumentu 'sep', rozdziela wartości niealfanumeryczne. Innymi słowy, zakłada, że wartości są rozdzielone czymś innym niż litera lub cyfra (w tym przypadku podkreśleniem).
+
+- Class: text
+  Output: Uporządkowanie students2 wymagało zarówno pivot_longer(), jak i separate(), co spowodowało, że zapisaliśmy wynik pośredni (res). Jednak tak jak w przypadku dplyr, możesz użyć operatora %>%, aby połączyć wiele wywołań funkcji.
+
+- Class: script
+  Output: Otworzyłem skrypt R do ćwiczeń. Postępuj zgodnie ze wskazówkami w skrypcie, a następnie zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy. Jeśli utkniesz i będziesz chciał zacząć od nowa, możesz wpisać reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script1.R
+
+- Class: cmd_question
+  Output: Trzecim objawem nieuporządkowanych danych jest przechowywanie zmiennych zarówno w wierszach, jak i kolumnach. students3 zawiera taki przykład. Pokaż students3 na konsoli.
+  CorrectAnswer: students3
+  AnswerTests: prints_var('students3')
+  Hint: Nie używaj View() tym razem.
+
+- Class: text
+  Output: W students3 mamy oceny z egzaminów śródokresowych i końcowych pięciu studentów, z których każdy zapisał się dokładnie na dwa z pięciu możliwych zajęć.
+
+- Class: text
+  Output: Pierwsza zmienna, name, jest już kolumną i powinna pozostać taka, jaka jest. Nagłówki ostatnich pięciu kolumn, od class1 do class5, są różnymi wartościami tego, co powinno być zmienną class. Wartości w kolumnie test, midterm i final, powinny być każdą z osobnych zmiennych zawierających odpowiednie oceny dla każdego ucznia.
+
+- Class: script
+  Output: Wymaga to wielu kroków, które będziemy stopniowo budować za pomocą %>%. Edytuj skrypt R, zapisz go, a następnie wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do stanu pierwotnego.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script2.R
+
+- Class: cmd_question
+  Output: Następny krok będzie wymagał użycia pivot_wider(). Otwórz teraz dokumentację dla pivot_wider().
+  CorrectAnswer: ?pivot_wider
+  AnswerTests: gets_help('pivot_wider')
+  Hint: Wpisz ?pivot_wider
+
+- Class: script
+  Output: Edytuj skrypt R, a następnie zapisz go i wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script3.R
+
+- Class: cmd_question
+  Output: readr jest wymagany do pewnych manipulacji danymi, takich jak `parse_number(), które zostaną użyte w następnym pytaniu. Załadujmy (ponownie) pakiet za pomocą library(readr).
+  CorrectAnswer: library(readr)
+  AnswerTests: omnitest('library(readr)')
+  Hint: Wpisz library(nazwa_pakietu)
+
+- Class: cmd_question
+  Output: Na koniec chcemy, aby wartości w kolumnie class były po prostu 1, 2, ..., 5, a nie class1, class2, ..., class5. Możemy użyć funkcji parse_number() z readr, aby to osiągnąć. Aby zobaczyć, jak to działa, spróbuj parse_number("class5").
+  CorrectAnswer: parse_number("class5")
+  AnswerTests: omnitest('parse_number("class5")')
+  Hint: Wpisz parse_number("class5") i sprawdź jaki jest efekt.
+
+- Class: script
+  Output: Teraz ostatni krok. Edytuj skrypt R, a następnie zapisz go i wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script4.R
+
+- Class: cmd_question
+  Output: Czwarty problem z bałaganem w danych, który omówimy, występuje, gdy wiele jednostek obserwacyjnych jest przechowywanych w tej samej tabeli. students4 jest tutaj przykładem. Przyjrzyj się teraz danym.
+  CorrectAnswer: students4
+  AnswerTests: prints_var('students4')
+  Hint: Nie używaj View() tym razem także.
+
+- Class: text
+  Output: students4 jest prawie taki sam jak nasza uporządkowana wersja students3. Jedyną różnicą jest to, że students4 zapewnia unikalny identyfikator dla każdego studenta, a także jego lub jej płeć (M = mężczyzna; K = kobieta).
+
+- Class: text
+  Output: Na pierwszy rzut oka nie wydaje się, aby istniał jakiś problem ze students4. Wszystkie kolumny są zmiennymi, a wszystkie wiersze są obserwacjami. Należy jednak zauważyć, że każdy identyfikator, imię i płeć powtarza się dwa razy, co wydaje się dość zbędne. Jest to wskazówka, że nasze dane zawierają wiele jednostek obserwacyjnych w jednej tabeli.
+
+- Class: script
+  Output: "Nasze rozwiązanie będzie polegało na podzieleniu students4 na dwie oddzielne tabele — jedna zawiera podstawowe informacje o studencie (id, imię i płeć), a druga oceny (id, klasa, egzamin śródokresowy, końcowy).\n\nEdytuj skrypt R, zapisz go, a następnie wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu."
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script5.R
+
+- Class: script
+  Output: Czy zauważyłeś coś dziwnego w student_info? Zawiera pięć zduplikowanych wierszy! Zobacz skrypt, aby uzyskać wskazówki, jak to naprawić. Zapisz skrypt i wpisz submit(), gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script6.R
+
+- Class: script
+  Output: "Teraz, używając skryptu, który właśnie dla Ciebie otworzyłem, utwórz drugą tabelę o nazwie gradebook, używając kolumn id, class, midterm i final (w tej kolejności).\n\nEdytuj skrypt R, zapisz go, a następnie wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu."
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script7.R
+
+- Class: text
+  Output: Zwróc uwagę, że pozostawiliśmy kolumnę id w obu tabelach. W świecie relacyjnych baz danych „id” jest nazywane naszym „kluczem podstawowym” (primary key), ponieważ pozwala nam połączyć każdego studenta wymienionego w student_info z jego ocenami wymienionymi w gradebook. Bez unikalnego identyfikatora moglibyśmy nie wiedzieć, jak tabele są powiązane. (W tym przypadku moglibyśmy również użyć zmiennej name, ponieważ każdy student ma unikalne imię.)
+
+- Class: text
+  Output: Piąty i ostatni scenariusz bałaganu w danych, który omówimy, to sytuacja, gdy pojedyncza jednostka obserwacyjna jest przechowywana w wielu tabelach. To przeciwieństwo czwartego problemu.
+
+- Class: cmd_question
+  Output: Aby to zilustrować, stworzyliśmy dwa zestawy danych, passed i fail. Spójrz teraz na passed.
+  CorrectAnswer: passed
+  AnswerTests: prints_var('passed')
+  Hint: Wpisz pass
+
+- Class: cmd_question
+  Output: Teraz sprawdź zawartość failed.
+  CorrectAnswer: failed
+  AnswerTests: prints_var('failed')
+  Hint: Zrób podobnie jak poprzednio.
+
+- Class: text
+  Output: Nauczyciele postanowili brać pod uwagę tylko oceny z egzaminów końcowych przy określaniu, czy uczniowie zdali, czy nie zdali każdego przedmiotu. Jak można wywnioskować z danych, uczniowie zdali, jeśli otrzymali ocenę A lub B z egzaminu końcowego, a w innym przypadku nie zdali.
+
+- Class: text
+  Output: Nazwa każdego zestawu danych w rzeczywistości reprezentuje wartość nowej zmiennej, którą nazwiemy „status”. Przed połączeniem dwóch tabel dodamy do każdej nową kolumnę zawierającą te informacje, aby nie zostały utracone, gdy wszystko połączymy.
+
+- Class: cmd_question
+  Output: Użyj mutate() dplyr, aby dodać nową kolumnę do tabeli passed. Kolumna powinna nazywać się status, a wartość „passed” (ciąg znaków) powinna być taka sama dla wszystkich studentów. „Nadpisz” bieżącą wersję passed nową.
+  CorrectAnswer: passed <- passed %>% mutate(status = "passed")
+  AnswerTests: any_of_exprs('passed <- passed %>% mutate(status = "passed")', 'passed <- mutate(passed, status = "passed")')
+  Hint: passed <- passed %>% mutate(status = "passed") zadziała
+
+- Class: cmd_question
+  Output: Teraz zrób to samo dla tabeli failed, z tą różnicą, że kolumna statusu powinna mieć wartość „failed” dla wszystkich studentów.
+  CorrectAnswer: failed <- failed %>% mutate(status = "failed")
+  AnswerTests: any_of_exprs('failed <- failed %>% mutate(status = "failed")', 'failed <- mutate(failed, status = "failed")')
+  Hint: failed <- failed %>% mutate(status = "coś tutaj")
+
+- Class: cmd_question
+  Output: "Teraz przekaż jako argumenty tabele z wynikiem pozytywnym i negatywnym (w kolejności) do funkcji bind_rows() dplyr, która połączy je w jedną jednostkę. Sprawdź ?bind_rows, jeśli potrzebujesz pomocy."
+  CorrectAnswer: bind_rows(passed, failed)
+  AnswerTests: match_call('bind_rows(passed, failed)')
+  Hint: Wywołaj bind_rows() z dwoma argumentami, passed i failed (w tej kolejności), aby połączyć dwie tabele.
+
+- Class: text
+  Output: Oczywiście, moglibyśmy ułożyć wiersze jak chcemy w tym momencie, ale ważne jest, aby każdy wiersz był obserwacją, każda kolumna była zmienną, a tabela zawierała pojedynczą jednostkę obserwacyjną. Dzięki temu dane są uporządkowane.
+
+- Class: text
+  Output: W tej lekcji omówiliśmy wiele spraw. Zbierzmy wszystko razem i uporządkujmy prawdziwy zbiór danych.
+
+- Class: text
+  Output: "SAT to popularny egzamin przygotowujący do college'u w Stanach Zjednoczonych, który składa się z trzech sekcji: krytycznego czytania, matematyki i pisania. Uczniowie mogą zdobyć do 800 punktów w każdej sekcji. Ten zestaw danych przedstawia całkowitą liczbę uczniów, dla każdej kombinacji sekcji egzaminu i płci, w każdym z sześciu zakresów wyników."
+
+- Class: cmd_question
+  Output: Utworzyłem zmienną o nazwie „sat” w Twojej przestrzeni roboczej. Zawiera ona dane dotyczące wszystkich absolwentów szkół średnich, którzy przystąpili do egzaminu SAT. Pokaż teraz ten zbiór danych.
+  CorrectAnswer: sat
+  AnswerTests: prints_var('sat')
+  Hint: Nie używaj View() tym razem.
+
+- Class: script
+  Output: Jak już wcześniej zrobiliśmy, zbudujemy serię połączonych poleceń, używając funkcji zarówno z tidyr, jak i dplyr. Edytuj skrypt R, zapisz go, a następnie wpisz submit(), gdy będziesz gotowy. Wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script8.R
+
+- Class: script
+  Output: Zakończ pracę, postępując zgodnie ze wskazówkami w skrypcie. Zapisz skrypt i wpisz submit(), gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu.
+  AnswerTests: script_vals_identical()
+  Hint: Przeczytaj uważnie instrukcje w skrypcie. Jeśli R wyświetla błąd, spróbuj zrozumieć, co mówi albo spytaj się prowadzącego. Zapisz skrypt i wpisz submit() w wierszu poleceń, gdy będziesz gotowy, lub wpisz reset(), aby zresetować skrypt do pierwotnego stanu.
+  Script: script9.R
+
+- Class: text
+  Output: W tej lekcji nauczyłeś się, jak uporządkować dane za pomocą tidyr i dplyr. Te narzędzia pomogą Ci poświęcić mniej czasu i energii na przygotowanie danych do analizy, a więcej na ich faktyczną analizę.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za tę lekcję?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

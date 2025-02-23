@@ -1,0 +1,128 @@
+- Class: meta
+  Course: R Programming
+  Lesson: Looking at Data
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.11
+
+- Class: text
+  Output: Kiedykolwiek pracujesz z nowym zestawem danych, pierwszą rzeczą, którą powinieneś zrobić, jest przyjrzenie się mu! Jaki jest format danych? Jakie są wymiary? Jakie są nazwy zmiennych? Jak są przechowywane zmienne? Czy brakuje danych? Czy są jakieś wady w danych?
+
+- Class: text
+  Output: Ta lekcja nauczy Cię, jak odpowiadać na te pytania i inne, korzystając z wbudowanych funkcji R. Będziemy korzystać ze zbioru danych skonstruowanego z bazy danych PLANTS Department of Agriculture (http://plants.usda.gov/adv_search.html).
+
+- Class: cmd_question
+  Output: Przechowałem dane dla Ciebie w zmiennej o nazwie plants. Wpisz ls(), aby wyświetlić zmienne w swojej przestrzeni roboczej, wśród których powinny być plants.
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExpr='ls()')
+  Hint: Użyj ls(), aby wyświetlić listę zmiennych.
+
+- Class: cmd_question
+  Output: Zacznijmy od sprawdzenia klasy zmiennej plants za pomocą class(plants). To da nam wskazówkę co do ogólnej struktury danych.
+  CorrectAnswer: class(plants)
+  AnswerTests: omnitest(correctExpr='class(plants)')
+  Hint: Użyj class(plants) aby sprawdzić klasę zmiennej plants.
+
+- Class: text
+  Output: Bardzo często dane są przechowywane w ramce danych (dataframe). Jest to domyślna klasa dla danych odczytywanych do R za pomocą funkcji takich jak read.csv() i read.table(), o których dowiesz się w innej lekcji.
+
+- Class: cmd_question
+  Output: Ponieważ zbiór danych jest przechowywany w ramce danych, wiemy, że jest prostokątny. Innymi słowy, ma dwa wymiary (wiersze i kolumny) i idealnie pasuje do tabeli lub arkusza kalkulacyjnego. Użyj dim(plants), aby zobaczyć dokładnie, z iloma wierszami i kolumnami mamy do czynienia.
+  CorrectAnswer: dim(plants)
+  AnswerTests: omnitest(correctExpr='dim(plants)')
+  Hint: Użyj polecenia dim(plants), aby zobaczyć dokładne wymiary zestawu danych o roślinach.
+
+- Class: text
+  Output: Pierwsza liczba, którą widzisz (5166), to liczba wierszy (obserwacji), a druga liczba (10) to liczba kolumn (zmiennych).
+
+- Class: cmd_question
+  Output: Możesz również użyć nrow(plants) aby zobaczyć tylko liczbę wierszy. Sprawdź to.
+  CorrectAnswer: nrow(plants)
+  AnswerTests: omnitest(correctExpr='nrow(plants)')
+  Hint: Użyj nrow(plants), aby wyświetlić tylko liczbę wierszy.
+
+- Class: cmd_question
+  Output: ... I ncol(plants), aby wyświetlić tylko liczbę kolumn.
+  CorrectAnswer: ncol(plants)
+  AnswerTests: omnitest(correctExpr='ncol(plants)')
+  Hint: Użyj ncol(plants), aby wyświetlić tylko liczbę kolumn.
+
+- Class: cmd_question
+  Output: Jeśli jesteś ciekaw, ile miejsca w pamięci zajmuje zbiór danych, możesz użyć object.size(plants).
+  CorrectAnswer: object.size(plants)
+  AnswerTests: omnitest(correctExpr='object.size(plants)')
+  Hint: object.size(plants) powie Ci, ile pamięci zajmuje ramka danych plants.
+
+- Class: cmd_question
+  Output: Teraz, gdy mamy już pojęcie o kształcie i rozmiarze zestawu danych, zobaczmy, co jest w środku. names(plants) zwróci wektor znaków nazw kolumn (tj. zmiennych). Spróbuj.
+  CorrectAnswer: names(plants)
+  AnswerTests: omnitest(correctExpr='names(plants)')
+  Hint: names(plants) zwróci wektor znaków nazw kolumn (czyli zmiennych).
+
+- Class: text
+  Output: Zastosowaliśmy dość opisowe nazwy zmiennych do tego zestawu danych, ale nie zawsze tak będzie. Logicznym następnym krokiem jest zajrzenie do rzeczywistych danych. Jednak nasz zestaw danych zawiera ponad 5000 obserwacji (wierszy), więc niepraktyczne jest przeglądanie całości na raz.
+  
+- Class: cmd_question
+  Output: Funkcja head() umożliwia podgląd górnej części zestawu danych. Wypróbuj ją z tylko jednym argumentem.
+  CorrectAnswer: head(plants)
+  AnswerTests: omnitest(correctExpr='head(plants)')
+  Hint: head(plants) pokaże Ci sam początek zbioru danych.
+
+- Class: text
+  Output: Poświęć chwilę na przejrzenie i zrozumienie powyższego wyniku. Każdy wiersz jest oznaczony numerem obserwacji, a każda kolumna nazwą zmiennej. Twój ekran prawdopodobnie nie jest wystarczająco szeroki, aby wyświetlić wszystkie 10 kolumn obok siebie, w takim przypadku R wyświetla tyle kolumn, ile może w każdym wierszu, zanim przejdzie do następnego.
+
+- Class: cmd_question
+  Output: Domyślnie head() pokazuje pierwsze sześć wierszy danych. Możesz zmienić to zachowanie, przekazując jako drugi argument liczbę wierszy, które chcesz wyświetlić. Użyj head(), aby wyświetlić podgląd pierwszych 10 wierszy roślin.
+  CorrectAnswer: head(plants, 10)
+  AnswerTests: omnitest(correctExpr='head(plants, 10)')
+  Hint: head(plants, 10) wyświetli pierwsze 10 wierszy zestawu danych.
+
+- Class: cmd_question
+  Output: To samo dotyczy użycia tail() do podglądu końca zestawu danych. Użyj tail() do wyświetlenia ostatnich 15 wierszy.
+  CorrectAnswer: tail(plants, 15)
+  AnswerTests: omnitest(correctExpr='tail(plants, 15)')
+  Hint: tail(plants, 15) wyświetli 15 ostatnich wierszy zestawu danych.
+
+- Class: cmd_question
+  Output: Po przejrzeniu górnej i dolnej części danych prawdopodobnie zauważyłeś wiele NA, które są symbolami zastępczymi R dla wartości brakujących. Użyj summary(plants), aby lepiej zrozumieć, jak rozłożona jest każda zmienna i ile zestawu danych brakuje.
+  CorrectAnswer: summary(plants)
+  AnswerTests: omnitest(correctExpr='summary(plants)')
+  Hint: Wypróbuj polecenie summary(plants), aby zobaczyć, jak rozkłada się każda zmienna i z iloma wartościami brakującymi mamy do czynienia.
+
+- Class: text
+  Output: summary() dostarcza różne dane wyjściowe dla każdej zmiennej, w zależności od jej klasy. Dla danych liczbowych, takich jak Precip_Min, summary() wyświetla minimum, 1. kwartyl, medianę, średnią, 3. kwartyl i maksimum. Wartości te pomagają nam zrozumieć, jak rozłożone są dane.
+
+- Class: text
+  Output: W przypadku zmiennych kategorycznych (nazywanych zmiennymi „czynnikowymi” w R), summary() wyświetla liczbę wystąpień każdej wartości (lub „poziomu”) w danych. Na przykład każda wartość Scientific_Name pojawia się tylko raz, ponieważ jest unikalna dla konkretnej rośliny. Natomiast podsumowanie dla Duration (również zmienna czynnikowa) informuje nas, że nasz zestaw danych zawiera 3031 roślin wieloletnich, 682 roślin jednorocznych itd.
+
+- Class: cmd_question
+  Output: Można zobaczyć, że R skróciło podsumowanie dla Active_Growth_Period, uwzględniając kategorię catch-all o nazwie „Other”. Ponieważ jest to zmienna kategoryczna/czynnikowa, możemy zobaczyć, ile razy każda wartość faktycznie występuje w danych za pomocą table(plants$Active_Growth_Period).
+  CorrectAnswer: table(plants$Active_Growth_Period)
+  AnswerTests: omnitest(correctExpr='table(plants$Active_Growth_Period)')
+  Hint: table(plants$Active_Growth_Period) wyświetli liczbę dla każdego poziomu zmiennej czynnikowej.
+
+- Class: text
+  Output: Każda z funkcji, które wprowadziliśmy do tej pory, ma pomóc Ci lepiej zrozumieć strukturę Twoich danych. Jednak najlepsze zostawiliśmy na koniec....
+
+- Class: cmd_question
+  Output: Być może najbardziej użyteczną i zwięzłą funkcją do zrozumienia *str*uktury twoich danych jest str(). Wypróbuj ją teraz.
+  CorrectAnswer: str(plants)
+  AnswerTests: omnitest(correctExpr='str(plants)')
+  Hint: Użyj str(plants), aby przyjrzeć się strukturze swoich danych.
+
+- Class: text
+  Output: Piękno str() polega na tym, że łączy wiele cech innych funkcji, które już widziałeś, wszystko w zwięzłym i czytelnym formacie. Na samej górze mówi nam, że klasą roślin jest „data.frame” i że ma 5166 obserwacji i 10 zmiennych. Następnie podaje nam nazwę i klasę każdej zmiennej, a także podgląd jej zawartości.
+
+- Class: text
+  Output: str() jest w rzeczywistości bardzo ogólną funkcją, której można używać w przypadku większości obiektów w R. Zawsze, gdy chcesz zrozumieć strukturę czegoś (zestawu danych, funkcji itp.), str() jest dobrym miejscem na początek.
+
+- Class: text
+  Output: W tej lekcji nauczyłeś się, jak sprawdzić strukturę i zawartość nowego zestawu danych, korzystając z kolekcji prostych i przydatnych funkcji. Poświęcenie czasu na zrobienie tego na początku może zaoszczędzić Ci czasu i frustracji później w analizie.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

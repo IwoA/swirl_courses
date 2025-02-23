@@ -1,0 +1,246 @@
+- Class: meta
+  Course: Getting and Cleaning Data
+  Lesson: Grouping and Chaining with dplyr
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.13
+  
+- Class: text
+  Output: "Ostrzeżenie: Ta lekcja korzysta z funkcji View(). Funkcja View() może nie działać prawidłowo w każdym środowisku programistycznym. Zdecydowanie zalecamy korzystanie z RStudio"
+
+- Class: text
+  Output: 'W ostatniej lekcji poznałeś pięć głównych czasowników manipulacji danymi w dplyr: select(), filter(), arrangement(), mutate() i summarize(). Ostatni z nich, summarize(), jest najpotężniejszy, gdy jest stosowany do danych grupowanych.'
+
+- Class: text
+  Output: Główną ideą grupowania danych jest to, że chcesz podzielić swój zestaw danych na grupy wierszy na podstawie wartości jednej lub więcej zmiennych. Do tego służy funkcja group_by().
+
+- Class: text
+  Output: Będziemy kontynuować tam, gdzie ostatnio skończyliśmy, czyli od danych nt. pobrań z serwera CRAN z 12 lutego 2025 r.
+
+- Class: cmd_question
+  Output: Podobnie jak w przypadku ostatniej lekcji, pakiet dplyr został automatycznie zainstalowany (jeśli było to konieczne) i załadowany na początku tej lekcji. Zwykle jest to coś, co musiałbyś zrobić samodzielnie. Aby wyrobić sobie nawyk, wpisz library(dplyr) now, aby ponownie załadować pakiet.
+  CorrectAnswer: library(dplyr)
+  AnswerTests: omnitest(correctExpr='library(dplyr)')
+  Hint: Użyj funkcji library().
+
+- Class: cmd_question
+  Output: Tak jak ostatnio dane są w ramce danych o nazwie mydf. Zamień go na tibble za pomocą funkcji as_tibble() i zapisz wynik w obiekcie o nazwie cran. Jeśli nie jesteś pewien, o czym mówię, powinieneś zacząć od poprzedniej lekcji. Pamiętaj praktyka czyni mistrza!
+  CorrectAnswer: cran <- as_tibble(mydf)
+  AnswerTests: omnitest(correctExpr='cran <- as_tibble(mydf)')
+  Hint: Uzupełnij cran <- as_tibble() 
+
+- Class: cmd_question
+  Output: Tak jak poprzednio, usuń obiekt mydf przy pomocy funkcji rm().
+  CorrectAnswer: rm(mydf)
+  AnswerTests: omnitest(correctExpr='rm(mydf)')
+  Hint: Wpisz rm(mydf).
+
+- Class: cmd_question
+  Output: Naszym pierwszym celem jest pogrupowanie danych według nazwy pakietu. Wyświetl plik pomocy dla group_by().
+  CorrectAnswer: ?group_by
+  AnswerTests: any_of_exprs('?group_by', 'help(group_by)')
+  Hint: Użyj ?group_by, aby wyświetlić dokumentację.
+
+- Class: cmd_question
+  Output: pogrupuj tabelę cran według zmiennej package i zapisz wynik w nowym obiekcie o nazwie by_package.
+  CorrectAnswer: by_package <- group_by(cran, package)
+  AnswerTests: omnitest('by_package <- group_by(cran, package)')
+  Hint: Zapisz wynik funkcji group_by(cran, package) w nowym obiekcie o nazwie by_package.
+
+- Class: cmd_question
+  Output: Przyjrzyjmy się by_package. Wyświetl go na konsoli.
+  CorrectAnswer: by_package
+  AnswerTests: any_of_exprs('by_package', 'print(by_package)')
+  Hint: Wpisz po prostu nazwę obiektu.
+
+- Class: text
+  Output: "Na początku wyświetlonego wyniku zobaczysz „Groups: package”, co mówi nam, że ta tabela została zgrupowana według zmiennej package. Wszystko inne wygląda tak samo, ale teraz każda operacja, którą zastosujemy do zgrupowanych danych, będzie wykonywana na podstawie kolumny package."
+
+- Class: text
+  Output: Pamiętasz, że gdy zastosowaliśmy mean(size) do oryginalnego tabeli za pomocą summarize(), zwróciło to pojedynczą liczbę — średnią wszystkich wartości w kolumnie size. Może to być interesujące, ale czy nie byłoby o wiele ciekawiej spojrzeć na średni rozmiar pobierania dla każdego unikalnego pakietu?
+
+- Class: cmd_question
+  Output: Dokładnie taki wynik dostaniesz, jeśli użyjesz summarize(), do obliczenia mean(size) dla zgrupowanych danych w by_package. Spróbuj.
+  CorrectAnswer: summarize(by_package, mean(size))
+  AnswerTests: any_of_exprs('summarize(by_package, mean(size))', 'summarise(by_package, mean(size))')
+  Hint: 'Wywołaj summarize() z dwoma argumentami: by_package i mean(size).'
+
+- Class: text
+  Output: Zamiast zwracać pojedynczą wartość, funkcja summarize() zwraca teraz średni rozmiar KAŻDEGO pakietu w naszym zestawie danych.
+
+- Class: script
+  Output: "Pójdźmy o krok dalej. Właśnie otworzyłem skrypt R, który zawiera częściowo napisane wywołanie summary(). Postępuj zgodnie z instrukcjami w komentarzach do skryptu.\n\nGdy będziesz gotowy, aby przejść dalej, zapisz skrypt i wpisz submit() lub wpisz reset(), aby zresetować skrypt do jego pierwotnego stanu."
+  AnswerTests: script_results_identical('pack_sum'); multi_expr_creates_var('pack_sum')
+  Hint: Postępuj ostrożnie zgodnie ze wskazówkami w komentarzach skryptu. Jeśli R wyświetlił Ci błąd, spróbuj zrozumieć, co Ci mówi. Jeśli utkniesz, wpisz reset(), aby rozpocząć od nowego nowa, a następnie zapisz skrypt i wpisz submit(), gdy będziesz gotowy.
+  Script: summarize1.R
+
+- Class: cmd_question
+  Output: Pokaż wynikową tabelę pack_sum w konsoli, aby sprawdzić jej zawartość.
+  CorrectAnswer: pack_sum
+  AnswerTests: any_of_exprs('pack_sum', 'print(pack_sum)')
+  Hint: Robiłeś to już wiele razy.
+
+- Class: text
+  Output: Kolumna „count”, utworzona za pomocą n(), zawiera całkowitą liczbę wierszy (tj. pobrań) dla każdego pakietu. Kolumna „unique”, utworzona za pomocą n_distinct(ip_id), podaje całkowitą liczbę unikalnych pobrań dla każdego pakietu, mierzoną liczbą odrębnych ip_id. Kolumna „countries”, utworzona za pomocą n_distinct(country), podaje liczbę krajów, w których pobrano każdy pakiet. I wreszcie kolumna „avg_bytes”, utworzona za pomocą mean(size), zawiera średni rozmiar pobierania (w bajtach) dla każdego pakietu.
+
+- Class: text
+  Output: Ważne jest, aby zrozumieć, jak każda kolumna pack_sum została utworzona i co oznacza. Teraz, gdy podsumowaliśmy dane według poszczególnych pakietów, pobawmy się nimi jeszcze trochę, aby zobaczyć, czego możemy się nauczyć.
+
+- Class: text
+  Output: Ponieważ tabela zawiera nie więcej niż 10 pobrań danego pakietu (niestety oryginalny plik był za duży)
+    to nie możemy sprawdzić, które pakiety były najpopularniejsze w dniu, w którym zbierano te dane. 
+    Możemy jednak wyizolować 1% najmniej popularnych pakietów, w oparciu o całkowitą liczbę pobrań mierzoną kolumną „count”.
+
+- Class: cmd_question
+  Output: Musimy znać wartość 'count', która dzieli dane na dolne 1% i górne 99% pakietów na podstawie całkowitej liczby pobrań. W statystyce nazywa się to 0,99 lub 99% kwantylem próbki. Użyj quantile(pack_sum$count, probs = 0.01), aby określić tę liczbę.
+  AnswerTests: checkExpr('quantile(pack_sum$count, probs = 0.01)')
+  Hint: quantile(pack_sum$count, probs = 0.01) da nam kwantyl próbki 0,01, czyli 1%, dla zmiennej 'count'. Pamiętaj, że kropka oddziela liczby ułamkowe.
+
+- Class: cmd_question
+  Output: Teraz możemy wyizolować tylko te pakiety, które miały mniej niż 2 pobrania. Użyj filter(), aby wybrać wszystkie wiersze z pack_sum, dla których 'count' jest mniejsze lub równe (<=) 2. Zapisz wynik w nowym obiekcie o nazwie bottom_counts.
+  AnswerTests: checkExpr('bottom_counts <- filter(pack_sum, count <= 2)')
+  Hint: Store the result of filter(pack_sum, count <= 2) in a new object called bottom_counts.
+
+- Class: cmd_question
+  Output: Rzućmy okiem na bottom_counts.
+  CorrectAnswer: bottom_counts
+  AnswerTests: any_of_exprs('bottom_counts', 'print(bottom_counts)')
+  Hint: Możesz wpisać po prostu nazwę obiektu albo "wydrukować" zawartość komendą print(nazwa_obiektu)
+
+- Class: text
+  Output: "W naszym dolnym 1% jest aż 295 pakietów, a chcielibyśmy zobaczyć je wszystkie. Ponieważ dplyr pokazuje nam tylko pierwsze 10 wierszy, możemy użyć funkcji View(), aby zobaczyć więcej."
+
+- Class: cmd_question
+  Output: Wyświetl wszystkie wiersze za pomocą View(bottom_counts). Zwróć uwagę, że „V” w View() jest pisane wielką literą.
+  CorrectAnswer: View(bottom_counts)
+  AnswerTests: omnitest('View(bottom_counts)')
+  Hint: Użyj View(bottom_counts), aby wyświetlić wszystkie 1375 wierszy. Może to nie działać prawidłowo w każdym środowisku programistycznym. Jeśli masz problemy, zalecamy użycie RStudio.
+
+- Class: cmd_question
+  Output: Posortuj arrange() wiersze bottom_counts na podstawie kolumny 'count' i przypisz wynik do nowego obiektu o nazwie bottom_counts_sorted. Chcemy, aby pakiety z największą liczbą pobrań znalazły się na końcu, co oznacza, 
+    że chcemy, aby 'count' było w kolejności rosnącej. Jeśli potrzebujesz pomocy, sprawdź ?arrange.
+  CorrectAnswer: bottom_counts_sorted <- arrange(bottom_counts, count)
+  AnswerTests: omnitest('bottom_counts_sorted <- arrange(bottom_counts, count)')
+  Hint: Uzupełnij arrange(bottom_counts,  ) 
+
+- Class: cmd_question
+  Output: Teraz użyj ponownie funkcji View(), aby zobaczyć wszystkie wiersze bottom_counts_sorted.
+  CorrectAnswer: View(bottom_counts_sorted)
+  AnswerTests: omnitest('View(bottom_counts_sorted)')
+  Hint: Już wiesz jak to zrobić.
+
+- Class: text
+  Output: Być może bardziej interesuje nas liczba *unikalnych* pobrań w tym konkretnym dniu. Innymi słowy, jeśli pakiet jest pobierany dziesięć razy w ciągu jednego dnia z tego samego komputera, możemy chcieć policzyć to jako tylko jedno pobranie. To właśnie powie nam kolumna „unique”.
+
+- Class: cmd_question
+  Output: Tym razem znajdźmy kwantyl wynoszący 0,99, czyli 99%, dla zmiennej „unique” za pomocą funkcji quantile(pack_sum$unique, probs = 0.99).
+  CorrectAnswer: quantile(pack_sum$unique, probs = 0.99)
+  AnswerTests: omnitest('quantile(pack_sum$unique, probs = 0.99)')
+  Hint: Uzupełnij quantile(pack_sum$, probs = ).
+
+- Class: cmd_question
+  Output: Zastosuj filter() do pack_sum, aby wybrać wszystkie wiersze odpowiadające wartościom 'unique' większym lub równym 465. Przypisz wynik do obiektu o nazwie top_unique.
+  CorrectAnswer: top_unique <- filter(pack_sum, unique >= 465)
+  AnswerTests: checkExpr('top_unique <- filter(pack_sum, unique >= 465)')
+  Hint: filter(pack_sum, unique == )
+
+- Class: cmd_question
+  Output: Przyjrzyjmy się naszym kandydatom!
+  CorrectAnswer: View(top_unique)
+  AnswerTests: omnitest('View(top_unique)')
+  Hint: Wpisz View(top_unique) 
+
+- Class: cmd_question
+  Output: Teraz spróbuj arrange() top_unique według kolumny 'unique' w kolejności malejącej, aby zobaczyć, które pakiety zostały pobrane z największej liczby unikalnych adresów IP. Przypisz wynik do top_unique_sorted.
+  CorrectAnswer: top_unique_sorted <- arrange(top_unique, desc(unique))
+  AnswerTests: omnitest('top_unique_sorted <- arrange(top_unique, desc(unique))')
+  Hint: Uzupełnij arrange(, desc()) . Zapisz wynik do zmiennej top_unique_sorted.
+
+- Class: cmd_question
+  Output: Zobacz View() posortowane wyniki.
+  CorrectAnswer: View(top_unique_sorted)
+  AnswerTests: omnitest('View(top_unique_sorted)')
+  Hint: View(top_unique_sorted)
+
+- Class: text
+  Output: Pakiet Rccp jest pierwszy, stringr drugi a ggplot2 piąty, Całkiem sporo pobrań jak na jeden dzień!
+
+- Class: text
+  Output: Naszą ostateczną miarą popularności jest liczba odrębnych krajów, z których pobrano każdy pakiet. Podejdziemy do tego nieco inaczej, aby przedstawić metodę zwaną „chaining” (lub „piping”).
+
+- Class: text
+  Output: Chaining (piping, trudno znaleźć polski odpowiednik) pozwala na łączenie wielu wywołań funkcji w sposób logiczny i czytelny. Aby było to bardziej konkretne, obliczmy naszą ostatnią metrykę popularności od podstaw, zaczynając od naszych oryginalnych danych.
+
+- Class: script
+  Output: Otworzyłem skrypt, który zawiera kod podobny do tego, który widziałeś do tej pory. Nie zmieniaj niczego. Po prostu przestudiuj go przez minutę, upewnij się, że rozumiesz wszystko, co tam jest, a następnie submit(), gdy będziesz gotowy, aby przejść dalej.
+  AnswerTests: script_results_identical('result1'); multi_expr_creates_var('result1')
+  Hint: Jeżeli przypadkowo zmieniłeś coś w skrypcie, wpisz reset(), aby cofnąć zmiany, a następnie ponownie submit().
+  Script: summarize2.R
+
+- Class: text
+  Output: Warto zauważyć, że sortowaliśmy głównie według kraju, ale użyliśmy avg_bytes (w kolejności rosnącej) jako rozstrzygającego. Oznacza to, że jeśli dwa pakiety zostały pobrane z tej samej liczby krajów, pakiet o mniejszym średnim rozmiarze pobierania otrzymał wyższą ocenę.
+
+- Class: text
+  Output: Chcielibyśmy osiągnąć ten sam wynik, co w ostatnim skrypcie, ale uniknąć zapisywania naszych pośrednich wyników. Wymaga to osadzania wywołań funkcji w sobie nawzajem.
+
+- Class: script
+  Output: Dokładnie to zrobiliśmy w tym skrypcie. Wynik jest równoważny, ale kod jest znacznie mniej czytelny, a niektóre argumenty są daleko od funkcji, do której należą. Ponownie, spróbuj po prostu zrozumieć, co się tutaj dzieje, a następnie submit(), gdy będziesz gotowy na lepsze rozwiązanie.
+  AnswerTests: script_results_identical('result2'); multi_expr_creates_var('result2')
+  Hint: Jeżeli przypadkowo zmieniłeś coś w skrypcie, wpisz reset(), aby cofnąć zmiany, a następnie ponownie submit().
+  Script: summarize3.R
+
+- Class: script
+  Output: "W tym skrypcie użyliśmy specjalnego operatora łańcuchowego %>%, który pierwotnie został wprowadzony w pakiecie magrittr R i stał się kluczowym komponentem dplyr. Możesz pobrać powiązaną dokumentację za pomocą ?chain. Zaletą %>% jest to, że pozwala nam łączyć wywołania funkcji w łańcuch w sposób liniowy. Kod po prawej stronie %>% działa na wyniku z kodu po lewej stronie %>%.\n\nJeszcze raz, spróbuj zrozumieć kod, a następnie wpisz submit(), aby kontynuować."
+  AnswerTests: script_results_identical('result3'); multi_expr_creates_var('result3')
+  Hint: Jeżeli przypadkowo zmieniłeś coś w skrypcie, wpisz reset(), aby cofnąć zmiany, a następnie ponownie submit().
+  Script: summarize4.R
+
+- Class: text
+  Output: Operator ten stał się tak popularny, że obecnie został wbudowany do R w postaci |>. Jego działanie różni się nieco od %>% ale działa bez konieczności używania pakietu magrittr czy dplyr.
+  
+- Class: text
+  Output: Tak więc wyniki ostatnich trzech skryptów są identyczne. Jednak trzeci skrypt zapewnia wygodną i zwięzłą alternatywę dla bardziej tradycyjnej metody, którą stosowaliśmy wcześniej, która polega na zapisywaniu wyników pośrednich.
+
+- Class: cmd_question
+  Output: Ponownie wykonajmy funkcję View() aby wyświetlić pełne dane zapisane w result3.
+  CorrectAnswer: View(result3)
+  AnswerTests: omnitest('View(result3)')
+  Hint: Pokaż wszystkie dane a nie tylko pierwszych 10 wierszy.
+
+- Class: text
+  Output: Aby lepiej zrozumieć tę myśl, przeanalizujmy jeszcze kilka przykładów łączenia łańcuchowego (chaining/piping).
+
+- Class: script
+  Output: Zbudujmy teraz łańcuch poleceń dplyr, krok po kroku, zaczynając od skryptu, który przed chwilą dla Ciebie otworzyłem.
+  AnswerTests: script_vals_identical()
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then save the script and type submit() when you are ready.
+  Script: chain1.R
+
+- Class: script
+  Output: Dodajmy coś do łańcucha.
+  AnswerTests: script_vals_identical()
+  Hint: Postępuj zgodnie ze wskazówkami w komentarzach skryptu. Jeśli R wyświetlił Ci błąd powyżej, spróbuj zrozumieć, co Ci mówi. Jeśli utkniesz, wpisz reset(), aby rozpocząć od nowego skryptu, a następnie zapisz skrypt i wpisz submit(), gdy będziesz gotowy.
+  Script: chain2.R
+
+- Class: script
+  Output: I jeszcze trochę
+  AnswerTests: script_vals_identical()
+  Hint: Postępuj zgodnie ze wskazówkami w komentarzach skryptu. Jeśli R wyświetlił Ci błąd powyżej, spróbuj zrozumieć, co Ci mówi. Jeśli utkniesz, wpisz reset(), aby rozpocząć od nowego skryptu, a następnie zapisz skrypt i wpisz submit(), gdy będziesz gotowy.
+  Script: chain3.R
+
+- Class: script
+  Output: A teraz dokończmy.
+  AnswerTests: script_vals_identical()
+  Hint: Postępuj zgodnie ze wskazówkami w komentarzach skryptu. Jeśli R wyświetlił Ci błąd powyżej, spróbuj zrozumieć, co Ci mówi. Jeśli utkniesz, wpisz reset(), aby rozpocząć od nowego skryptu, a następnie zapisz skrypt i wpisz submit(), gdy będziesz gotowy.
+  Script: chain4.R
+
+- Class: text
+  Output: W tej lekcji dowiedziałeś się o grupowaniu i "łańcuchowaniu" za pomocą dplyr. Połączyłeś niektóre rzeczy, których nauczyłeś się w poprzedniej lekcji, z tymi bardziej zaawansowanymi pomysłami, aby stworzyć zwięzły i czytelny kod. Witamy w cudownym świecie dplyr!
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za tę lekcję?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: save_credit()
+  Hint: ""

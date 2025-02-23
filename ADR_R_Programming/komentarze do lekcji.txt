@@ -1,0 +1,4 @@
+Looking_at_Data jest zbyt krótkie.
+Dates_and_Times - można dodać utrudnienie lub dodatkowy test niech sami ustalą  strptime(t3, "tę część") na podstawie ?strptime
+Base_Graphics jest dość krótki. Dodać może dataset diamonds, do histogramu dodać breaks. Dodać abline, lines, legend, wiele wykresów w jednym.
+              Dobre źródło to https://www.ling.upenn.edu/~joseff/rstudy/week4.html
