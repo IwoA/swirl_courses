@@ -7,124 +7,127 @@
   Version: 2.2.13
 
 - Class: text
-  Output: In this lesson, we'll explore the lubridate R package, by Garrett Grolemund and Hadley Wickham. According to the package authors, "lubridate has a consistent, memorable syntax, that makes working with dates fun instead of frustrating." If you've ever worked with dates in R, that statement probably has your attention.
+  Output: W tej lekcji przyjrzymy się pakietowi R lubridate autorstwa Garretta Grolemunda i Hadleya Wickhama. Według autorów pakietu „lubridate ma spójną, łatwą do zapamiętania składnię, która sprawia, że ​​praca z datami jest zabawna, a nie frustrująca”. Jeśli kiedykolwiek pracowałeś z datami w R, to stwierdzenie prawdopodobnie przykuło twoją uwagę.
 
 - Class: cmd_question
-  Output: Unfortunately, due to different date and time representations, this lesson is only guaranteed to work with an "en_US.UTF-8" locale. To view your locale, type Sys.getlocale("LC_TIME").
+  Output: Niestety, ze względu na różne reprezentacje daty i godziny, ta lekcja jest gwarantowana tylko dla ustawień regionalnych „Polish_Poland.utf8”. Aby wyświetlić ustawienia regionalne, wpisz Sys.getlocale("LC_TIME").
   CorrectAnswer: Sys.getlocale("LC_TIME")
   AnswerTests: start_timer(); omnitest(correctExpr='Sys.getlocale("LC_TIME")')
-  Hint: Type Sys.getlocale("LC_TIME") to view your time locale.
+  Hint: Wpisz Sys.getlocale("LC_TIME") żeby sprawdzić lokalny format zapisu czasu.
 
 - Class: text
-  Output: If the output above is not "en_US.UTF-8", you can change the locale used by R for the duration of this session by typing Sys.setlocale("LC_TIME", "en_US.UTF-8"). Otherwise, this lesson is not guaranteed to work correctly. We apologize for this inconvenience.
+  Output: Jeśli powyższy wynik nie jest „Polish_Poland.utf8”, możesz zmienić ustawienia regionalne używane przez R na czas trwania tej sesji, wpisując Sys.setlocale("LC_TIME", "Polish_Poland.utf8"). W przeciwnym razie nie ma gwarancji, że ta lekcja będzie działać poprawnie. Przepraszamy za tę niedogodność.
 
 - Class: cmd_question
-  Output: lubridate was automatically installed (if necessary) and loaded upon starting this lesson. To build the habit, we'll go ahead and (re)load the package now. Type library(lubridate) to do so.
+  Output: lubridate został automatycznie zainstalowany (jeśli było to konieczne) i załadowany po rozpoczęciu tej lekcji. Aby wyrobić nawyk, przejdziemy dalej i (ponownie) załadujemy pakiet. Wpisz library(lubridate) w konsoli.
   CorrectAnswer: library(lubridate)
   AnswerTests: start_timer(); omnitest(correctExpr='library(lubridate)')
-  Hint: Type library(lubridate) to (re)load the package.
-
+  Hint: Wpisz library(lubridate) żeby (ponownie) załadować pakiet.
+  
 - Class: cmd_question
-  Output: lubridate contains many useful functions. We'll only be covering the basics here. Type help(package = lubridate) to bring up an overview of the package, including the package DESCRIPTION, a list of available functions, and a link to the official package vignette.
+  Output: lubridate zawiera wiele przydatnych funkcji. Tutaj omówimy tylko podstawy. Wpisz help(package = lubridate), aby wyświetlić przegląd pakietu, w tym opis pakietu, listę dostępnych funkcji i link do oficjalnej winietki pakietu.
   CorrectAnswer: help(package = lubridate)
   AnswerTests: omnitest(correctExpr='help(package = lubridate)')
-  Hint: help(package = lubridate) will bring up the package documentation.
+  Hint: help(package = lubridate) wywoła dokumentację pakietu.
 
 - Class: text
-  Output: Let's get going!
+  Output: No to ruszamy!
 
 - Class: cmd_question
-  Output: The today() function returns today's date. Give it a try, storing the result in a new variable called this_day.
+  Output: Funkcja today() zwraca dzisiejszą datę. Wypróbuj ją, przechowując wynik w nowej zmiennej o nazwie this_day.
   CorrectAnswer: this_day <- today()
   AnswerTests: omnitest(correctExpr='this_day <- today()')
-  Hint: Use this_day <- today() to store today's date in a variable called this_day.
+  Hint: Wpisz this_day <- today() żeby zapisać dzisiejszą datę w zmiennej this_day.
 
 - Class: cmd_question
-  Output: Print the contents of this_day to the console.
+  Output: Pokaż zawartość this_day w konsoli.
   CorrectAnswer: this_day
   AnswerTests: any_of_exprs('this_day', 'print(this_day)')
-  Hint: Type this_day to print its contents.
+  Hint: Po prostu wpisz nazwę zmiennej.
 
 - Class: cmd_question
-  Output: There are three components to this date. In order, they are year, month, and day. We can extract any of these components using the year(), month(), or day() function, respectively. Try any of those on this_day now.
+  Output: Istnieją trzy komponenty tej daty. Kolejno są to rok, miesiąc i dzień. Możemy wyodrębnić dowolny z tych komponentów, używając odpowiednio funkcji year(), month() lub day(). Wypróbuj teraz dowolny z nich na this_day.
   CorrectAnswer: month(this_day)
   AnswerTests: any_of_exprs('year(this_day)', 'month(this_day)', 'day(this_day)')
   Hint: Try passing one argument, this_day, to year(), month(), or day().
 
 - Class: cmd_question
-  Output: We can also get the day of the week from this_day using the wday() function. It will be represented as a number, such that 1 = Sunday, 2 = Monday, 3 = Tuesday, etc. Give it a shot.
+  Output: Możemy również uzyskać dzień tygodnia z this_day za pomocą funkcji wday(). Będzie on reprezentowany jako liczba, taka że 1 = niedziela, 2 = poniedziałek, 3 = wtorek itd. Spróbuj.
   CorrectAnswer: wday(this_day)
   AnswerTests: omnitest('wday(this_day)')
-  Hint: wday(this_day) will give the day of the week, represented as a number.
+  Hint: wday(this_day) pokaże numer dnia tygodnia
 
 - Class: cmd_question
-  Output: "Now try the same thing again, except this time add a second argument, label = TRUE, to display the *name* of the weekday (represented as an ordered factor)."
+  Output: "Teraz spróbuj wykonać to samo jeszcze raz, ale tym razem dodaj drugi argument, label = TRUE, aby wyświetlić *nazwę* dnia tygodnia (reprezentowaną jako uporządkowany czynnik)."
   CorrectAnswer: wday(this_day, label = TRUE)
   AnswerTests: omnitest('wday(this_day, label = TRUE)')
-  Hint: wday(this_day, label = TRUE) will give you the day of the week, represented as a character string.
+  Hint: wday(this_day, label = TRUE) da ci dzień tygodnia zapisany jako wektor tekstowy.
+  
+- Class: text
+  Output: "Jak widać, w przypadku Polski jest problem bo tydzień zaczyna się od niedzieli i są problemy z właściwym zapisem dnia".
 
 - Class: cmd_question
-  Output: In addition to handling dates, lubridate is great for working with date and time combinations, referred to as date-times. The now() function returns the date-time representing this exact moment in time. Give it a try and store the result in a variable called this_moment.
+  Output: Oprócz obsługi dat, lubridate świetnie nadaje się do pracy z kombinacjami daty i czasu, nazywanymi date-times. Funkcja now() zwraca datę i czas reprezentujący ten dokładny moment w czasie. Wypróbuj ją i zapisz wynik w zmiennej o nazwie this_moment.
   CorrectAnswer: this_moment <- now()
   AnswerTests: omnitest('this_moment <- now()')
-  Hint: Store the result of now() in a new variable called this_moment.
+  Hint: Zapisz wynik funkcji now() w nowej zmiennej o nazwie this_moment.
 
 - Class: cmd_question
-  Output: View the contents of this_moment.
+  Output: Wyświetl zawartość this_moment.
   CorrectAnswer: this_moment
   AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
-  Hint: Type this_moment to print its contents to the console.
+  Hint: Wpisz nazwę tego obiektu w konsoli.
 
 - Class: cmd_question
-  Output: Just like with dates, we can extract the year, month, day, or day of week. However, we can also use hour(), minute(), and second() to extract specific time information. Try any of these three new functions now to extract one piece of time information from this_moment.
+  Output: Podobnie jak w przypadku dat, możemy wyodrębnić rok, miesiąc, dzień lub dzień tygodnia. Możemy jednak również użyć hour(), minute() i second(), aby wyodrębnić konkretne informacje o czasie. Wypróbuj teraz dowolną z tych trzech nowych funkcji, aby wyodrębnić jedną część informacji o czasie z this_moment.
   CorrectAnswer: second(this_moment)
   AnswerTests: any_of_exprs('hour(this_moment)', 'minute(this_moment)', 'second(this_moment)')
-  Hint: Use hour(), minute(), or second() to extract a single piece of time information from this_moment.
+  Hint: Użyj hour(), minute() lub second(), aby wyodrębnić pojedynczy fragment informacji o czasie z this_moment.
 
 - Class: text
-  Output: today() and now() provide neatly formatted date-time information. When working with dates and times 'in the wild', this won't always (and perhaps rarely will) be the case.
+  Output: today() i now() dostarczają uporządkowane informacje o dacie i czasie. Podczas pracy z datami i godzinami w praktyce nie zawsze (i być może rzadko) tak będzie.
 
 - Class: text
-  Output: Fortunately, lubridate offers a variety of functions for parsing date-times. These functions take the form of ymd(), dmy(), hms(), ymd_hms(), etc., where each letter in the name of the function stands for the location of years (y), months (m), days (d), hours (h), minutes (m), and/or seconds (s) in the date-time being read in.
+  Output: Na szczęście lubridate oferuje wiele funkcji do parsowania daty i godziny. Funkcje te przyjmują formę ymd(), dmy(), hms(), ymd_hms() itd., gdzie każda litera w nazwie funkcji oznacza lokalizację lat (y), miesięcy (m), dni (d), godzin (h), minut (m) i/lub sekund (s) w odczytywanej dacie i godzinie.
 
 - Class: cmd_question
-  Output: To see how these functions work, try ymd("1989-05-17"). You must surround the date with quotes. Store the result in a variable called my_date.
+  Output: Aby zobaczyć, jak działają te funkcje, wypróbuj ymd("1989-05-17"). Musisz ująć datę w cudzysłów. Zapisz wynik w zmiennej o nazwie my_date.
   CorrectAnswer: my_date <- ymd("1989-05-17")
   AnswerTests: omnitest('my_date <- ymd("1989-05-17")')
-  Hint: Type my_date <- ymd("1989-05-17") to see how ymd() works, storing the result in my_date.
+  Hint: Wpisz my_date <- ymd("1989-05-17"), aby zobaczyć jak działa funkcja ymd(). Zapisując wynik w my_date.
 
 - Class: cmd_question
-  Output: Now take a look at my_date.
+  Output: Teraz spójrz na my_date.
   CorrectAnswer: my_date
   AnswerTests: omnitest('my_date')
-  Hint: Type my_date to view its contents.
+  Hint: Wpisz my_date, aby wyświetlić jego zawartość.
 
 - Class: cmd_question
-  Output: It might look the same, but below the surface, there's another important change that takes place when lubridate parses a date. Type class(my_date) to see what that is.
+  Output: Może wyglądać tak samo, ale pod powierzchnią zachodzi inna ważna zmiana, gdy lubridate parsuje datę. Wpisz class(my_date), aby zobaczyć, co to jest.
   CorrectAnswer: class(my_date)
   AnswerTests: omnitest('class(my_date)')
-  Hint: Type class(my_date) to see what important change takes place when lubridate parses a date.
+  Hint: Wpisz class(my_date), aby zobaczyć, jakie ważne zmiany zachodzą podczas przetwarzania daty przez lubridate.
 
 - Class: text
-  Output: So ymd() took a character string as input and returned an object of class Date, which is how R stores date information internally.
+  Output: Dlatego funkcja ymd() przyjęła ciąg znaków jako dane wejściowe i zwróciła obiekt klasy Date, w taki sposób R wewnętrznie przechowuje informacje o datach.
 
 - Class: cmd_question
-  Output: '"1989-05-17" is a fairly standard format, but lubridate is ''smart'' enough to figure out many different date-time formats. Use ymd() to parse "1989 May 17". Don''t forget to put quotes around the date!'
+  Output: '„1989-05-17” to dość standardowy format, ale lubridate jest wystarczająco „inteligentny”, aby zrozumieć wiele różnych formatów daty i godziny. Użyj ymd(), aby przeanalizować „1989 May 17”. Nie zapomnij umieścić daty w cudzysłowie!'
   CorrectAnswer: ymd("1989 May 17")
   AnswerTests: omnitest('ymd("1989 May 17")')
-  Hint: Try ymd("1989 May 17") to see that ymd() is capable of handling different date-time formats.
+  Hint: Spróbuj wpisać ymd("1989 May 17")
 
 - Class: cmd_question
-  Output: Despite being formatted differently, the last two dates had the year first, then the month, then the day. Hence, we used ymd() to parse them. What do you think the appropriate function is for parsing "March 12, 1975"? Give it a try.
+  Output: Mimo że były inaczej sformatowane, ostatnie dwie daty miały najpierw rok, potem miesiąc, a potem dzień. Dlatego użyliśmy ymd(), aby je przeanalizować. Jak myślisz, jaka funkcja jest odpowiednia do analizy „12 marca 1975”? Sprawdź.
   CorrectAnswer: mdy("March 12, 1975")
   AnswerTests: any_of_exprs('mdy("March 12, 1975")', 'mdy("March 12 1975")')
-  Hint: mdy() will correctly parse "March 12, 1975". The function name, mdy(), stands for year (y), month (m), and day (d), in order from left to right.
+  Hint: mdy() poprawnie przetworzy „12 marca 1975”. Nazwa funkcji, mdy(), oznacza rok (y), miesiąc (m) i dzień (d), w kolejności od lewej do prawej.
 
 - Class: cmd_question
-  Output: We can even throw something funky at it and lubridate will often know the right thing to do. Parse 25081985, which is supposed to represent the 25th day of August 1985. Note that we are actually parsing a numeric value here -- not a character string -- so leave off the quotes.
+  Output: Możemy nawet coś bardziej szalonego, a lubridate często będzie wiedział, co zrobić. Przeanalizuj 25081985, co ma reprezentować 25. dzień sierpnia 1985. Zauważ, że tak naprawdę analizujemy tutaj wartość liczbową — a nie ciąg znaków — więc pomiń cudzysłowy.
   CorrectAnswer: dmy(25081985)
   AnswerTests: omnitest('dmy(25081985)')
-  Hint: Use dmy(25081985) to see how lubridate handles something a little different from what we've seen so far.
+  Hint: Użyj dmy(25081985), aby zobaczyć, jak lubridate radzi sobie z czymś nieco innym, niż to, co widzieliśmy do tej pory.
 
 - Class: cmd_question
   Output: But be careful, it's not magic. Try ymd("192012") to see what happens when we give it something more ambiguous. Surround the number with quotes again, just to be consistent with the way most dates are represented (as character strings).
