@@ -44,7 +44,7 @@
   Output: "Pamiętaj, że jeśli masz pytania dotyczące konkretnej funkcji w R, 
     możesz uzyskać dokumentację, wpisując znak zapytania, a następnie nazwę funkcji: 
     ?nazwa_funkcji. Jednak w przypadku operatorów, takich jak dwukropek użyty powyżej, 
-    musisz umieścić symbol w odwrotnych cudzysłowach (backticks), na przykład: `?`:`. 
+    musisz umieścić symbol w odwrotnych cudzysłowach (backticks), na przykład: ?`:`. 
     Backtick (`) znajduje się zazwyczaj w lewym górnym rogu klawiatury, nad klawiszem Tab. 
     Jeśli nie masz klawisza backtick, możesz użyć zwykłych cudzysłowów."
 
