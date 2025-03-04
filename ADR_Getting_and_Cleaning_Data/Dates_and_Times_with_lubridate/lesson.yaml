@@ -64,10 +64,10 @@
   Hint: wday(this_day, label = TRUE) da ci dzień tygodnia zapisany jako wektor tekstowy.
   
 - Class: text
-  Output: "Jak widać, w przypadku Polski jest problem bo tydzień zaczyna się od niedzieli i są problemy z właściwym zapisem dnia".
+  Output: Jak widać, w przypadku Polski jest problem bo są problemy z właściwym zapisem dnia. Na kolejność levels nie zwracaj uwagi.
 
 - Class: cmd_question
-  Output: Oprócz obsługi dat, lubridate świetnie nadaje się do pracy z kombinacjami daty i czasu, nazywanymi date-times. Funkcja now() zwraca datę i czas reprezentujący ten dokładny moment w czasie. Wypróbuj ją i zapisz wynik w zmiennej o nazwie this_moment.
+  Output: "Oprócz obsługi dat, lubridate świetnie nadaje się do pracy z kombinacjami daty i czasu, nazywanymi date-times. Funkcja now() zwraca datę i czas reprezentujący ten dokładny moment w czasie. Wypróbuj ją i zapisz wynik w zmiennej o nazwie this_moment."
   CorrectAnswer: this_moment <- now()
   AnswerTests: omnitest('this_moment <- now()')
   Hint: Zapisz wynik funkcji now() w nowej zmiennej o nazwie this_moment.
@@ -118,10 +118,13 @@
   Hint: Spróbuj wpisać ymd("1989 May 17")
 
 - Class: cmd_question
-  Output: Mimo że były inaczej sformatowane, ostatnie dwie daty miały najpierw rok, potem miesiąc, a potem dzień. Dlatego użyliśmy ymd(), aby je przeanalizować. Jak myślisz, jaka funkcja jest odpowiednia do analizy „12 marca 1975”? Sprawdź.
-  CorrectAnswer: mdy("March 12, 1975")
-  AnswerTests: any_of_exprs('mdy("March 12, 1975")', 'mdy("March 12 1975")')
-  Hint: mdy() poprawnie przetworzy „12 marca 1975”. Nazwa funkcji, mdy(), oznacza rok (y), miesiąc (m) i dzień (d), w kolejności od lewej do prawej.
+  Output: Mimo że były inaczej sformatowane, ostatnie dwie daty miały najpierw rok, potem miesiąc, a potem dzień. Dlatego użyliśmy ymd(), aby je przeanalizować. Jak myślisz, jaka funkcja jest odpowiednia do analizy „12 marzec 1975”? Sprawdź.
+  CorrectAnswer: mdy("12 marzec 1975")
+  AnswerTests: any_of_exprs('dmy("12 marzec, 1975")', 'dmy("12 marzec 1975")')
+  Hint: dmy() poprawnie przetworzy „12 marzec 1975”. Nazwa funkcji, dmy(), oznacza dzień (d), miesiąc (m) i rok (y), w kolejności od lewej do prawej.
+
+- Class: text
+  Output: Jak widać lubridate jest na tyle inteligentny, że umie parsować polskie nazwy! Ale tylko, gdy mamy ustawione polskie locale.
 
 - Class: cmd_question
   Output: Możemy nawet coś bardziej szalonego, a lubridate często będzie wiedział, co zrobić. Przeanalizuj 25081985, co ma reprezentować 25. dzień sierpnia 1985. Zauważ, że tak naprawdę analizujemy tutaj wartość liczbową — a nie ciąg znaków — więc pomiń cudzysłowy.
@@ -130,208 +133,208 @@
   Hint: Użyj dmy(25081985), aby zobaczyć, jak lubridate radzi sobie z czymś nieco innym, niż to, co widzieliśmy do tej pory.
 
 - Class: cmd_question
-  Output: But be careful, it's not magic. Try ymd("192012") to see what happens when we give it something more ambiguous. Surround the number with quotes again, just to be consistent with the way most dates are represented (as character strings).
+  Output: Ale uważaj, to nie magia. Spróbuj ymd("192012"), aby zobaczyć, co się stanie, gdy damy mu coś bardziej niejednoznacznego. Ponownie użyj cudzysłowu, aby zachować spójność ze sposobem, w jaki przedstawiana jest większość dat (jako ciągi znaków).
   CorrectAnswer: ymd("192012")
   AnswerTests: omnitest('ymd("192012")')
-  Hint: Try ymd("192012") to see what happens when lubridate can't figure out what the format of the date is.
+  Hint: Wypróbuj ymd("192012"), aby zobaczyć, co się stanie, gdy lubridate nie będzie w stanie ustalić formatu daty.
 
 - Class: cmd_question
-  Output: You got a warning message because it was unclear what date you wanted. When in doubt, it's best to be more explicit. Repeat the same command, but add two dashes OR two forward slashes to "192012" so that it's clear we want January 2, 1920.
+  Output: Otrzymałeś komunikat ostrzegawczy, ponieważ nie było jasne, jakiej daty chcesz. W razie wątpliwości najlepiej jest być bardziej precyzyjnym. Powtórz to samo polecenie, ale dodaj dwa myślniki LUB dwa ukośniki do „192012”, aby było jasne, że chcemy 2 stycznia 1920 r.
   CorrectAnswer: ymd("1920/1/2")
   AnswerTests: any_of_exprs('ymd("1920/1/2")', 'ymd("1920-1-2")')
-  Hint: ymd("1920/1/2") is more explicit than ymd("192012") and lubridate knows how to handle it.
+  Hint: ymd("1920/1/2") jest bardziej precyzyjne niż ymd("192012") i lubridate wie, jak sobie z tym poradzić.
 
 - Class: cmd_question
-  Output: In addition to dates, we can parse date-times. I've created a date-time object called dt1. Take a look at it now.
+  Output: Oprócz dat możemy parsować daty i godziny. Utworzyłem obiekt daty i godziny o nazwie dt1. Spójrz teraz na niego .
   CorrectAnswer: dt1
   AnswerTests: any_of_exprs('dt1', 'print(dt1)')
-  Hint: Type dt1 to view its contents.
+  Hint: Wpisz dt1 w konsoli, aby zobaczyć jego zawartość.
 
 - Class: cmd_question
-  Output: Now parse dt1 with ymd_hms(), and store the result in dt1_parsed.
+  Output: Teraz przeanalizuj dt1 za pomocą ymd_hms() i zapisz wynik w dt1_parsed.
   CorrectAnswer: dt1_parsed <- ymd_hms(dt1)
   AnswerTests: omnitest('dt1_parsed <- ymd_hms(dt1)')
-  Hint: dt1_parsed <- ymd_hms(dt1) will parse dt1 and store the result.
+  Hint: dt1_parsed <- ymd_hms(dt1) przeanalizuje dt1 i zapisze wynik.
 
 - Class: cmd_question
-  Output: Now take a look at dt1_parsed.
+  Output: Teraz przyjrzyjmy się dt1_parsed.
   CorrectAnswer: dt1_parsed
   AnswerTests: omnitest('dt1_parsed')
-  Hint: Type dt1_parsed to view its contents.
+  Hint: Wpisz dt1_parsed w konsoli.
 
 - Class: cmd_question
-  Output: It looks almost the same, except for the addition of a time zone, which we'll discuss later in the lesson. Let's use class(dt1_parsed) to see what the class is.
+  Output: Wygląda prawie tak samo, z wyjątkiem dodania strefy czasowej, którą omówimy później w tej lekcji. Użyjmy class(dt1_parsed), aby zobaczyć, jaka jest klasa tego obiektu.
   CorrectAnswer: class(dt1_parsed)
   AnswerTests: omnitest('class(dt1_parsed)')
-  Hint: Type class(dt1_parsed) to see what class is used to represent date-times.
+  Hint: Użyj funkcji class()
 
 - Class: text
-  Output: This time, instead of Date, the object returned by ymd_hms() is of class POSIXct. It's not necessary that you understand what POSIXct is, but just know that it stores date-time information.
+  Output: Tym razem zamiast Date obiekt zwrócony przez ymd_hms() jest klasy POSIXct. Nie musisz rozumieć, czym jest POSIXct, ale wiedz, że przechowuje informacje o dacie i czasie.
 
 - Class: cmd_question
-  Output: What if we have a time, but no date? Use the appropriate lubridate function to parse "03:22:14" (hh:mm:ss).
+  Output: Co jeśli mamy godzinę, ale nie mamy daty? Użyj odpowiedniej funkcji lubridate, aby przeanalizować „03:22:14” (hh:mm:ss).
   CorrectAnswer: hms("03:22:14")
   AnswerTests: omnitest('hms("03:22:14")')
-  Hint: Give hms("03:22:14") a try. In this case, hms() stands for hours (h), minutes (m), and seconds (s).
+  Hint: Wypróbuj hms("03:22:14"). W tym przypadku hms() oznacza godziny (h), minuty (m) i sekundy (s).
 
 - Class: cmd_question
-  Output: lubridate is also capable of handling vectors of dates, which is particularly helpful when you need to parse an entire column of data. I've created a vector of dates called dt2. View its contents now.
+  Output: lubridate jest również w stanie obsługiwać wektory dat, co jest szczególnie pomocne, gdy trzeba przeanalizować całą kolumnę danych. Utworzyłem wektor dat o nazwie dt2. Zobacz jego zawartość.
   CorrectAnswer: dt2
   AnswerTests: any_of_exprs('dt2', 'print(dt2)')
-  Hint: Type dt2 to view its contents.
+  Hint: Wiesz jak to zrobić.
 
 - Class: cmd_question
-  Output: Now parse dt2 using the appropriate lubridate function.
+  Output: Teraz parsuj dt2 przy użyciu odpowiedniej funkcji lubridate.
   CorrectAnswer: ymd(dt2)
   AnswerTests: omnitest('ymd(dt2)')
-  Hint: Use ymd(dt2) to parse the vector of dates named dt2.
+  Hint: Użyj funkcji ymd(dt2) do parsowania wektora dat o nazwie dt2.
 
 - Class: cmd_question
-  Output: "The update() function allows us to update one or more components of a date-time. For example, let's say the current time is 08:34:55 (hh:mm:ss). Update this_moment to the new time using the following command:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 55)."
+  Output: "Funkcja update() pozwala nam zaktualizować jeden lub więcej komponentów daty i godziny. Na przykład, powiedzmy, że bieżąca godzina to 08:34:55 (hh:mm:ss). Zaktualizuj this_moment do nowej godziny, używając następującego polecenia:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 55)."
   CorrectAnswer: update(this_moment, hours = 8, minutes = 34, seconds = 55)
   AnswerTests: omnitest('update(this_moment, hours = 8, minutes = 34, seconds = 55)')
-  Hint: update(this_moment, hours = 8, minutes = 34, seconds = 55) will update this_moment to reflect a new time of 08:34:55.
+  Hint: update(this_moment, hours = 8, minutes = 34, seconds = 55) zaktualizuje this_moment, aby odzwierciedlić nowy czas, tj. 08:34:55.
 
 - Class: cmd_question
-  Output: It's important to recognize that the previous command does not alter this_moment unless we reassign the result to this_moment. To see this, print the contents of this_moment.
+  Output: Ważne żeby zapamiętać, że poprzednie polecenie nie zmienia this_moment, chyba że przypiszemy wynik ponownie do this_moment. Aby to zobaczyć, pokaż zawartość this_moment w konsoli.
   CorrectAnswer: this_moment
   AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
-  Hint: Type this_moment to view its contents.
+  Hint: Wpisz this_moment 
 
 - Class: cmd_question
-  Output: Unless you're a superhero, some time has passed since you first created this_moment. Use update() to make it match the current time, specifying at least hours and minutes. Assign the result to this_moment, so that this_moment will contain the new time.
+  Output: Jeśli nie jesteś superszybki to minęło trochę czasu odkąd po raz pierwszy utworzyłeś this_moment. Użyj update(), aby dopasować go do bieżącego czasu, określając co najmniej godziny i minuty. Przypisz wynik do this_moment, aby this_moment zawierał nowy czas.
   CorrectAnswer: this_moment <- update(this_moment, hours = 10, minutes = 16, seconds = 0)
   AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes'); expr_creates_var('this_moment')
-  Hint: Try update(this_moment, hours = 10, minutes = 16, seconds = 0), which will update the time to 10:16:00. Make sure to reassign the result to this_moment.
+  Hint: Wypróbuj funkcję update(this_moment, hours = 10, minutes = 16, seconds = 0), która zaktualizuje czas do 10:16:00. Pamiętaj, aby ponownie przypisać wynik do this_moment.
 
 - Class: cmd_question
-  Output: Take one more look at this_moment to see that it's been updated.
+  Output: Spójrz jeszcze raz na this_moment, aby sprawdzić, czy został zaktualizowany.
   CorrectAnswer: this_moment
   AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
-  Hint: Type this_moment to see its new value.
+  Hint: Wiesz jak to zrobić.
 
 - Class: text
-  Output: Now, pretend you are in New York City and you are planning to visit a friend in Hong Kong. You seem to have misplaced your itinerary, but you know that your flight departs New York at 17:34 (5:34pm) the day after tomorrow. You also know that your flight is scheduled to arrive in Hong Kong exactly 15 hours and 50 minutes after departure.
+  Output: Teraz wyobraź sobie, że jesteś w Nowym Jorku i planujesz odwiedzić przyjaciółkę w Hongkongu. Wygląda na to, że zgubiłeś swój plan podróży, ale wiesz, że twój samolot odlatuje z Nowego Jorku o 17:34 (5:34pm) pojutrze. Wiesz również, że twój samolot ma przylecieć do Hongkongu dokładnie 15 godzin i 50 minut po odlocie.
 
 - Class: text
-  Output: Let's reconstruct your itinerary from what you can remember, starting with the full date and time of your departure. We will approach this by finding the current date in New York, adding 2 full days, then setting the time to 17:34.
+  Output: Zrekonstruujmy trasę na podstawie tego, co pamiętasz, zaczynając od pełnej daty i godziny wyjazdu. Podejdziemy do tego, znajdując bieżącą datę w Nowym Jorku, dodając 2 pełne dni, a następnie ustawiając czas na 17:34.
 
 - Class: cmd_question
-  Output: 'To find the current date in New York, we''ll use the now() function again. This time, however, we''ll specify the time zone that we want: "America/New_York". Store the result in a variable called nyc. Check out ?now if you need help.'
+  Output: 'Aby znaleźć aktualną datę w Nowym Jorku, ponownie użyjemy funkcji now(). Tym razem jednak określimy strefę czasową, której szukamy: „America/New_York”. Zapisz wynik w zmiennej o nazwie nyc. Sprawdź ?now, jeśli potrzebujesz pomocy.'
   CorrectAnswer: nyc <- now("America/New_York")
   AnswerTests: match_call('nyc <- now("America/New_York")')
-  Hint: now("America/New_York") will give the current date in New York. Store the result in a variable called nyc.
+  Hint: now("America/New_York") zwróci aktualną datę w Nowym Jorku. Zapisz wynik w zmiennej o nazwie nyc.
 
 - Class: text
-  Output: "For a complete list of valid time zones for use with lubridate, check out the following Wikipedia page:\n\nhttp://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+  Output: "Aby uzyskać pełną listę prawidłowych stref czasowych dla lubridate, sprawdź następującą stronę Wikipedii:\n\nhttp://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
 
 - Class: cmd_question
-  Output: View the contents of nyc, which now contains the current date and time in New York.
+  Output: Zobacz zawartość obiektu nyc, który zawiera teraz aktualną datę i godzinę w Nowym Jorku.
   CorrectAnswer: nyc
   AnswerTests: any_of_exprs('nyc', 'print(nyc)')
-  Hint: Type nyc to see the current date and time in New York.
+  Hint: ...
 
 - Class: cmd_question
-  Output: "Your flight is the day after tomorrow (in New York time), so we want to add two days to nyc. One nice aspect of lubridate is that it allows you to use arithmetic operators on dates and times. In this case, we'd like to add two days to nyc, so we can use the following expression: nyc + days(2). Give it a try, storing the result in a variable called depart."
+  Output: "Twój lot jest pojutrze (według czasu nowojorskiego), więc chcemy dodać dwa dni do nyc. Jedną z fajnych cech lubridate jest to, że pozwala używać operatorów arytmetycznych w datach i godzinach. W tym przypadku chcielibyśmy dodać dwa dni do nyc, więc możemy użyć następującego wyrażenia: nyc + days(2). Wypróbuj to, przechowując wynik w zmiennej o nazwie depart."
   CorrectAnswer: depart <- nyc + days(2)
   AnswerTests: any_of_exprs('depart <- nyc + days(2)', 'depart <- days(2) + nyc')
-  Hint: Use nyc + days(2) to add two days to the current date in New York. Store the result in a variable called depart.
+  Hint: Użyj nyc + days(2), aby dodać dwa dni do bieżącej daty w Nowym Jorku. Zapisz wynik w zmiennej o nazwie depart.
 
 - Class: cmd_question
-  Output: Take a look at depart.
+  Output: Spójż na depart.
   CorrectAnswer: depart
   AnswerTests: any_of_exprs('depart', 'print(depart)')
-  Hint: Type depart to view its contents.
+  Hint: Wiesz jak.
 
 - Class: cmd_question
-  Output: So now depart contains the date of the day after tomorrow. Use update() to add the correct hours (17) and minutes (34) to depart. Reassign the result to depart.
+  Output: Teraz depart zawiera datę dnia pojutrze. Użyj update(), aby dodać poprawne godziny (17) i minuty (34) do leave. Przypisz ponownie wynik do depart.
   CorrectAnswer: depart <- update(depart, hours = 17, minutes = 34)
   AnswerTests: any_of_exprs('depart <- update(depart, hours = 17, minutes = 34)', 'depart <- update(depart, minutes = 34, hours = 17)')
-  Hint: Use depart <- update(depart, hours = 17, minutes = 34) to update depart with the correct time of 17:34.
+  Hint: Wpisz depart <- update(depart, hours = 17, minutes = 34), aby zaktualizować czas odjazdu o poprawną godzinę 17:34.
 
 - Class: cmd_question
-  Output: Take one more look at depart.
+  Output: Sprawdź jak to teraz wygląda.
   CorrectAnswer: depart
   AnswerTests: any_of_exprs('depart', 'print(depart)')
-  Hint: Type depart to view its contents.
+  Hint: Wpisz depart w konsoli.
 
 - Class: text
-  Output: Your friend wants to know what time she should pick you up from the airport in Hong Kong. Now that we have the exact date and time of your departure from New York, we can figure out the exact time of your arrival in Hong Kong.
+  Output: Twoja przyjaciółka chce wiedzieć, o której godzinie powinna odebrać Cię z lotniska w Hongkongu. Teraz, gdy znamy dokładną datę i godzinę Twojego wylotu z Nowego Jorku, możemy ustalić dokładną godzinę Twojego przylotu do Hongkongu.
 
 - Class: cmd_question
-  Output: The first step is to add 15 hours and 50 minutes to your departure time. Recall that nyc + days(2) added two days to the current time in New York. Use the same approach to add 15 hours and 50 minutes to the date-time stored in depart. Store the result in a new variable called arrive.
+  Output: Pierwszym krokiem jest dodanie 15 godzin i 50 minut do czasu odlotu. Przypomnij sobie, że nyc + days(2) dodało dwa dni do bieżącego czasu w Nowym Jorku. Użyj tego samego podejścia, aby dodać 15 godzin i 50 minut do daty i godziny zapisanej w parametrze odlot. Zapisz wynik w nowej zmiennej o nazwie arrive.
   CorrectAnswer: arrive <- depart + hours(15) + minutes(50)
   AnswerTests: expr_creates_var('arrive'); test_arrive_val()
-  Hint: arrive <- depart + hours(15) + minutes(50) will add 15 hours and 50 minutes to depart and store the result in arrive.
+  Hint: arrive <- depart + hours(15) + minutes(50) doda 15 godzin 50 minut.
 
 - Class: text
-  Output: The arrive variable contains the time that it will be in New York when you arrive in Hong Kong. What we really want to know is what time it will be in Hong Kong when you arrive, so that your friend knows when to meet you.
+  Output: Zmienna arrive zawiera godzinę, która będzie w Nowym Jorku, kiedy przybędziesz do Hong Kongu. Tak naprawdę chcemy wiedzieć, o której godzinie będziesz w Hong Kongu, czasu miejscowego, aby Twoja przyjaciółka wiedziała, kiedy się z Tobą spotkać.
 
 - Class: cmd_question
-  Output: The with_tz() function returns a date-time as it would appear in another time zone. Use ?with_tz to check out the documentation.
+  Output: Funkcja with_tz() zwraca datę i godzinę, tak jak wyglądałyby w innej strefie czasowej. Użyj ?with_tz, aby sprawdzić dokumentację.
   CorrectAnswer: ?with_tz
   AnswerTests: any_of_exprs('?with_tz', 'help(with_tz)')
-  Hint: View the help file using ?with_tz.
+  Hint: użyj ?
 
 - Class: cmd_question
-  Output: Use with_tz() to convert arrive to the "Asia/Hong_Kong" time zone. Reassign the result to arrive, so that it will get the new value.
+  Output: Użyj with_tz(), aby przekonwertować arrive na strefę czasową „Asia/Hong_Kong”. Ponownie przypisz wynik do arrive, aby uzyskać nową wartość.
   CorrectAnswer: arrive <- with_tz(arrive, "Asia/Hong_Kong")
   AnswerTests: match_call('arrive <- with_tz(arrive, "Asia/Hong_Kong")')
-  Hint: with_tz(arrive, "Asia/Hong_Kong") will convert arrive to Hong Kong time. Assign the result back to arrive.
+  Hint: with_tz(arrive, "Asia/Hong_Kong") przekonwertuje czas. Przypisz wynik ponownie do arrive.
 
 - Class: cmd_question
-  Output: Print the value of arrive to the console, so that you can tell your friend what time to pick you up from the airport.
+  Output: Wypisz wartość arrive na konsoli, dzięki czemu będziesz mógł powiedzieć znajomej, o której ma cię odebrać z lotniska.
   CorrectAnswer: arrive
   AnswerTests: any_of_exprs('arrive', 'print(arrive)')
-  Hint: Type arrive to view its contents.
+  Hint: Wpisz arrive.
 
 - Class: text
-  Output: Fast forward to your arrival in Hong Kong. You and your friend have just met at the airport and you realize that the last time you were together was in Singapore on June 17, 2008. Naturally, you'd like to know exactly how long it has been.
+  Output: Przewińmy czas do twojego przybycia do Hong Kongu. Właśnie spotkaliście się na lotnisku i zdajesz sobie sprawę, że ostatni raz byliście razem w Singapurze 17 czerwca 2018 r. Naturalnie, chciałbyś wiedzieć dokładnie, ile czasu minęło.
 
 - Class: cmd_question
-  Output: Use the appropriate lubridate function to parse "June 17, 2008", just like you did near the beginning of this lesson. This time, however, you should specify an extra argument, tz = "Singapore". Store the result in a variable called last_time.
-  CorrectAnswer: last_time <- mdy("June 17, 2008", tz = "Singapore")
-  AnswerTests: omnitest('last_time <- mdy("June 17, 2008", tz = "Singapore")')
-  Hint: Use mdy("June 17, 2008", tz = "Singapore") to parse the date with the correct time zone and store the result in last_time.
+  Output: Użyj odpowiedniej funkcji lubridate, aby przeanalizować „17 czerwiec 2008”, tak jak zrobiłeś to na początku tej lekcji. Tym razem jednak powinieneś określić dodatkowy argument, tz = "Asia/Singapore". Zapisz wynik w zmiennej o nazwie last_time.
+  CorrectAnswer: last_time <- dmy("17 czerwiec 2008", tz = "Asia/Singapore")
+  AnswerTests: omnitest('last_time <- dmy("17 czerwiec 2008", tz = "Asia/Singapore")')
+  Hint: Użyj dmy("17 czerwiec 2008", tz = "Asia/Singapore"), aby przeparsować datę z uwzględnieniem właściwej strefy czasowej i zapisać wynik w last_time.
 
 - Class: cmd_question
-  Output: View the contents of last_time.
+  Output: Sprawdź zawartość last_time.
   CorrectAnswer: last_time
   AnswerTests: any_of_exprs('last_time', 'print(last_time)')
-  Hint: Type last_time to view its contents.
+  Hint: ...
 
 - Class: cmd_question
-  Output: Pull up the documentation for interval(), which we'll use to explore how much time has passed between arrive and last_time.
+  Output: Sprawdź dokumentację funkcji interval(), której użyjemy, aby sprawdzić, ile czasu upłynęło między arrive (przybyciem) a last_time (last_time).
   CorrectAnswer: ?interval
   AnswerTests: any_of_exprs('?interval', 'help(interval)')
-  Hint: Type ?interval to bring up the help file.
+  Hint: Wpisz ?interval.
 
 - Class: cmd_question
-  Output: Create an interval() that spans from last_time to arrive. Store it in a new variable called how_long.
+  Output: Utwórz interval() rozciągający się od last_time do arrive. Zapisz go w nowej zmiennej o nazwie how_long.
   CorrectAnswer: how_long <- interval(last_time, arrive)
   AnswerTests: match_call('how_long <- interval(last_time, arrive)')
-  Hint: Call interval with two arguments, last_time and arrive, and store the result in how_long.
+  Hint: Wywołaj interval z dwoma argumentami, last_time i arrive, a następnie zapisz wynik w how_long.
 
 - Class: cmd_question
-  Output: Now use as.period(how_long) to see how long it's been.
+  Output: Teraz użyj as.period(how_long), aby sprawdzić, ile czasu minęło.
   CorrectAnswer: as.period(how_long)
   AnswerTests: omnitest('as.period(how_long)')
-  Hint: as.period(how_long) will tell you how many years, months, days, etc. have passed since you last saw your friend.
+  Hint: as.period(how_long) powie Cię, ile lat, miesięcy, dni itd. minęło od czasu, gdy ostatni raz widziałeś swojego przyjaciela.
 
 - Class: text
-  Output: This is where things get a little tricky. Because of things like leap years, leap seconds, and daylight savings time, the length of any given minute, day, month, week, or year is relative to when it occurs. In contrast, the length of a second is always the same, regardless of when it occurs.
+  Output: Tutaj sprawy stają się nieco skomplikowane. Z powodu takich rzeczy jak lata przestępne, sekundy przestępne i czas letni, długość danej minuty, dnia, miesiąca, tygodnia lub roku jest względna w stosunku do momentu, w którym występuje. Natomiast długość sekundy jest zawsze taka sama, niezależnie od momentu, w którym występuje.
 
 - Class: text
-  Output: "To address these complexities, the authors of lubridate introduce four classes of time related objects: instants, intervals, durations, and periods. These topics are beyond the scope of this lesson, but you can find a complete discussion in the 2011 Journal of Statistical Software paper titled 'Dates and Times Made Easy with lubridate'."
+  Output: "Aby rozwiązać te zawiłości, autorzy lubridate wprowadzają cztery klasy obiektów związanych z czasem: momenty, interwały, okresy trwania i okresy (instants, intervals, durations i periods). Te tematy wykraczają poza zakres tej lekcji, ale możesz znaleźć pełną dyskusję w artykule z 2011 r. w Journal of Statistical Software zatytułowanym „Dates and Times Made Easy with lubridate”."
 
 - Class: cmd_question
-  Output: This concludes our introduction to working with dates and times in lubridate. I created a little timer that started running in the background when you began this lesson. Type stopwatch() to see how long you've been working!
+  Output: To kończy nasze wprowadzenie do pracy z datami i godzinami w lubridate. Stworzyłem mały timer, który zaczął działać w tle, gdy zacząłeś tę lekcję. Wpisz stopwatch(), aby zobaczyć, jak długo pracujesz!
   CorrectAnswer: stopwatch()
   AnswerTests: omnitest('stopwatch()'); stop_timer()
-  Hint: Type stopwatch() to see how long you've been working!
+  Hint: Wpisz stopwatch(), aby sprawdzić, jak długo pracujesz!
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course?"
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
