@@ -7,7 +7,7 @@
   Version: 2.2.13
 
 - Class: text
-  Output: W tej lekcji przyjrzymy się pakietowi R lubridate autorstwa Garretta Grolemunda i Hadleya Wickhama. Według autorów pakietu „lubridate ma spójną, łatwą do zapamiętania składnię, która sprawia, że ​​praca z datami jest zabawna, a nie frustrująca”. Jeśli kiedykolwiek pracowałeś z datami w R, to stwierdzenie prawdopodobnie przykuło twoją uwagę.
+  Output: W tej lekcji przyjrzymy się pakietowi R lubridate autorstwa Garretta Grolemunda i Hadleya Wickhama. Według autorów pakietu „lubridate ma spójną, łatwą do zapamiętania składnię, która sprawia, że praca z datami jest zabawna, a nie frustrująca”. Jeśli kiedykolwiek pracowałeś z datami w R, to stwierdzenie prawdopodobnie przykuło twoją uwagę.
 
 - Class: cmd_question
   Output: Niestety, ze względu na różne reprezentacje daty i godziny, ta lekcja jest gwarantowana tylko dla ustawień regionalnych „Polish_Poland.utf8”. Aby wyświetlić ustawienia regionalne, wpisz Sys.getlocale("LC_TIME").
@@ -16,7 +16,7 @@
   Hint: Wpisz Sys.getlocale("LC_TIME") żeby sprawdzić lokalny format zapisu czasu.
 
 - Class: text
-  Output: Jeśli powyższy wynik nie jest „Polish_Poland.utf8”, możesz zmienić ustawienia regionalne używane przez R na czas trwania tej sesji, wpisując Sys.setlocale("LC_TIME", "Polish_Poland.utf8"). W przeciwnym razie nie ma gwarancji, że ta lekcja będzie działać poprawnie. Przepraszamy za tę niedogodność.
+  Output: Jeśli powyższy wynik nie jest „pl_PL.utf8”, możesz zmienić ustawienia regionalne używane przez R na czas trwania tej sesji, wpisując Sys.setlocale("LC_TIME", "pl_PL.utf8"). W przeciwnym razie nie ma gwarancji, że ta lekcja będzie działać poprawnie. Przepraszamy za tę niedogodność.
 
 - Class: cmd_question
   Output: lubridate został automatycznie zainstalowany (jeśli było to konieczne) i załadowany po rozpoczęciu tej lekcji. Aby wyrobić nawyk, przejdziemy dalej i (ponownie) załadujemy pakiet. Wpisz library(lubridate) w konsoli.
