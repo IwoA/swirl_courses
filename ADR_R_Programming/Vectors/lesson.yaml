@@ -235,6 +235,6 @@
 - Class: mult_question
   Output: "Czy chcesz dostać punkty za ukończenie tej lekcji?"
   CorrectAnswer: NULL
-  AnswerChoices: Tak;Nie
+  AnswerChoices: Yes;No
   AnswerTests: save_credit()
   Hint: ""
