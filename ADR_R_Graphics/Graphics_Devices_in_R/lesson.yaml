@@ -7,150 +7,150 @@
   Version: 2.2.0
 
 - Class: text
-  Output:  As the title suggests, this will be a short lesson introducing you to graphics devices in R. So, what IS a graphics device?
+  Output:  Jak sugeruje tytuł, będzie to krótka lekcja wprowadzająca do urządzeń graficznych w języku R. Czym więc JEST urządzenie graficzne?
 
 - Class: text
-  Output:  Would you believe that it is something where you can make a plot appear, either a screen device, such as a window on your computer, OR a file device? 
+  Output:  Czy uwierzyłbyś, że jest to coś, co pozwala na wyświetlenie wykresu, czy to na ekranie komputera, np. w oknie, CZY zapis do pliku?
 
 - Class: text
-  Output:   There are several different kinds of file devices with particular characteristics and hence uses. These include PDF, PNG, JPEG, SVG, and TIFF. We'll talk more about these later. 
+  Output:   Istnieje kilka różnych rodzajów plików o określonych cechach i zastosowaniach. Należą do nich PDF, PNG, JPEG, SVG i TIFF. Porozmawiamy o nich więcej później.
 
 - Class: text
-  Output: To be clear,  when you make a plot in R, it has to be "sent" to a specific graphics device. Usually this is the screen (the default device), especially when you're doing exploratory work. You'll send your plots to files when you're ready to publish a report, make a presentation, or send info to colleagues.
+  Output: Aby było jasne, gdy tworzysz wykres w R, musi on zostać „wysłany” do określonego urządzenia graficznego. Zazwyczaj jest to ekran (urządzenie domyślne), zwłaszcza gdy wykonujesz pracę eksploracyjną. Wykresy wysyłasz do plików, gdy jesteś gotowy do opublikowania raportu, zrobienia prezentacji lub wysłania informacji współpracownikom.
 
 - Class: text
-  Output: How you access your screen device depends on what computer system you're using. On a Mac the screen device is launched with the call quartz(), on Windows you use the call windows(), and on Unix/Linux  x11().  On a given platform (Mac, Windows, Unix/Linux) there is only one screen device, and obviously not all graphics devices are available on all platforms (i.e. you cannot launch  windows() on a Mac).
+  Output: Sposób dostępu do ekranu zależy od używanego systemu komputerowego. Na komputerze Mac dostęp do ekranu jest możliwy za pomocą wywołania quartz(), w systemie Windows używasz wywołania windows(), a w systemie Unix/Linux x11(). Na danej platformie (Mac, Windows, Unix/Linux) istnieje tylko jeden dostęp do ekranu i oczywiście nie wszystkie urządzenia graficzne są dostępne na wszystkich platformach (tj. nie możesz uruchomić windows() na komputerze Mac).
 
 - Class: cmd_question
-  Output:  Run the R command ?Devices to see what graphics devices are available on your system.
+  Output:  Uruchom polecenie R ?Devices, aby zobaczyć, jakie urządzenia graficzne są dostępne w Twoim systemie.
   CorrectAnswer: ?Devices
   AnswerTests: omnitest(correctExpr='?Devices')
-  Hint: Type ?Devices at the command prompt.
+  Hint: Wpisz ?Devices w konsoli.
 
 - Class: text
-  Output: R Documentation shows you what's available. 
+  Output: Dokumentacja języka R pokaże Ci jakie funkcje są dostępne.
 
 - Class: text
-  Output: There are two basic approaches to plotting. The first, plotting to the screen, is the most common. It's simple - you call a plotting function like plot, xyplot, or qplot (which you call depends on the plotting system you favor, but that's another lesson), so that the plot appears on the screen. Then you annotate (add  to) the plot if necessary. 
+  Output: Istnieją dwa podstawowe podejścia do tworzenia wykresów. Pierwsze, tworzenie wykresów na ekranie, jest najpopularniejsze. Jest proste - wywołujesz funkcję tworzenia wykresów, taką jak plot, xyplot lub ggplot, tak aby wykres pojawił się na ekranie. Następnie, jeśli to konieczne, dodajesz adnotacje do wykresu.
 
 - Class: cmd_question
-  Output:  As an example, run the R command with with 2 arguments. The first is a dataset, faithful, which comes with R, and the second is a call to the base plotting function plot. Your call to plot should have two arguments, eruptions and waiting. Try this now to see what happens. 
+  Output:  Na przykład uruchom polecenie R z 2 argumentami. Pierwszym jest tabela, faithful, która jest dostarczana z R, a drugim jest wywołanie funkcji bazowej plot(). Twoje wywołanie plot() powinno mieć dwa argumenty, eruptions i waiting. Sprawdź to teraz, aby zobaczyć, co się stanie.
   CorrectAnswer: with(faithful, plot(eruptions, waiting))
   AnswerTests: omnitest(correctExpr='with(faithful, plot(eruptions, waiting))')
-  Hint: Type with(faithful, plot(eruptions, waiting)) at the command prompt.
+  Hint: Wpisz with(faithful, plot(eruptions, waiting)) 
  
 - Class: cmd_question
-  Output: See how R created a scatterplot on the screen for you? This shows that relationship between eruptions of the geyser Old Faithful and waiting time. Now use the R function title with the argument main set equal to the string "Old Faithful Geyser data". This is an annotation to the plot.
+  Output: Widzisz, jak R stworzył dla Ciebie wykres punktowy na ekranie? Pokazuje on zależność między erupcjami gejzeru Old Faithful a czasem oczekiwania. Teraz użyj funkcji R title() z argumentem main równym ciągowi „Old Faithful Geyser data”. To jest adnotacja do wykresu.
   CorrectAnswer: title(main = "Old Faithful Geyser data")
   AnswerTests: omnitest(correctExpr='title(main = "Old Faithful Geyser data")')
-  Hint: Type title(main = "Old Faithful Geyser data") at the command prompt.
+  Hint: Wpisz title(main = "Old Faithful Geyser data") 
  
 - Class: cmd_question
-  Output: Simple, right?  Now run the command dev.cur(). This will show you the current plotting device, the screen.
+  Output: Proste, prawda? Teraz uruchom polecenie dev.cur(). To pokaże Ci aktualne urządzenie rysujące, ekran.
   CorrectAnswer: dev.cur()
   AnswerTests: omnitest(correctExpr='dev.cur()')
-  Hint: Type dev.cur() at the command prompt.
+  Hint: Wpisz dev.cur()
  
 - Class: cmd_question
-  Output: The second way to create a plot is to send it to a file device. Depending on the type of plot you're making, you explicitly launch a graphics device, e.g., a pdf file. Type the command pdf(file="myplot.pdf") to launch the file device. This will create the pdf file myplot.pdf in your working directory.
+  Output: Drugim sposobem na utworzenie wykresu jest wysłanie go do pliku. W zależności od typu wykresu, który tworzysz, jawnie uruchamiasz urządzenie graficzne, np. plik pdf. Wpisz polecenie pdf(file="myplot.pdf"), aby utworzyć plik pdf myplot.pdf w katalogu roboczym.
   CorrectAnswer: pdf(file="myplot.pdf")
   AnswerTests: omnitest(correctExpr='pdf(file="myplot.pdf")')
-  Hint: Type pdf(file="myplot.pdf") at the command prompt.
+  Hint: Wpisz pdf(file="myplot.pdf")
  
 - Class: cmd_question
-  Output: You then call the plotting function (if you are using a file device, no plot will appear on the screen). Run the with command again to plot the Old Faithful data. Use the up arrow key to recover the command and save yourself some typing.
+  Output: Następnie wywołujesz funkcję rysującą (jeśli wysyłasz do pliku, wykres nie pojawi się na ekranie). Ponownie uruchom polecenie with, aby narysować dane Old Faithful. Użyj klawisza strzałki w górę, aby wrócić do poprzedniego polecenia i zaoszczędzić sobie pisania.
   CorrectAnswer: with(faithful, plot(eruptions, waiting))
   AnswerTests: omnitest(correctExpr='with(faithful, plot(eruptions, waiting))')
-  Hint: Type with(faithful, plot(eruptions, waiting)) at the command prompt.
+  Hint: Wpisz with(faithful, plot(eruptions, waiting)) 
  
 - Class: cmd_question
-  Output: Now rerun the title command and annotate the plot. (Up arrow keys are great!)
+  Output: Teraz uruchom ponownie polecenie title i dodaj adnotacje do wykresu. (Klawisz strzałki w górę jest świetny!)
   CorrectAnswer: title(main = "Old Faithful Geyser data")
   AnswerTests: omnitest(correctExpr='title(main = "Old Faithful Geyser data")')
-  Hint: Type title(main = "Old Faithful Geyser data") at the command prompt.
+  Hint: Wpisz title(main = "Old Faithful Geyser data") w konsoli
  
 - Class: text
-  Output: Finally, when plotting to a file device, you have to close the device with the command dev.off(). This is very important! Don't do it yet, though. After closing, you'll be able to view the pdf file on your computer.
+  Output: Na koniec, podczas rysowania do pliku, musisz zamknąć połączenie z plikiem poleceniem dev.off(). To bardzo ważne! Nie rób tego jednak jeszcze. Po zamknięciu będziesz mógł wyświetlić plik pdf na swoim komputerze.
  
 
 - Class: text
-  Output: There are two basic types of file devices, vector and bitmap devices. These use different formats and have different characteristics. Vector formats are good for line drawings and plots with solid colors using a modest number of points, while bitmap formats are good for plots with a large number of points, natural scenes or web-based plots.
+  Output: Istnieją dwa podstawowe typy plików graficznych: wektorowe i bitmapowe. Używają one różnych formatów i mają różne cechy. Formaty wektorowe są dobre do wykresów liniowych i takich z jednolitymi kolorami wykorzystujących skromną liczbę punktów, podczas gdy formaty bitmapowe są dobre do wykresów z dużą liczbą punktów, scen naturalnych lub wykresów umieszczanych w internecie.
 
 
 - Class: text
-  Output:  We'll mention 4 specific vector formats. The first is pdf, which we've just used in our example. This is useful for line-type graphics and papers. It resizes well, is usually portable, but it is not efficient if a plot has many objects/points.
+  Output:  Wspomnimy o 4 konkretnych formatach wektorowych. Pierwszym jest pdf, którego właśnie użyliśmy w naszym przykładzie. Jest on przydatny do grafiki liniowej i wydruków. Dobrze się skaluje, jest zazwyczaj przenośny, ale nie jest wydajny, jeśli wykres ma wiele obiektów/punktów.
 
 - Class: text
-  Output: The second is svg which is  XML-based, scalable vector graphics. This supports animation and interactivity and is potentially useful for web-based plots. 
+  Output: Drugim jest svg, czyli oparta na XML, skalowalna grafika wektorowa. Obsługuje animację i interaktywność i jest użyteczny w przypadku wykresów internetowych.
 
 - Class: text
-  Output: The last two vector formats are win.metafile, a  Windows-only metafile format, and postscript (ps), an older format which also resizes well, is usually portable, and can be used to create encapsulated postscript files. Unfortunately, Windows systems often don’t have a postscript viewer.
+  Output: Ostatnie dwa formaty wektorowe to win.metafile, format metapliku dostępny wyłącznie w systemie Windows, oraz postscript (ps), starszy format, który również dobrze zmienia rozmiar, jest zazwyczaj przenośny i może być używany do tworzenia enkapsulowanych plików postscript. Niestety, systemy Windows często nie mają przeglądarki postscript.
 
 - Class: text
-  Output:  We'll also mention 4 different bitmap formats. The first is png (Portable Network Graphics) which is  good for line drawings or images with solid colors. It uses lossless compression (like the old GIF format), and most web browsers can read this format natively. In addition, png is good for plots with many points, but it does not resize well. 
+  Output:  Wspomnimy również o czterech różnych formatach bitmapowych. Pierwszym z nich jest PNG (Portable Network Graphics), który sprawdza się dobrze w przypadku rysunków liniowych lub obrazów z jednolitymi kolorami. Używa kompresji bezstratnej (podobnie jak stary format GIF), a większość przeglądarek internetowych obsługuje go natywnie. Ponadto PNG jest dobrym wyborem dla wykresów z wieloma punktami, ale nie skaluje się dobrze.
 
 - Class: text
-  Output: In contrast,  jpeg files are good for photographs or natural scenes. They use lossy compression, so they're good for plots with many points. Files in jpeg format  don't resize well, but they can be read by almost any computer and any web browser. They're not great for line drawings.
+  Output: Natomiast pliki JPEG dobrze sprawdzają się w przypadku fotografii lub scen naturalnych. Używają kompresji stratnej, dlatego nadają się do wykresów z wieloma punktami. Pliki w formacie JPEG nie skalują się dobrze, ale mogą być odczytane przez niemal każdy komputer i każdą przeglądarkę internetową. Nie są jednak najlepszym wyborem do rysunków liniowych.
 
 - Class: text
-  Output: The last two bitmap formats are tiff, an older lossless compression meta-format and bmp which is a native Windows bitmapped format.
+  Output: Dwa ostatnie formaty bitmapowe to TIFF, starszy metaformat z kompresją bezstratną, oraz BMP, natywny format bitmapowy systemu Windows.
 
 - Class: text
-  Output: Although it is possible to open multiple graphics devices (screen, file, or both), when viewing multiple plots at once, plotting can only occur on one graphics device at a time.
+  Output: Chociaż możliwe jest otwarcie wielu urządzeń graficznych (ekran, plik lub oba), podczas jednoczesnego wyświetlania wielu wykresów rysowanie może odbywać się tylko na jednym urządzeniu graficznym naraz.
 
 - Class: cmd_question
-  Output: The currently active graphics device can be found by calling dev.cur(). Try it now to see what number is assigned to your pdf device.
+  Output: Aktualnie aktywne urządzenie graficzne można znaleźć, wywołując `dev.cur()`. Spróbuj teraz, aby zobaczyć, jaki numer jest przypisany do Twojego urządzenia (pliku) PDF.
   CorrectAnswer: dev.cur()
   AnswerTests: omnitest(correctExpr='dev.cur()')
-  Hint: Type dev.cur() at the command prompt.
+  Hint: Wpisz dev.cur()
 
 - Class: cmd_question
-  Output: Now use dev.off() to close the device.
+  Output: Teraz użyj `dev.off()`, aby zamknąć połączenie.
   CorrectAnswer: dev.off()
   AnswerTests: omnitest(correctExpr='dev.off()')
-  Hint: Type dev.off() at the command prompt.
+  Hint: Wpisz dev.off()
 
 - Class: cmd_question
-  Output: Now rerun dev.cur() to see what integer your plotting window is assigned.
+  Output: Teraz ponownie uruchom `dev.cur()`, aby sprawdzić, jaki numer jest przypisany do okna wykresu.
   CorrectAnswer: dev.cur()
   AnswerTests: omnitest(correctExpr='dev.cur()')
-  Hint: Type dev.cur() at the command prompt.
+  Hint: Wpisz dev.cur() w konsoli.
 
 - Class: text
-  Output: The device is back to what it was when you started. As you might have guessed,  every open graphics device is assigned an integer greater than or equal to 2. You can change the active graphics device with dev.set(<integer>) where <integer> is the number associated with the graphics device you want to switch to.
+  Output: Urządzenie wróciło do stanu początkowego. Jak można się domyślić, każde otwarte urządzenie graficzne otrzymuje numer całkowity większy lub równy 2. Możesz zmienić aktywne urządzenie graficzne za pomocą `dev.set(<integer>)`, gdzie `<integer>` to numer przypisany do urządzenia graficznego, na które chcesz się przełączyć.
 
 - Class: text
-  Output: You can also copy a plot from one device to another. This can save you some time but beware! Copying a plot is not an exact operation, so the result may not be identical to the original. R provides some functions to help you do this. The function dev.copy copies a plot from one device to another, and dev.copy2pdf specifically copies a plot to a PDF file.
+  Output: Możesz również skopiować wykres z jednego urządzenia na drugie. Może to zaoszczędzić trochę czasu, ale uwaga! Kopiowanie wykresu nie jest operacją dokładną, więc wynik może nie być identyczny z oryginałem. R oferuje kilka funkcji ułatwiających to zadanie. Funkcja `dev.copy` kopiuje wykres z jednego urządzenia na drugie, a `dev.copy2pdf` służy do kopiowania wykresu bezpośrednio do pliku PDF.
 
 - Class: cmd_question
-  Output:  Just for fun, rerun the with command again, with(faithful, plot(eruptions, waiting)), to plot the Old Faithful data. Use the up arrow key to recover the command if you don't feel like typing.
+  Output:  Dla zabawy, ponownie uruchom polecenie z użyciem komendy with(), with(faithful, plot(eruptions, waiting)), aby wykreślić dane z Old Faithful. Użyj klawisza strzałki w górę, aby odzyskać polecenie, jeśli nie masz ochoty pisać go ponownie.
   CorrectAnswer: with(faithful, plot(eruptions, waiting))
   AnswerTests: omnitest(correctExpr='with(faithful, plot(eruptions, waiting))')
-  Hint: Type with(faithful, plot(eruptions, waiting)) at the command prompt.
+  Hint: Wpisz with(faithful, plot(eruptions, waiting))
  
 - Class: cmd_question
-  Output: Now rerun the title command, title(main = "Old Faithful Geyser data"),  to annotate the plot. (Up arrow keys are great!)
+  Output: Teraz wykonaj ponownie polecenie title(), title(main = "Old Faithful Geyser data"), aby dodać adnotację do wykresu. (Klawisze strzałek w górę są świetne!)
   CorrectAnswer: title(main = "Old Faithful Geyser data")
   AnswerTests: omnitest(correctExpr='title(main = "Old Faithful Geyser data")')
-  Hint: Type title(main = "Old Faithful Geyser data") at the command prompt.
+  Hint: Wpisz title(main = "Old Faithful Geyser data")
  
 - Class: cmd_question
-  Output: Now run dev.copy with the 2 arguments. The first is png, and the second is file set equal to "geyserplot.png". This will copy your screen plot to a png file in your working directory which you can view AFTER you close the device.
+  Output: Teraz uruchom dev.copy z 2 argumentami. Pierwszy to png, a drugi to plik set równy "geyserplot.png". Spowoduje to skopiowanie wykresu ekranu do pliku png w katalogu roboczym, który możesz wyświetlić PO zamknięciu urządzenia.
   CorrectAnswer: dev.copy(png, file = "geyserplot.png")
   AnswerTests: omnitest(correctExpr='dev.copy(png, file = "geyserplot.png")')
-  Hint: Type dev.copy(png, file = "geyserplot.png") at the command prompt.
+  Hint: Wpisz dev.copy(png, file = "geyserplot.png")
  
 - Class: cmd_question
-  Output: Don't forget to close the PNG device! Do it NOW!!! Then you'll be able to view the file.
+  Output: Nie zapomnij zamknąć połączenia z plikiem PNG! Zrób to TERAZ!!! Wtedy będziesz mógł zobaczyć plik.
   CorrectAnswer: dev.off()
   AnswerTests: omnitest(correctExpr='dev.off()')
   Hint: Type dev.off() at the command prompt.
 
 - Class: text
-  Output: Congrats! We hope you found this lesson deviced well!
+  Output: Gratulacje! Mamy nadzieję, że ta lekcja była dobrze urządzona ;)
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course?"
+  Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
