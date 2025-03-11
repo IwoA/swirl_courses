@@ -200,151 +200,151 @@
   Hint: Wpisz ?rgb
 
 - Class: mult_question
-  Output: We see that rgb is a color specification function that can be used to produce any color with red, green, blue proportions. We see the maxColorValue is 1 by default, so if we called rgb with values for red, green and blue, we would specify numbers at most 1 (assuming we didn't change the default for maxColorValue). According to the documentation, what is the maximum number of arguments rgb can have?
+  Output: Widzimy, że rgb() jest funkcją specyfikacji koloru. Może być używana do tworzenia dowolnego koloru na podstawie proporcji czerwonego, zielonego i niebieskiego. Widzimy, że maxColorValue domyślnie wynosi 1, więc gdybyśmy wywołali rgb() z wartościami dla czerwonego, zielonego i niebieskiego, określilibyśmy określilibyśmy każdą z 3 liczb maksymalnie na 1 (zakładając, że nie zmieniliśmy domyślnej wartości maxColorValue). Zgodnie z dokumentacją, jaka jest maksymalna liczba argumentów, jaką może mieć rgb?
   AnswerChoices: 3;4;5;6
   CorrectAnswer: 6
   AnswerTests: omnitest(correctVal='6')
-  Hint: Look at the sample calling line in the Usage section of the documentation.
+  Hint: Sprawdź w dokumentacji funkcji ?
 
 - Class: cmd_question
-  Output: So the fourth argument is alpha which can be a logical, i.e., either TRUE or FALSE, or a numerical value. Create the function p3 now by calling colorRampPalette with the colors blue and green (remember to concatenate them into a single argument) and setting the alpha argument to .5.
+  Output: Więc czwarty argument to alpha, który może mieć wartość logiczną, tj. TRUE lub FALSE, lub wartość liczbową. Utwórz teraz funkcję p3(), wywołując colorRampPalette() z kolorami niebieskim i zielonym (pamiętaj, aby połączyć je w jeden argument) i ustawiając argument alpha na .5.
   CorrectAnswer: p3 <- colorRampPalette(c("blue","green"),alpha=.5)
   AnswerTests: expr_creates_var("p3"); omnitest(correctExpr='p3 <- colorRampPalette(c("blue","green"),alpha=.5)')
-  Hint: Type p3 <- colorRampPalette(c("blue","green"),alpha=.5) at the command prompt.
+  Hint: Wpisz p3 <- colorRampPalette(c("blue","green"),alpha=.5)
 
 
 - Class: cmd_question
-  Output: Now call p3 with the argument 5.
+  Output: Teraz wywołaj p3() z argumentem 5.
   CorrectAnswer: p3(5)
   AnswerTests:  omnitest(correctExpr='p3(5)')
-  Hint: Type p3(5) at the command prompt.
+  Hint: Uzupełnijp3( )
 
 - Class: text
-  Output: We see that in the 5-long vector that the call returned, each element has 32 bits, 4 groups of 8 bits each. The last 8 bits represent the value of alpha. Since it was NOT ZERO in the call to colorRampPalette, it gets the maximum FF value. (The same result would happen if alpha had been set to TRUE.) When it was 0 or FALSE (as in previous calls to colorRampPalette) it was given the value 00 and wasn't shown. The leftmost 24 bits of each element are the same RGB encoding we previously saw.
+  Output: Widzimy, że w zwróconym 5-elementowym wektorze każdy element ma 32 bity, 4 grupy po 8 bitów każda. Ostatnie 8 bitów reprezentuje wartość alpha. Ponieważ nie wynosiła ona zero w wywołaniu colorRampPalette(), otrzymała maksymalną wartość FF. (Ten sam wynik wystąpiłby, gdyby alpha została ustawiona na TRUE.) Gdy było 0 lub FALSE (jak w poprzednich wywołaniach colorRampPalette()), otrzymałaby wartość 00 i nie była wyświetlana. Pierwsze 24 bity każdego elementu to to samo kodowanie RGB, które widzieliśmy wcześniej.
 
 - Class: text
-  Output: So what is alpha? Alpha represents an opacity level, that is, how transparent should the colors be. We can add color transparency with the alpha parameter to calls to rgb. We haven't seen any examples of this yet, but we will now.
+  Output: Czym jest alpha? Alpha reprezentuje poziom krycia, czyli jak przezroczyste powinny być kolory. Możemy dodać przezroczystość kolorów za pomocą parametru alpha do wywołań funkcji rgb(). 
 
 - Class: cmd_question
-  Output: We generated 1000 random normal pairs for you in the variables x and y. We'll plot them in a scatterplot by calling plot with 4 arguments. The variables x and y are the first 2. The third is the print character argument pch. Set this equal to 19 (filled circles). The final argument is col which should be set equal to a call to rgb. Give rgb 3 arguments, 0, .5, and .5. 
+  Output: Wygenerowaliśmy dla Ciebie 1000 losowych par zmiennych x i y. Przedstaw je na wykresie punktowym, wywołując funkcję plot() z 4 argumentami. Zmienne x i y to pierwsze 2. Trzecim jest argument znaku drukowania pch. Ustaw go na 19 (wypełnione kółka). Ostatnim argumentem jest col, który powinien być ustawiony na wywołanie funkcji rgb(). Podaj rgb() 3 argumenty: 0, .5 i .5.
   CorrectAnswer: plot(x,y,pch=19,col=rgb(0,.5,.5))
   AnswerTests:  omnitest(correctExpr='plot(x,y,pch=19,col=rgb(0,.5,.5))')
-  Hint: Type plot(x,y,pch=19,col=rgb(0,.5,.5)) at the command prompt.
+  Hint: Wpisz plot(x,y,pch=19,col=rgb(0,.5,.5))
 
 - Class: cmd_question
-  Output: Well this picture is okay for a scatterplot, a nice mix of blue and green, but it really doesn't tell us too much information in the center portion, since the points are so thick there. We see there are a lot of points, but is one area more filled than another? We can't really discriminate between different point densities. This is where the alpha argument can help us. Recall your plot command (use the up arrow) and add a 4th argument, .3,  to the call to rgb. This will be our value for alpha.
+  Output: Cóż, ten obrazek jest w porządku, ładne połączenie niebieskiego i zielonego, ale tak naprawdę nie przekazuje nam zbyt wiele informacji w środkowej części, ponieważ punkty są tam tak gęsto rozmieszczone. Widzimy, że jest wiele punktów, ale czy jeden obszar jest bardziej wypełniony niż inny? Tutaj argument alpha może nam pomóc. Przypomnij sobie polecenie plot() (użyj strzałki w górę) i dodaj czwarty argument, .3, do wywołania rgb(). To będzie nasza wartość alpha.
   CorrectAnswer: plot(x,y,pch=19,col=rgb(0,.5,.5,.3))
   AnswerTests:  omnitest(correctExpr='plot(x,y,pch=19,col=rgb(0,.5,.5,.3))')
-  Hint: Type plot(x,y,pch=19,col=rgb(0,.5,.5,.3)) at the command prompt.
+  Hint: Wpisz plot(x,y,pch=19,col=rgb(0,.5,.5,.3))
 
 - Class: text
-  Output: Clearly this is better. It shows us where, specifically, the densest areas of the scatterplot really are.
+  Output: Teraz jest dużo lepiej. Widać, gdzie konkretnie znajdują się najgęstsze obszary wykresu punktowego.
 
 - Class: text
-  Output: Our last topic for this lesson is the RColorBrewer Package, available on CRAN, that contains interesting and useful color palettes, of which there are 3 types, sequential, divergent, and qualitative. Which one you would choose to use depends on your data. 
+  Output: Ostatnim tematem tej lekcji jest pakiet RColorBrewer, dostępny w CRAN, który zawiera interesujące i przydatne palety kolorów, których istnieją 3 typy: sekwencyjne, rozbieżne i jakościowe. Wybór zależy od danych.
 
 - Class: figure
-  Output: Here's a picture of the palettes available from this package. The top section shows the sequential palettes in which the colors are ordered from light to dark. The divergent palettes are at the bottom. Here the neutral color (white) is in the center, and as you move from the middle to the two ends of each palette, the colors increase in intensity. The middle display shows the qualitative palettes which look like collections of random colors. These might be used to distinguish factors in your data.
+  Output: Oto obraz palet dostępnych w tym pakiecie. Górna sekcja pokazuje sekwencyjne palety, w których kolory są uporządkowane od jasnych do ciemnych. Rozbieżne palety są na dole. Tutaj neutralny kolor (biały) znajduje się w środku, a w miarę przesuwania się od środka do dwóch końców każdej palety, kolory stają się intensywniejsze. Środkowa sekcja pokazuje jakościowe palety, które wyglądają jak zbiory losowych kolorów. Mogą być one używane do rozróżniania czynników w danych.
   Figure: showBrewer.R
   FigureType: new
 
 - Class: text
-  Output: These colorBrewer palettes can be used in conjunction with the colorRamp() and colorRampPalette() functions. You would use colors from a colorBrewer palette as your base palette,i.e., as arguments to colorRamp or colorRampPalette  which would interpolate them to create new colors.
+  Output: Te palety colorBrewer mogą być używane w połączeniu z funkcjami colorRamp() i colorRampPalette(). Kolory z palety colorBrewer można używać jako palety bazowej, tj. jako argumenty dla colorRamp lub colorRampPalette, które będą je interpolować w celu tworzenia nowych kolorów.
 
 - Class: cmd_question
-  Output: As an example of this, create a new object, cols by calling the function brewer.pal with 2 arguments, 3 and "BuGn". The string "BuGn" is the second last palette in the sequential display. The 3 tells the function how many different colors we want.
+  Output: Jako przykład utwórz nowy obiekt cols, wywołując funkcję brewer.pal z 2 argumentami, 3 i „BuGn”. Ciąg „BuGn” jest przedostatnią paletą w wyświetlaniu sekwencyjnym. 3 mówi funkcji, ile różnych kolorów chcemy.
   CorrectAnswer: cols <- brewer.pal(3, "BuGn")
   AnswerTests:  expr_creates_var("cols"); omnitest(correctExpr='cols <- brewer.pal(3, "BuGn")')
-  Hint: Type cols <- brewer.pal(3, "BuGn") at the command prompt.
+  Hint: Wpisz cols <- brewer.pal(3, "BuGn") w konsoli
 
 - Class: cmd_question
-  Output: Use showMe to look at cols now.
+  Output: Użyj showMe() do pokazania efektu.
   CorrectAnswer: showMe(cols)
   AnswerTests:  omnitest(correctExpr='showMe(cols)')
-  Hint: Type showMe(cols) at the command prompt.
+  Hint: Wpisz showMe(cols)
 
 - Class: cmd_question
-  Output: We see 3 colors, mixes of blue and green. Now create the variable pal by calling colorRampPalette with cols as its argument.
+  Output: Widzimy 3 kolory, mieszanki niebieskiego i zielonego. Teraz utwórz zmienną pal wywołując colorRampPalette() z cols jako argumentem.
   CorrectAnswer: pal <- colorRampPalette(cols)
   AnswerTests:  omnitest(correctExpr='pal <- colorRampPalette(cols)')
-  Hint: Type pal <- colorRampPalette(cols) at the command prompt.
+  Hint: Uzupełnij pal <- colorRampPalette( )
 
 - Class: cmd_question
-  Output: The call showMe(pal(3)) would be identical to the showMe(cols) call. So use showMe to look at pal(20).
+  Output: Wywołanie showMe(pal(3)) byłoby identyczne z wywołaniem showMe(cols). Więc użyj showMe(), aby sprawdzić pal(20).
   CorrectAnswer: showMe(pal(20))
   AnswerTests:  omnitest(correctExpr='showMe(pal(20))')
-  Hint: Type showMe(pal(20)) at the command prompt.
+  Hint: Wpisz showMe(pal(20))
 
 - Class: cmd_question
-  Output: Now we can use the colors in pal(20) to display topographic information on Auckland's Maunga Whau Volcano. R provides this information in a matrix called volcano which is included in the package datasets.  Call the R function image with volcano as its first argument and col set equal to pal(20) as its second.
+  Output: Teraz możemy użyć kolorów w pal(20), aby wyświetlić informacje topograficzne o wulkanie Maunga Whau w Auckland. R dostarcza te informacje w macierzy o nazwie volcano, która jest zawarta w pakiecie datasets. Wywołaj funkcję image() z volcano jako pierwszym argumentem i col równym pal(20) jako drugim.
   CorrectAnswer: image(volcano, col = pal(20))
   AnswerTests:  omnitest(correctExpr='image(volcano, col = pal(20))')
-  Hint: Type image(volcano, col = pal(20)) at the command prompt.
+  Hint: Wpisz image(volcano, col = pal(20))
 
 - Class: cmd_question
-  Output: We see that the colors here of the sequential palette clue us in on the topography. The darker colors are more concentrated than the lighter ones. Just for fun, recall your last command calling image and instead of pal(20), use p1(20) as the second argument.
+  Output: Widzimy, że kolory w tej sekwencyjnej palecie dają nam wskazówki co do topografii. Ciemniejsze kolory są bardziej skoncentrowane niż jaśniejsze. Dla zabawy przypomnij sobie ostatnie polecenie wywołujące image() i zamiast pal(20) użyj p1(20) jako drugiego argumentu.
   CorrectAnswer: image(volcano, col = p1(20))
   AnswerTests:  omnitest(correctExpr='image(volcano, col = p1(20))')
-  Hint: Type image(volcano, col = p1(20)) at the command prompt.
+  Hint: Wpisz image(volcano, col = p1(20))
 
 - Class: text
-  Output: Not as nice a picture since the palette isn't as well suited to this data, but that's okay. It's review time!!!!
+  Output: Nie jest to zbyt ładny obraz, ponieważ paleta nie jest tak dobrze dopasowana do tych danych, ale to nic. Czas na powtórkę!!!!
 
 
 - Class: mult_question
-  Output:  True or False? Careful use of colors in plots/maps/etc. can make it easier for the reader to understand what points you're trying to convey.
+  Output:  Prawda czy fałsz? Uważne użycie kolorów na wykresach/mapach/itp. może ułatwić czytelnikowi zrozumienie, jakie punkty próbujesz przekazać.
   AnswerChoices:  True; False
   CorrectAnswer:  True
   AnswerTests: omnitest(correctVal='True')
-  Hint: If this were false, would we have created this great lesson on the subject?
+  Hint: Gdyby to była nieprawda, czy stworzylibyśmy tę świetną lekcję na ten temat?
 
 - Class: mult_question
-  Output:  Which of the following is an R package that provides color palettes for sequential, categorical, and diverging data?
+  Output:  Który z poniższych pakietów R udostępnia palety kolorów dla danych sekwencyjnych, kategorialnych i rozbieżnych?
   AnswerChoices:  RColorBrewer; RColorVintner; RColorBluer; RColorStewer
   CorrectAnswer:  RColorBrewer
   AnswerTests: omnitest(correctVal='RColorBrewer')
-  Hint: Three of the choices rhyme. Eliminate the one with color in it and the one that's not really a real word.
+  Hint: Prawidłowa odpowiedź zawiera literę B
 
 - Class: mult_question
-  Output:  True or False? The colorRamp and colorRampPalette functions can be used in conjunction with color palettes to connect data to colors.
+  Output:  Prawda czy fałsz? Funkcje colorRamp() i colorRampPalette() mogą być używane w połączeniu z paletami kolorów, aby połączyć dane z kolorami.
   AnswerChoices:  True; False
   CorrectAnswer:  True
   AnswerTests: omnitest(correctVal='True')
-  Hint: Recall our example using RColorBrewer and colorRampPalette.
+  Hint: Przypomnij sobie nasz przykład wykorzystujący RColorBrewer i colorRampPalette.
 
 - Class: mult_question
-  Output:  True or False?    Transparency can NEVER be used to clarify plots with many points
+  Output:  Prawda czy fałsz? Przezroczystość NIGDY nie może być użyta do poprawiania wykresów z wieloma punktami
   AnswerChoices:  True; False
   CorrectAnswer: False
   AnswerTests: omnitest(correctVal='False')
-  Hint: Recall our example with the scatterplot and the dense section.
+  Hint: Przypomnij sobie nasz przykład z wykresem punktowym.
 
 - Class: mult_question
-  Output:  True or False?    The call p7 <- colorRamp("red","blue") would work (i.e., not generate an error).
+  Output:  Prawda czy fałsz? Wywołanie p7 <- colorRamp("red","blue") zadziała (tj. nie wygeneruje błędu).
   AnswerChoices:  True; False
   CorrectAnswer: False
   AnswerTests: omnitest(correctVal='False')
-  Hint: Recall our reminders to concatenate the colors to form a single argument.
+  Hint: Przypomnij sobie nasze uwagi o łączeniu kolorów w celu utworzenia pojedynczego argumentu.
 
 - Class: mult_question
-  Output:  True or False?    The function colors returns only 10 colors.
+  Output:  Prawda czy fałsz? Funkcja colors() zwraca tylko 10 kolorów.
   AnswerChoices:  True; False
   CorrectAnswer: False
   AnswerTests: omnitest(correctVal='False')
-  Hint: We only looked at 10 but there were many, many more.
+  Hint: Przyjrzeliśmy się tylko 10, ale było ich o wiele, wiele więcej.
 
 - Class: mult_question
-  Output:  Transparency is determined by which parameter of the rgb function?
+  Output:  Który parametr funkcji rgb() określa przezroczystość?
   AnswerChoices:  alpha; beta; gamma; delta; it's all Greek to me
   CorrectAnswer: alpha
   AnswerTests: omnitest(correctVal='alpha')
-  Hint: We only mentioned one Greek letter in this lesson.
+  Hint: W tej lekcji wspomnieliśmy tylko o jednej literze greckiej.
 
 - Class: text
-  Output: Congratulations! We hope this lesson didn't make you see red. We're green with envy that you blue through it.  
+  Output: Gratulacje! Mam nadzieję, że nie mieni ci się teraz przed oczami.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course?"
+  Output: "Chcesz otrzymać punkty za tę lekcję?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
