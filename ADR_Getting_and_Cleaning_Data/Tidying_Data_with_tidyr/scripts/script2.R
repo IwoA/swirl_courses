@@ -9,7 +9,7 @@
 #
 # Ponieważ każdy student jest zapisany tylko na dwie z
 # pięciu możliwych klas, brakuje wielu
-# wartości (tj. NA). Użyj argumentu na.rm = TRUE
+# wartości (tj. NA). Użyj argumentu values_drop_na = TRUE
 #, aby pominąć te wartości w końcowym wyniku.
 #
 # Pamiętaj, że gdy używasz operatora %>%,
@@ -19,5 +19,5 @@
 # Jeśli utkniesz, sprawdź ?pivot_longer i/lub ?chain.
 #
 students3 %>%
-     pivot_longer( , , : , = TRUE) %>%
+  pivot_longer(cols = , names_to = , values_to = ,  = TRUE) %>%
   print

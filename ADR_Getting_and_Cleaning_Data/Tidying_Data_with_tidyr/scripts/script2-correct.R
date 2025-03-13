@@ -9,7 +9,7 @@
 #
 # Ponieważ każdy student jest zapisany tylko na dwie z
 # pięciu możliwych klas, brakuje wielu
-# wartości (tj. NA). Użyj argumentu na.rm = TRUE
+# wartości (tj. NA). Użyj argumentu values_drop_na
 #, aby pominąć te wartości w końcowym wyniku.
 #
 # Pamiętaj, że gdy używasz operatora %>%,

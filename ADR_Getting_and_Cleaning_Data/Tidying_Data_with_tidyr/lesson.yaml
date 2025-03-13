@@ -28,7 +28,7 @@
   Output: Każdy zbiór danych, który nie spełnia tych warunków, jest uważany za dane nieuporządkowane. Dlatego wszystkie poniższe cechy są cechami nieuporządkowanych danych, Z WYJĄTKIEM...
   AnswerChoices: Każda kolumna zawiera inną zmienną.; Nagłówki kolumn to wartości, a nie nazwy zmiennych.; Wiele zmiennych jest przechowywanych w jednej kolumnie.; Zmienne są przechowywane zarówno w wierszach, jak i kolumnach.; Wiele typów obserwacji jest przechowywanych w tej samej tabeli.; Pojedyncza obserwacja jest przechowywana w wielu tabelach.
   CorrectAnswer: Każda kolumna zawiera inną zmienną.
-  AnswerTests: omnitest(correctVal= 'Każda kolumna zawiera inną zmienną')
+  AnswerTests: omnitest(correctVal= 'Każda kolumna zawiera inną zmienną.')
   Hint: Przewiń w górę, aby przejrzeć trzy cechy uporządkowanych danych. Każdy zbiór danych, który narusza przynajmniej jedną z tych cech, jest uważany za nieuporządkowany. Dlatego wszystkie poniższe cechy są cechami chaotycznych danych, Z WYJĄTKIEM...
 
 - Class: text
