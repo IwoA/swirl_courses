@@ -120,7 +120,7 @@
 - Class: cmd_question
   Output: Mimo że były inaczej sformatowane, ostatnie dwie daty miały najpierw rok, potem miesiąc, a potem dzień. Dlatego użyliśmy ymd(), aby je przeanalizować. Jak myślisz, jaka funkcja jest odpowiednia do analizy „12 marca 1975”? Sprawdź.
   CorrectAnswer: mdy("12 marzec 1975")
-  AnswerTests: any_of_exprs('dmy("12 marzec, 1975")', 'dmy("12 marzec 1975"), 'dmy("12 marca 1975")')
+  AnswerTests: any_of_exprs('dmy("12 marzec, 1975")', 'dmy("12 marzec 1975")', 'dmy("12 marca 1975")')
   Hint: 'dmy() poprawnie przetworzy „12 marca 1975”. Może być jednak tak, że prawidłowo parsowana będzie wersja "12 marzec 1975". To zależy od systemu operacyjnego (Linux, Windows, MacOS).\n Nazwa funkcji, dmy(), oznacza dzień (d), miesiąc (m) i rok (y), w kolejności od lewej do prawej.'
 
 - Class: text
