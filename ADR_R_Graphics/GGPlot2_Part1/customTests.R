@@ -54,5 +54,3 @@ save_credit <- function(){
   }
   TRUE
 }
-
-suppressWarnings(rm(omnitest, expr_identical_to,val_matches, any_of_exprs, var_is_a, expr_is_a, expr_uses_func, expr_creates_var, val_has_length, func_of_newvar_equals))

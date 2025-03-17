@@ -45,7 +45,7 @@
   Output: Możesz więc swobodnie używać dowolnego z tych 600+ kolorów wymienionych przez funkcję colors(). Jednak dwie dodatkowe funkcje z grDevices, colorRamp() i colorRampPalette(), dają Ci więcej opcji. Obie przyjmują nazwy kolorów jako argumenty i używają ich jako „palet”, czyli te kolory argumentów są mieszane w różnych proporcjach, aby utworzyć nowe kolory.
 
 - Class: text
-  Output: Pierwsza, colorRamp(), przyjmuje paletę kolorów (argumenty) i zwraca funkcję, która przyjmuje wartości od 0 do 1 jako argumenty. 0 i 1 odpowiadają ekstremom palety kolorów. Argumenty od 0 do 1 zwracają mieszanki tych ekstremów.
+  Output: Pierwsza, colorRamp(), przyjmuje paletę kolorów (argumenty) i zwraca funkcję, która przyjmuje wartości od 0 do 1 jako argumenty. 0 i 1 odpowiadają ekstremom palety kolorów. Argumenty między 0 a 1 zwracają mieszanki tych ekstremów.
 
 - Class: cmd_question
   Output:  Zobaczmy, co to oznacza. Przypisz zmiennej pal wynik wywołania colorRamp z jednym argumentem, c("red","blue").
@@ -60,7 +60,7 @@
   Hint: Wpisz pal(0) w konsoli.
 
 - Class: text
-  Output: Widzimy tablicę 1 na 3 z 255 jako pierwszym wpisem i 0 w pozostałych 2. Ten 3-elementowy wektor odpowiada kodowaniu kolorów czerwonego, zielonego, niebieskiego (RGB) powszechnie stosowanemu w telewizorach i monitorach. W R do reprezentowania kolorów używa się 24 bitów. Wyobraź sobie te 24 bity jako 3 zestawy po 8 bitów, z których każdy reprezentuje intensywność jednego z kolorów: czerwonego, zielonego i niebieskiego.
+  Output: "Widzimy tablicę 1 na 3 z 255 jako pierwszym wpisem i 0 w pozostałych 2. Ten 3-elementowy wektor odpowiada kodowaniu kolorów czerwonego, zielonego, niebieskiego (RGB) powszechnie stosowanemu w telewizorach i monitorach. W R do reprezentowania kolorów używa się 24 bitów. Wyobraź sobie te 24 bity jako 3 zestawy po 8 bitów, z których każdy reprezentuje intensywność jednego z kolorów: czerwonego, zielonego i niebieskiego."
 
 - Class: text
   Output: Wartość 255 zwrócona przez wywołanie pal(0) odpowiada największej możliwej liczbie przedstawionej za pomocą 8 bitów, więc wektor (255,0,0) zawiera tylko kolor czerwony (nie zawiera zielonego ani niebieskiego), co więcej, jest to najwyższa możliwa wartość koloru czerwonego.
@@ -151,7 +151,7 @@
   FigureType: new
 
 - Class: cmd_question
-  Output:  Wywołajmy teraz p2() z argumentem 10. Pokaże nam to, jak łączą się ze sobą dwa skrajne kolory: czerwony i żółty.
+  Output:  "Wywołajmy teraz p2() z argumentem 10. Pokaże nam to, jak łączą się ze sobą dwa skrajne kolory: czerwony i żółty."
   CorrectAnswer: p2(10)
   AnswerTests: omnitest(correctExpr='p2(10)')
   Hint: Uzupełnij p2( )
@@ -194,7 +194,7 @@
   Output: Widzimy, że p1() jest krótką funkcją z jednym argumentem, n. Argument n jest używany jako długość w wywołaniu funkcji seq.int(), która sama jest argumentem funkcji ramp(). Możemy wywnioskować, że ramp po prostu podzieli przedział od 0 do 1 na n części.
 
 - Class: cmd_question
-  Output: Sercem p1() jest tak naprawdę wywołanie funkcji rgb() z 4 lub 5 argumentami. Użyj konstrukcji ?fun, aby przejrzeć dokumentację R dla rgb.
+  Output: Sercem p1() jest tak naprawdę wywołanie funkcji rgb() z 4 lub 5 argumentami. Wykorzystaj ?, aby przejrzeć dokumentację R dla rgb.
   CorrectAnswer: ?rgb
   AnswerTests: omnitest(correctExpr='?rgb')
   Hint: Wpisz ?rgb
@@ -207,7 +207,7 @@
   Hint: Sprawdź w dokumentacji funkcji ?
 
 - Class: cmd_question
-  Output: Więc czwarty argument to alpha, który może mieć wartość logiczną, tj. TRUE lub FALSE, lub wartość liczbową. Utwórz teraz funkcję p3(), wywołując colorRampPalette() z kolorami niebieskim i zielonym (pamiętaj, aby połączyć je w jeden argument) i ustawiając argument alpha na .5.
+  Output: Więc czwarty argument to alpha, który może mieć wartość logiczną, tj. TRUE lub FALSE, lub wartość liczbową. Utwórz teraz funkcję p3, wywołując colorRampPalette() z kolorami niebieskim i zielonym (pamiętaj, aby połączyć je w jeden argument) i ustawiając argument alpha na .5.
   CorrectAnswer: p3 <- colorRampPalette(c("blue","green"),alpha=.5)
   AnswerTests: expr_creates_var("p3"); omnitest(correctExpr='p3 <- colorRampPalette(c("blue","green"),alpha=.5)')
   Hint: Wpisz p3 <- colorRampPalette(c("blue","green"),alpha=.5)
@@ -226,7 +226,7 @@
   Output: Czym jest alpha? Alpha reprezentuje poziom krycia, czyli jak przezroczyste powinny być kolory. Możemy dodać przezroczystość kolorów za pomocą parametru alpha do wywołań funkcji rgb(). 
 
 - Class: cmd_question
-  Output: Wygenerowaliśmy dla Ciebie 1000 losowych par zmiennych x i y. Przedstaw je na wykresie punktowym, wywołując funkcję plot() z 4 argumentami. Zmienne x i y to pierwsze 2. Trzecim jest argument znaku drukowania pch. Ustaw go na 19 (wypełnione kółka). Ostatnim argumentem jest col, który powinien być ustawiony na wywołanie funkcji rgb(). Podaj rgb() 3 argumenty: 0, .5 i .5.
+  Output: "Wygenerowaliśmy dla Ciebie 1000 losowych par zmiennych x i y. Przedstaw je na wykresie punktowym, wywołując funkcję plot() z 4 argumentami. Zmienne x i y to pierwsze 2. Trzecim jest argument znaku drukowania pch. Ustaw go na 19 (wypełnione kółka). Ostatnim argumentem jest col, który powinien być ustawiony na wywołanie funkcji rgb(). Podaj rgb() 3 argumenty: 0, .5 i .5."
   CorrectAnswer: plot(x,y,pch=19,col=rgb(0,.5,.5))
   AnswerTests:  omnitest(correctExpr='plot(x,y,pch=19,col=rgb(0,.5,.5))')
   Hint: Wpisz plot(x,y,pch=19,col=rgb(0,.5,.5))
@@ -241,7 +241,7 @@
   Output: Teraz jest dużo lepiej. Widać, gdzie konkretnie znajdują się najgęstsze obszary wykresu punktowego.
 
 - Class: text
-  Output: Ostatnim tematem tej lekcji jest pakiet RColorBrewer, dostępny w CRAN, który zawiera interesujące i przydatne palety kolorów, których istnieją 3 typy: sekwencyjne, rozbieżne i jakościowe. Wybór zależy od danych.
+  Output: "Ostatnim tematem tej lekcji jest pakiet RColorBrewer, dostępny w CRAN, który zawiera interesujące i przydatne palety kolorów, których istnieją 3 typy: sekwencyjne, rozbieżne i jakościowe. Wybór zależy od danych."
 
 - Class: figure
   Output: Oto obraz palet dostępnych w tym pakiecie. Górna sekcja pokazuje sekwencyjne palety, w których kolory są uporządkowane od jasnych do ciemnych. Rozbieżne palety są na dole. Tutaj neutralny kolor (biały) znajduje się w środku, a w miarę przesuwania się od środka do dwóch końców każdej palety, kolory stają się intensywniejsze. Środkowa sekcja pokazuje jakościowe palety, które wyglądają jak zbiory losowych kolorów. Mogą być one używane do rozróżniania czynników w danych.

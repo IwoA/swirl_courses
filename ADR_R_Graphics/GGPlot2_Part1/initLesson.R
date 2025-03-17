@@ -10,7 +10,7 @@ library(datasets)
 
 # Put initialization code in this file.
 path_to_course <- file.path(.get_course_path(),
-	"PRPT_R_Graphics","GGPlot2_Part1")
+	"PRPT_R_Graphics","GGPlot2_Part2")
 try(dev.off(),silent=TRUE)
 plot.new()
 
@@ -34,4 +34,8 @@ myedit <- function(fname){
    file.edit(mypath)
 }
 
-myhigh <- mpg$hwy
+
+testdat <- data.frame(x = 1:100, y = rnorm(100))
+testdat[50,2] <- 100  ## Outlier!
+myx <- testdat$x
+myy <- testdat$y

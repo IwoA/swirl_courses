@@ -10,7 +10,7 @@
   Output:  Jak sugeruje tytuł, będzie to krótka lekcja wprowadzająca do urządzeń graficznych w języku R. Czym więc JEST urządzenie graficzne?
 
 - Class: text
-  Output:  Czy uwierzyłbyś, że jest to coś, co pozwala na wyświetlenie wykresu, czy to na ekranie komputera, np. w oknie, CZY zapis do pliku?
+  Output:  Czy uwierzyłbyś, że jest to coś, co pozwala na wyświetlenie wykresu, czy to na ekranie komputera, np. w oknie, lub zapis do pliku?
 
 - Class: text
   Output:   Istnieje kilka różnych rodzajów plików o określonych cechach i zastosowaniach. Należą do nich PDF, PNG, JPEG, SVG i TIFF. Porozmawiamy o nich więcej później.
@@ -34,13 +34,13 @@
   Output: Istnieją dwa podstawowe podejścia do tworzenia wykresów. Pierwsze, tworzenie wykresów na ekranie, jest najpopularniejsze. Jest proste - wywołujesz funkcję tworzenia wykresów, taką jak plot, xyplot lub ggplot, tak aby wykres pojawił się na ekranie. Następnie, jeśli to konieczne, dodajesz adnotacje do wykresu.
 
 - Class: cmd_question
-  Output:  Na przykład uruchom polecenie R z 2 argumentami. Pierwszym jest tabela, faithful, która jest dostarczana z R, a drugim jest wywołanie funkcji bazowej plot(). Twoje wywołanie plot() powinno mieć dwa argumenty, eruptions i waiting. Sprawdź to teraz, aby zobaczyć, co się stanie.
+  Output:  Na przykład uruchom funkcję with() z 2 argumentami. Pierwszym jest tabela faithful, która jest dostarczana z R, a drugim jest wywołanie funkcji bazowej plot(). Twoje wywołanie plot() powinno mieć dwa argumenty, eruptions i waiting. Sprawdź to teraz, aby zobaczyć, co się stanie.
   CorrectAnswer: with(faithful, plot(eruptions, waiting))
   AnswerTests: omnitest(correctExpr='with(faithful, plot(eruptions, waiting))')
   Hint: Wpisz with(faithful, plot(eruptions, waiting)) 
  
 - Class: cmd_question
-  Output: Widzisz, jak R stworzył dla Ciebie wykres punktowy na ekranie? Pokazuje on zależność między erupcjami gejzeru Old Faithful a czasem oczekiwania. Teraz użyj funkcji R title() z argumentem main równym ciągowi „Old Faithful Geyser data”. To jest adnotacja do wykresu.
+  Output: Widzisz, jak R stworzył dla Ciebie wykres punktowy na ekranie? Pokazuje on zależność między erupcjami gejzeru Old Faithful a czasem oczekiwania. Teraz użyj funkcji title() z argumentem main równym ciągowi „Old Faithful Geyser data”. To jest adnotacja do wykresu.
   CorrectAnswer: title(main = "Old Faithful Geyser data")
   AnswerTests: omnitest(correctExpr='title(main = "Old Faithful Geyser data")')
   Hint: Wpisz title(main = "Old Faithful Geyser data") 
@@ -74,7 +74,7 @@
  
 
 - Class: text
-  Output: Istnieją dwa podstawowe typy plików graficznych: wektorowe i bitmapowe. Używają one różnych formatów i mają różne cechy. Formaty wektorowe są dobre do wykresów liniowych i takich z jednolitymi kolorami wykorzystujących skromną liczbę punktów, podczas gdy formaty bitmapowe są dobre do wykresów z dużą liczbą punktów, scen naturalnych lub wykresów umieszczanych w internecie.
+  Output: "Istnieją dwa podstawowe typy plików graficznych: wektorowe i bitmapowe. Używają one różnych formatów i mają różne cechy. Formaty wektorowe są dobre do wykresów liniowych i takich z jednolitymi kolorami wykorzystujących skromną liczbę punktów, podczas gdy formaty bitmapowe są dobre do wykresów z dużą liczbą punktów, scen naturalnych lub wykresów umieszczanych w internecie."
 
 
 - Class: text
@@ -96,7 +96,7 @@
   Output: Dwa ostatnie formaty bitmapowe to TIFF, starszy metaformat z kompresją bezstratną, oraz BMP, natywny format bitmapowy systemu Windows.
 
 - Class: text
-  Output: Chociaż możliwe jest otwarcie wielu urządzeń graficznych (ekran, plik lub oba), podczas jednoczesnego wyświetlania wielu wykresów rysowanie może odbywać się tylko na jednym urządzeniu graficznym naraz.
+  Output: Chociaż możliwe jest otwarcie wielu urządzeń graficznych (ekran, plik lub oba), podczas jednoczesnego wyświetlania wielu wykresów, rysowanie może odbywać się tylko na jednym urządzeniu graficznym naraz.
 
 - Class: cmd_question
   Output: Aktualnie aktywne urządzenie graficzne można znaleźć, wywołując `dev.cur()`. Spróbuj teraz, aby zobaczyć, jaki numer jest przypisany do Twojego urządzenia (pliku) PDF.
@@ -135,7 +135,7 @@
   Hint: Wpisz title(main = "Old Faithful Geyser data")
  
 - Class: cmd_question
-  Output: Teraz uruchom dev.copy z 2 argumentami. Pierwszy to png, a drugi to plik set równy "geyserplot.png". Spowoduje to skopiowanie wykresu ekranu do pliku png w katalogu roboczym, który możesz wyświetlić PO zamknięciu urządzenia.
+  Output: Teraz uruchom dev.copy z 2 argumentami. Pierwszy to png, a drugi to file równy "geyserplot.png". Spowoduje to skopiowanie wykresu ekranu do pliku png w katalogu roboczym, który możesz wyświetlić PO zamknięciu urządzenia.
   CorrectAnswer: dev.copy(png, file = "geyserplot.png")
   AnswerTests: omnitest(correctExpr='dev.copy(png, file = "geyserplot.png")')
   Hint: Wpisz dev.copy(png, file = "geyserplot.png")
@@ -147,7 +147,7 @@
   Hint: Type dev.off() at the command prompt.
 
 - Class: text
-  Output: Gratulacje! Mamy nadzieję, że ta lekcja była dobrze urządzona ;)
+  Output: Gratulacje! Możesz teraz zobaczyć pliki, które utworzyłeś.
 
 - Class: mult_question
   Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"

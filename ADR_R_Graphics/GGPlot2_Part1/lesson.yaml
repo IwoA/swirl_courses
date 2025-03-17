@@ -7,206 +7,221 @@
   Version: 2.2.0
 
 - Class: text
-  Output:  In another lesson, we gave you an overview of the three plotting systems in R. In this lesson we'll focus on the third and newest plotting system in R, ggplot2.  As we did with the other two systems, we'll focus on creating graphics on the screen device rather than another graphics device.
+  Output:  W jednej z poprzednich lekcji przedstawiliśmy przegląd trzech systemów tworzenia wykresów w R. W tej lekcji skupimy się na trzecim i najnowszym z nich - ggplot2. 
 
 - Class: text
-  Output:  The ggplot2 package is an add-on package available from CRAN via install.packages(). (Don't worry, we've installed it for you already.) It is an implementation of The Grammar of Graphics, an abstract concept (as well as book) authored and invented by Leland Wilkinson and implemented by Hadley Wickham while he was a graduate student at Iowa State. The web site http://ggplot2.org provides complete documentation.
+  Output:  Pakiet ggplot2 to pakiet dostępny w CRAN za pośrednictwem install.packages(). (Nie martw się, zainstalowaliśmy go już dla Ciebie.) Jest to implementacja The Grammar of Graphics, abstrakcyjnego konceptu (a także książki) autorstwa Lelanda Wilkinsona, a zaimplementowanego przez Hadleya Wickhama. Witryna internetowa https://ggplot2.tidyverse.org zawiera pełną dokumentację.
 
 - Class: text
-  Output: A grammar of graphics represents an abstraction of graphics, that is,  a theory of graphics which conceptualizes basic pieces from which you can build new graphics and graphical objects. The  goal of the grammar is to “Shorten the distance from mind to page”. From Hadley Wickham's book  we learn that 
+  Output: Gramatyka grafiki reprezentuje teorię grafiki, która konceptualizuje podstawowe elementy, z których można budować wykresy i obiekty graficzne. Celem gramatyki jest „Skrócenie odległości od umysłu do strony”. Z książki Hadleya Wickhama dowiadujemy się, że
 
 - Class: text
-  Output:  The ggplot2 package "is composed of a set of independent components that can be composed in many different ways. ... you can create new graphics that are precisely tailored for your problem." These components include aesthetics which are attributes such as colour, shape, and  size, and geometric objects or geoms such as points, lines, and bars.  
+  Output:  Pakiet ggplot2 „składa się z zestawu niezależnych komponentów, które można składać na wiele różnych sposobów. ... możesz tworzyć nowe wykresy, które są precyzyjnie dostosowane do Twojego problemu”. Komponenty te obejmują estetykę, czyli atrybuty takie jak kolor, kształt i rozmiar, oraz obiekty geometryczne (geoms), takie jak punkty, linie i słupki.
+  
+- Class: text
+  Output:  „Gramatyka” grafiki oznacza, że ggplot2 zawiera bloki konstrukcyjne, za pomocą których można tworzyć własne obiekty graficzne. Jakie są te podstawowe komponenty wykresów ggplot2? Jest ich 7.
 
 - Class: text
-  Output: Before we delve into details, let's review the other 2 plotting systems.
-
-- Class: mult_question
-  Output: Recall what you know about R's base plotting system. Which of the following does NOT apply to it? 
-  AnswerChoices: Start with plot (or similar) function; Use annotation functions to add/modify (text, lines, points, axis); It is convenient and mirrors how we think of building plots and analyzing data; Can easily go back once the plot has started (e.g., to adjust margins or correct a typo)
-  CorrectAnswer: Can easily go back once the plot has started (e.g., to adjust margins or correct a typo)
-  AnswerTests: omnitest(correctVal='Can easily go back once the plot has started (e.g., to adjust margins or correct a typo)')
-  Hint: Which choice is the only one which looks backward? 
-
-
-- Class: mult_question
-  Output: Recall what you know about R's lattice plotting system. Which of the following does NOT apply to it? 
-  AnswerChoices:  Plots are created with a single function call (xyplot, bwplot, etc.); Most useful for conditioning types of plots and putting many panels on one plot; Margins and spacing are set automatically because entire plot is specified at once; Can always add to the plot once it is created
-  CorrectAnswer: Can always add to the plot once it is created
-  AnswerTests: omnitest(correctVal='Can always add to the plot once it is created')
-  Hint: Which choice is the only one which is inconsistent with the other three? 
-
-- Class: mult_question
-  Output: If we told you that ggplot2 combines the best of base and lattice, that would mean it ...?  
-  AnswerChoices: Automatically deals with spacings, text, titles but also allows you to annotate; Like lattice it allows for multipanels but more easily and intuitively; Its default mode makes many choices for you (but you can customize!); All of the others  
-  CorrectAnswer: All of the others
-  AnswerTests: omnitest(correctVal='All of the others')
-  Hint: Which choice is the only one that encompasses the other three? 
+  Output: Oczywiście, istnieje RAMKA DANYCH, która zawiera dane, które próbujesz wykreślić. Następnie MAPOWANIA ESTETYCZNE określają, w jaki sposób dane są mapowane na kolor, rozmiar itp. GEOMS (obiekty geometryczne) to to, co widzisz na wykresie (punkty, linie, kształty), a FACETS to panele używane w wykresach warunkowych.
 
 - Class: text
-  Output: Yes, ggplot2 combines the best of base and lattice. It allows for multipanel (conditioning) plots (as lattice does) but also post facto annotation (as base does), so you can add titles and labels. It uses the low-level grid package (which comes with R) to draw the graphics. As part of its grammar philosophy, ggplot2 plots are composed of aesthetics (attributes such as size, shape, color) and geoms (points, lines, and bars), the geometric objects you see on the plot.
+  Output: Są jeszcze 3. STATYSTYKI to transformacje statystyczne, takie jak binning, kwantyle i wygładzanie, które ggplot2 stosuje do danych. SKALE pokazują, jakiego kodowania używa mapa estetyczna (na przykład mężczyzna = czerwony, kobieta = niebieski). Na koniec wykresy są przedstawione w UKŁADIE WSPÓŁRZĘDNYCH.
 
 - Class: text
-  Output: The ggplot2 package has 2 workhorse functions. The more basic workhorse function is qplot, (think quick plot), which works like the plot function in the base graphics system. It can produce many types of plots (scatter, histograms, box and whisker) while hiding tedious details from the user. Similar to lattice functions, it looks for data in a data frame or parent environment. 
-
-- Class: text
-  Output: The more advanced workhorse function in the package is ggplot, which is  more flexible and can be customized for doing things qplot cannot do. In this lesson we'll focus on qplot.
-    
-- Class: cmd_question
-  Output: We'll start by showing how easy and versatile qplot is. First, let's look at some data which comes with the ggplot2 package. The mpg data frame contains fuel economy data for 38 models of cars manufactured in 1999 and 2008. Run the R command str with the argument mpg. This will give you an idea of what mpg contains.
-  CorrectAnswer: str(mpg)
-  AnswerTests: omnitest(correctExpr='str(mpg)')
-  Hint: Type str(mpg) at the command prompt.
+  Output: Podobnie jak w podstawowym systemie wykresów, podczas tworzenia wykresów za pomocą ggplot2 wykresy są budowane warstwami, być może w kilku krokach. Możesz wykreślić dane, a następnie nałożyć podsumowanie (na przykład linię regresji lub wygładzanie), a następnie dodać wszelkie potrzebne metadane i adnotacje.
 
 - Class: cmd_question
-  Output: We see that there are 234 points in the dataset concerning 11 different characteristics of the cars. Suppose we want to see if there's a correlation between engine displacement (displ) and highway miles per gallon (hwy). As we did with the plot function of the base system we could simply call  qplot with 3 arguments, the first two are the variables we want to examine and the third argument data is set equal to the name of the dataset which contains them (in this case, mpg). Try this now.
-  CorrectAnswer: qplot(displ, hwy, data = mpg)
-  AnswerTests: omnitest(correctExpr='qplot(displ, hwy, data = mpg)')
-  Hint: Type qplot(displ, hwy, data = mpg) at the command prompt.
+  Output: Najpierw utworzymy zmienną g, przypisując jej wynik wywołania funkcji ggplot() z 2 argumentami. Pierwszym jest mpg (nasz zbiór danych), a drugi powie ggplot, co chcemy wykreślić, w tym przypadku na osi x displ a na osi y hwy. Chcemy aby właśnie te kolumny przedstawiała nasza estetyka, więc ujmujemy je jako dwa argumenty funkcji aes().
+  CorrectAnswer: g <- ggplot(mpg, aes(x = displ, y = hwy))
+  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(mpg, aes(x = displ, y = hwy))')
+  Hint: Wpisz g <- ggplot(mpg, aes(x = displ, y = hwy) )
+
+- Class: text
+  Output: Zauważyłaś, że nic się nie stało? ggplot utworzył obiekt graficzny, który przypisaliśmy do zmiennej g.
 
 - Class: cmd_question
-  Output: A nice scatterplot done simply, right? All the labels are provided. The first argument is shown along the x-axis and the second along the y-axis. The negative trend (increasing displacement and lower gas mileage) is pretty clear. Now suppose we want to do the same plot but this time use different colors to distinguish between the 3 factors (subsets) of different types of drive (drv) in  the data (front-wheel, rear-wheel, and 4-wheel). Again, qplot makes this very easy. We'll just add what ggplot2 calls an aesthetic, a fourth argument, color, and set it equal to drv. Try this now. (Use the up arrow key to save some typing.)
-  CorrectAnswer: qplot(displ, hwy, data = mpg, color = drv)
-  AnswerTests: omnitest(correctExpr='qplot(displ, hwy, data = mpg, color = drv)')
-  Hint: Type qplot(displ, hwy, data = mpg, color = drv) at the command prompt.
+  Output: Użyj komendy summary() z  g z argumentem g, żeby zobaczyć co zawiera g.
+  CorrectAnswer: summary(g)
+  AnswerTests: omnitest(correctExpr='summary(g)')
+  Hint: Uzupełnij summary( )
 
 - Class: text
-  Output: Pretty cool, right? See the legend to the right which qplot helpfully supplied? The colors were automatically assigned by qplot so the legend decodes the colors for you. Notice that qplot automatically used dots or points to indicate the data. These points are geoms (geometric objects). We could have used a different aesthetic, for instance shape instead of color, to distinguish between the drive types.
+  Output: Tal więc g zawiera dane mpg ze wszystkimi nazwanymi komponentami w macierzy 234 na 11. Zawiera również mapowanie, x (displ) i y (hwy), które określiłaś, i brak fasetowania.
+  
+- Class: cmd_question
+  Output: Spróbuj pokazać zawartosć g przy pomocy funkcji print()
+  CorrectAnswer: print(g)
+  AnswerTests: omnitest(correctExpr='print(g)')
+  Hint: Wpisz po prostu print(g)
 
 - Class: cmd_question
-  Output: Now let's add a second geom to the default points. How about some smoothing function to produce trend lines, one for each color? Just add a fifth argument, geom, and using the R function c(), set it equal to the concatenation of the two strings "point" and "smooth". The first refers to the data points and second to the trend lines we want plotted. Try this now.
-  CorrectAnswer: qplot(displ, hwy, data = mpg, color=drv, geom = c("point", "smooth"))
-  AnswerTests: omnitest(correctExpr='qplot(displ, hwy, data = mpg, color=drv, geom = c("point", "smooth"))')
-  Hint: Type qplot(displ, hwy, data = mpg, color=drv, geom = c("point", "smooth")) at the command prompt.
-
-- Class: text
-  Output: Notice the gray areas surrounding each trend lines. These indicate the 95% confidence intervals for the lines.
+  Output: Zauważ, że jeśli spróbujesz pokazać g za pomocą wyrażeń g lub print(g), otrzymasz pusty wykres! Mimo że jest to świetny pakiet, ggplot nie wie jeszcze, jak wyświetlić dane, ponieważ nie określiłaś, jak chcesz je zobaczyć. Teraz wpisz g+geom_point() i zobacz, co się stanie.
+  CorrectAnswer: g+geom_point()
+  AnswerTests: omnitest(correctExpr='g+geom_point()')
+  Hint: Wpisz g + geom_point()
 
 - Class: cmd_question
-  Output: Before we leave qplot's scatterplotting ability, call qplot again, this time with 3 arguments. The first is y set equal to hwy, the second is data set equal to mpg, and the third is color set equal to drv. Try this now.
-  CorrectAnswer: qplot(y=hwy, data = mpg, color = drv)
-  AnswerTests: omnitest(correctExpr='qplot(y=hwy, data = mpg, color = drv)')
-  Hint: Type qplot(y=hwy, data = mpg, color = drv) at the command prompt.
+  Output: Wywołując funkcję geom_point dodałaś warstwę. Mimo tego, że nie podałaś żadnej wartości do funkcji geom_point() wykres się wyświetlił. To dlatego, że obiekt g ma wszystkie dane w sobie zapisane. Teraz użyj wyrażenia, które właśnie wpisałaś - g + geom_point() i dodaj do niego kolejną warstwę geom_smooth(). Zauważ, że R wyświetla dodatkowy komunikat.
+  CorrectAnswer: g+geom_point()+geom_smooth()
+  AnswerTests: omnitest(correctExpr='g+geom_point()+geom_smooth()')
+  Hint: Type g+geom_point()+geom_smooth() at the command prompt.
 
 - Class: cmd_question
-  Output: What's this plot showing? We see the x-axis ranges from 0 to 250 and we remember that we had 234 data points in our set, so we can infer that each point in the plot represents one of the hwy values (indicated by the y-axis). We've created the vector myhigh for you which contains the hwy data from the mpg dataset. Look at myhigh now.
-  CorrectAnswer: myhigh
-  AnswerTests: omnitest(correctExpr='myhigh')
-  Hint: Type myhigh at the command prompt.
-
-- Class: text
-  Output: Comparing the values of myhigh with the plot, we see the first entries in the vector (29, 29, 31, 30,...) correspond to the leftmost points in the the plot (in order), and the last entries in myhigh (28, 29, 26, 26, 26) correspond to the rightmost plotted points. So, specifying the y parameter only, without an x argument, plots the values of the y argument in the order in which they occur in the data.
+  Output: Szary cień wokół niebieskiej linii to przedział ufności. Widzisz, jak szeroki jest po prawej? Wypróbujmy inną funkcję wygładzania. Użyj strzałki w górę, aby odzyskać wyrażenie, które właśnie wpisałaś, i zamiast wywoływać geom_smooth bez argumentów, wywołaj ją z argumentem „method” ustawionym na tekst „lm”.
+  CorrectAnswer: g+geom_point()+geom_smooth(method="lm")
+  AnswerTests: omnitest(correctExpr='g+geom_point()+geom_smooth(method="lm")')
+  Hint: Uzupełnij g+ +geom_smooth(method="lm")
 
 - Class: cmd_question
-  Output: The all-purpose qplot can also create box and whisker plots.  Call qplot now with 4 arguments. First specify the variable by which you'll split the data, in this case drv, then specify the variable which you want to examine, in this case hwy. The third argument is data (set equal to mpg), and the fourth, the geom, set equal to the string "boxplot"
-  CorrectAnswer: qplot(drv,hwy,data=mpg,geom="boxplot")
-  AnswerTests: omnitest(correctExpr='qplot(drv,hwy,data=mpg,geom="boxplot")')
-  Hint: Type qplot(drv,hwy,data=mpg,geom="boxplot") at the command prompt.
+  Output: Zmieniając funkcję wygładzania na „lm” (model liniowy) ggplot2 dodał linię regresji do danych. Teraz przypomnij sobie wyrażenie, którego właśnie użyłaś i dodaj do niego kolejne wywołanie, tym razem do funkcji facet_grid. Użyj argumentu w postaci formuły (. ~ drv).
+  CorrectAnswer: g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)
+  AnswerTests: omnitest(correctExpr='g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)')
+  Hint: Wpisz g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)
+
+- Class: text
+  Output: Zauważ, że każdy panel jest oznaczony odpowiednim współczynnikiem. Wszystkie dane związane z samochodami z napędem na 4 koła znajdują się w lewym panelu, dane dotyczące napędu na przednie koła są wyświetlane w środkowym panelu, a dane dotyczące napędu na tylne koła w prawym panelu.
 
 - Class: cmd_question
-  Output: We see 3 boxes, one for each drive. Now to impress you, call qplot with 5 arguments. The first 4 are just as you used previously, (drv, hwy, data set equal to mpg, and geom set equal to the string "boxplot"). Now add a fifth argument, color, equal to manufacturer. 
-  CorrectAnswer: qplot(drv,hwy,data=mpg,geom="boxplot",color=manufacturer)
-  AnswerTests: omnitest(correctExpr='qplot(drv,hwy,data=mpg,geom="boxplot",color=manufacturer)')
-  Hint: Type qplot(drv,hwy,data=mpg,geom="boxplot",color=manufacturer) at the command prompt.
+  Output: Do tej pory używałaś tylko domyślnych etykiet, które zapewnia ggplot. Możesz dodać własną adnotację, używając funkcji takich jak xlab(), ylab() i ggtitle(). Ponadto funkcja labs() jest bardziej ogólna i może być używana do etykietowania jednej lub obu osi, a także do nadawania tytułu. Teraz przypomnij sobie wyrażenie, które właśnie wpisałaś, i dodaj wywołanie do funkcji ggtitle z argumentem „Swirl Rządzi!”.
+  CorrectAnswer: g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)+ ggtitle("Swirl Rządzi!")
+  AnswerTests: omnitest(correctExpr='g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)+ ggtitle("Swirl Rządzi!")')
+  Hint: Type g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)+ ggtitle("Swirl Rządzi!") at the command prompt.
 
 - Class: text
-  Output: It's a little squished but we just wanted to illustrate qplot's capabilities. Notice that there are still 3 regions of the plot (determined by the factor drv). Each is subdivided into several boxes depicting different manufacturers.
+  Output: To były podstawy. Łatwie prawda? Teraz porozmawiajmy o customizacji. Każda z funkcji „geom” (np. _point i _smooth) ma opcje modyfikacji. Ponadto funkcja theme() może być używana do modyfikowania aspektów całego wykresu, np. położenia legendy. W ggplot zawarto dwa standardowe motywy wyglądu. Są to theme_gray(), który jest motywem domyślnym (szare tło z białymi liniami siatki) i theme_bw(), który jest prostszym (czarno-białym) schematem kolorów.
 
 - Class: cmd_question
-  Output: Now, on to histograms. These display frequency counts for a single variable. Let's start with an easy one. Call qplot with 3 arguments. First specify the variable for which you want the frequency count, in this case hwy, then specify the data (set equal to mpg), and finally, the aesthetic, fill, set equal to drv. Instead of a plain old histogram, this will again use colors to distinguish the 3 different drive factors.
-  CorrectAnswer: qplot(hwy, data = mpg, fill = drv)
-  AnswerTests: omnitest(correctExpr='qplot(hwy, data = mpg, fill = drv)')
-  Hint: Type qplot(hwy, data = mpg, fill = drv) at the command prompt.
+  Output: Poćwiczmy teraz modyfikowanie estetyki. Użyjemy obiektu graficznego g, który już wypełniliśmy danymi mpg i dodamy wywołanie funkcji geom_point, ale tym razem damy geom_point 3 argumenty. Ustawimy argument color na „pink”, argument size na 4, a argument alpha na 1/2. Zauważ, że wszystkie argumenty są ustawione na stałe.
+  CorrectAnswer: g+geom_point(color="pink",size=4,alpha=1/2)
+  AnswerTests: ANY_of_exprs('g+geom_point(color="pink",size=4,alpha=1/2)','g+geom_point(color="pink",size=4,alpha=.5)')
+  Hint: Uzupełnij g+geom_point(color=" ",size= ,alpha= )
 
 - Class: text
-  Output: See how qplot consistently uses the colors. Red (if 4-wheel drv is in the bin) is at the bottom of the bin, then green on top of it (if present), followed by blue (rear wheel drv). The color lets us see right away that 4-wheel drive vehicles in this dataset don't have gas mileages exceeding 30 miles per gallon.
-
-- Class: text
-  Output: It's cool that qplot can do this  so easily, but some people may find this multi-color histogram hard to interpret. Instead of using colors to distinguish between the drive factors let's use facets or panels. (That's what lattice called them.) This just means we'll split the data into 3 subsets (according to drive) and make 3 smaller individual plots of each subset in one plot (and with one call to qplot).
-
-- Class: text
-  Output: Remember that with base plot we had to do each subplot individually. The lattice system made plotting  conditioning plots  easier. Let's see how easy it is with qplot.
+  Output: Widzisz różne odcienie różu? To wynik estetyki alpha, którą ustawiłaś na 1/2. Ta estetyka mówi ggplot, jak przezroczyste powinny być punkty. Ciemniejsze kółka wskazują wartości trafione przez wiele punktów danych.
 
 - Class: cmd_question
-  Output:  We'll do two plots, a scatterplot and then a histogram, each with 3 facets. For the scatterplot, call qplot with 4 arguments. The first two are displ and hwy and the third is the argument data set equal to mpg. The fourth is the argument facets which will be set equal to the expression . ~ drv which is ggplot2's shorthand for number of rows (to the left of the ~) and number of columns (to the right of the ~). Here the . indicates a single row and drv implies 3, since there are 3 distinct drive factors. Try this now.
-  CorrectAnswer: qplot(displ, hwy, data = mpg, facets = . ~ drv)
-  AnswerTests: omnitest(correctExpr='qplot(displ, hwy, data = mpg, facets = . ~ drv)')
-  Hint: Type qplot(displ, hwy, data = mpg, facets = . ~ drv) at the command prompt.
+  Output: Teraz zmodyfikujemy estetykę tak, aby kolor wskazywał, jaki typ drv reprezentuje każdy punkt. Ponownie użyj g i dodaj do niego wywołanie funkcji geom_point() z 3 argumentami. Pierwszy to size równy 4, drugi to alpha równe 1/2. Trzeci to wywołanie funkcji aes() z argumentem color równym drv. Zauważ, że MUSISZ użyć funkcji aes, ponieważ kolor punktów jest zależny od danych, a nie jest stały, jak w poprzednim przykładzie.
+  CorrectAnswer: g + geom_point(aes(color = drv), size = 4, alpha = 1/2)
+  AnswerTests: ANY_of_exprs('g + geom_point(aes(color = drv), size = 4, alpha = 1/2)','g + geom_point(aes(color = drv), size = 4, alpha = .5)')
+  Hint: Wpisz g + geom_point(aes(color = drv), size = 4, alpha = 1/2)
 
 - Class: text
-  Output: The result is a 1 by 3 array of plots. Note how each is labeled at the top with the factor label (4,f, or r). This shows us more detailed information than the histogram. We see the relationship between displacement and highway mileage for each of the 3 drive factors.
+  Output: Zwróć uwagę na legendę po prawej stronie objaśniającą związek między kolorem a drv.
 
 - Class: cmd_question
-  Output:  Now we'll do a histogram, again calling qplot with 4 arguments. This time, since we need only one variable for a histogram, the first is hwy and the second is the argument data set equal to mpg. The third is the argument facets which we'll set equal to the expression drv ~ . . This will give us a different arrangement of the facets. The fourth argument is binwidth. Set this equal to 2. Try this now.
-  CorrectAnswer: qplot(hwy, data = mpg, facets = drv ~ ., binwidth = 2)
-  AnswerTests: omnitest(correctExpr='qplot(hwy, data = mpg, facets = drv ~ ., binwidth = 2)')
-  Hint: Type qplot(hwy, data = mpg, facets = drv ~ ., binwidth = 2) at the command prompt.
+  Output: Teraz poćwiczymy modyfikowanie etykiet. Ponownie użyjemy g i dodamy do niego wywołania 3 funkcji. Najpierw dodajmy geom_point() z argumentem, który uzależnia kolor od typu drv (jak zrobiliśmy w poprzednim przykładzie). Po drugie, dodajmy wywołanie funkcji labs() z argumentem title ustawionym na „Swirl Rules!”. Na koniec dodajmy wywołanie labs() z 2 argumentami, jeden ustawiający x na „Displacement”, a drugi ustawiający y na „Hwy Mileage”.
+  CorrectAnswer: g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") + labs(x="Displacement", y="Hwy Mileage")
+  AnswerTests: omnitest(correctExpr='g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") + labs(x="Displacement", y="Hwy Mileage")')
+  Hint: Uzupełnij g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") + labs(x= , y= ) 
 
-- Class: mult_question
-  Output: The facets argument, drv ~ ., resulted in what arrangement of facets?
-  AnswerChoices:  1 by 3; 3 by 1; 2 by 2; huh?
-  CorrectAnswer:  3 by 1
-  AnswerTests: omnitest(correctVal='3 by 1')
-  Hint: How many row? How many columns?
-
+- Class: cmd_question
+  Output: Zauważ, że w poprzednim przykładzie mogliśmy połączyć dwa wywołania funkcji labs(). Teraz przećwiczymy dopracowanie szczegółów na przykładzie geom_smooth(). Użyj g i dodaj do niego wywołanie geom_point(), dopasowując kolor do typu drv (pamiętaj, aby użyć funkcji aes()), rozmiar ustaw na 2 i alpha na 1/2. Następnie dodaj wywołanie geom_smooth() z 4 argumentami. Ustaw rozmiar równy 4, typ linii (linetype) na 3, metodę na „lm” i se na FALSE.
+  CorrectAnswer: g + geom_point(aes(color = drv),size = 2,alpha = 1/2) + geom_smooth(size = 4, linetype = 3,method ="lm", se = FALSE)
+  AnswerTests: ANY_of_exprs('g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4,linetype = 3, method = "lm", se = FALSE)','g + geom_point(aes(color = drv), size = 2, alpha = .5) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)')
+  Hint: Uzupełnij g + geom_point(aes(color = ), size = , alpha = ) + geom_smooth(size = ,linetype = , method = "", se = )
 
 - Class: text
-  Output:  Pretty good, right? Not too difficult either. Let's review what we learned!
+  Output: Co te argumenty robią? Method wybiera regresję liniową (zauważ ujemne nachylenie wskazujące, że im większe przemieszczenie, tym mniejsze zużycie paliwa), typ linii określa, że powinna być przerywana, rozmiar sprawia, że linie są duże, a flaga se każe ggplot wyłączenie szarych cieni wskazujących błędy standardowe.
 
-- Class: mult_question
-  Output: Which of the following is a basic workhorse function of ggplot2?
-  AnswerChoices:  hist; xyplot; scatterplot; gplot; qplot
-  CorrectAnswer:  qplot
-  AnswerTests: omnitest(correctVal='qplot')
-  Hint: Which function did we invoke the most in this lesson?
-
-- Class: mult_question
-  Output:  Which types of plot does qplot plot?
-  AnswerChoices:  histograms; scatterplots; box and whisker plots; all of the others
-  CorrectAnswer: all of the others
-  AnswerTests: omnitest(correctVal='all of the others')
-  Hint: That qplot is amazing! It seems to do everything!
-
-- Class: mult_question
-  Output:  What does the gg in ggplot2 stand for?
-  AnswerChoices:  good grief; grammar of graphics; goto graphics; good graphics
-  CorrectAnswer: grammar of graphics
-  AnswerTests: omnitest(correctVal='grammar of graphics')
-  Hint: Think of building blocks and components.
-
-- Class: mult_question
-  Output:  True or False? The geom argument takes a string for a value.
-  AnswerChoices:  True; False
-  CorrectAnswer: True
-  AnswerTests: omnitest(correctVal='True')
-  Hint: Recall our examples, for instance, geom="density".
-
-- Class: mult_question
-  Output:  True or False? The data argument takes a string for a value.
-  AnswerChoices:  True; False
-  CorrectAnswer: True
-  AnswerTests: omnitest(correctVal='False')
-  Hint: Recall our examples. Did we ever put the dataset name in quotation marks?
-
-- Class: mult_question
-  Output:  True or False? The binwidth argument takes a string for a value.
-  AnswerChoices:  True; False
-  CorrectAnswer: False
-  AnswerTests: omnitest(correctVal='False')
-  Hint: Recall our examples, for instance, binwidth=18497/30.
-
-- Class: mult_question
-  Output:  True or False? The user must specify x- and y-axis labels when using qplot. 
-  AnswerChoices:  True; False
-  CorrectAnswer: False
-  AnswerTests: omnitest(correctVal='False')
-  Hint: Recall our examples when we saw labels that we didn't specify.
+- Class: cmd_question
+  Output: Na koniec zróbmy prosty wykres używając czarno-białego motywu theme_bw(). Wpisz g i dodaj wywołanie funkcji geom_point() z argumentem uzależniającym kolor od typu drv. Następnie dodaj funkcję theme_bw() z argumentem base_family ustawionym na „Times”. Sprawdź, czy zauważysz różnicę.
+  CorrectAnswer: g + geom_point(aes(color = drv)) + theme_bw(base_family="Times")
+  AnswerTests: omnitest(correctExpr='g + geom_point(aes(color = drv)) + theme_bw(base_family="Times")')
+  Hint: Uzupełnij g + geom_point(aes(color =  )) + theme_bw(base_family=" ")
 
 - Class: text
-  Output: Congrats! You've finished plot 1 of  ggplot2. In the next lesson the plot thickens.
+  Output: Koniec z szarym tłem! Ponadto, jeśli masz dobry wzrok, zauważysz, że czcionka w etykietach uległa zmianie.
+
+- Class: text
+  Output: Jedna ostatnia uwaga zanim przejdziemy do bardziej skomplikowanego przykładu z warstwami, a dotyczy ona granic osi. Chcemy podkreślić subtelną różnicę między ggplot a bazową funkcją plot().
+
+- Class: cmd_question
+  Output: Wygenerowaliśmy losowe dane x i y, zwane myx i myy jako kolumny ramki danych o nazwie testdat. Reprezentują one 100 losowych punktów o rozkładzie normalnym, z tym wyjątkiem, że jednemu z punktów nadaliśmy wartość odstającą. Oznacza to, że ustawiliśmy jego wartość y tak, aby była poza zakresem innych punktów. Użyj bazowej funkcji plot(), aby utworzyć wykres liniowy tych danych. Wywołaj ją z 4 argumentami - myx, myy, type="l" i ylim=c(-3,3). Type="l" mówi plot(), że chcesz wyświetlić dane jako linię, a nie jako wykres punktowy.
+  CorrectAnswer: plot(myx, myy, type = "l", ylim = c(-3,3))
+  AnswerTests: omnitest(correctExpr='plot(myx, myy, type = "l", ylim = c(-3,3))')
+  Hint: Wpisz plot(myx, myy, type = "l", ylim = c(-3,3))
+
+- Class: cmd_question
+  Output: Zauważ, jak plot() narysował punkty w zakresie (-3,3) dla wartości y. Wartość odstająca w (50,100) NIE jest pokazana na wykresie liniowym. Teraz narysujemy te same dane za pomocą ggplot. Przypomnijmy, że nazwa ramki danych to testdat. Utwórz obiekt graficzny g z wywołaniem ggplot z 2 argumentami, testdat (to nasze dane) i wywołaniem aes z 2 argumentami, x ustawionym na myx i y ustawionym na myy.
+  CorrectAnswer: g <- ggplot(testdat, aes(x = myx, y = myy)) 
+  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(testdat, aes(x = myx, y = myy))')
+  Hint: Wpisz g <- ggplot(testdat, aes(x = myx, y = myy)) 
+
+- Class: cmd_question
+  Output: Teraz dodaj do g puste wywołanie geom_line() (bez żadnych argumentów).
+  CorrectAnswer: g + geom_line()
+  AnswerTests: omnitest(correctExpr='g + geom_line()')
+  Hint: Wpisz g + geom_line()
+
+- Class: text
+  Output: Zauważ, jak ggplot wyświetlił punkt odstający przy (50,100). W rezultacie reszta danych jest zbita, więc nie widzisz, jak wygląda. Pojedynczy odstający punkt prawdopodobnie nie jest wystarczająco ważny, aby zdominować wykres. Jak sprawić, aby ggplot zachowywał się bardziej jak plot w takiej sytuacji?
+
+- Class: cmd_question
+  Output: Załóżmy, że oprócz dodania geom_line() do g musimy również dodać ylim(-3,3), tak jak zrobiliśmy to przy wywołaniu plot(). Spróbuj zobaczyć, co się stanie.
+  CorrectAnswer: g + geom_line() + ylim(-3,3)
+  AnswerTests: omnitest(correctExpr='g + geom_line() + ylim(-3,3)')
+  Hint: Wpisz g + geom_line() + ylim(-3,3)
+
+- Class: cmd_question
+  Output: Zauważ, że w ten sposób ggplot po prostu zignorował punkt odstający w (50,100). W linii jest przerwa, choć mało zauważalna. Teraz przypomnij sobie, że na początku lekcji wspomnieliśmy o 7 składnikach wykresu ggplot, z których jednym był układ współrzędnych. Jest to sytuacja, w której użycie układu współrzędnych byłoby pomocne. Zamiast dodawać ylim(-3,3) do wyrażenia g+geom_line(), dodaj wywołanie funkcji coord_cartesian() z argumentem ylim ustawionym na c(-3,3).
+  CorrectAnswer: g + geom_line() + coord_cartesian(ylim = c(-3,3))
+  AnswerTests: omnitest(correctExpr='g + geom_line() + coord_cartesian(ylim = c(-3,3))')
+  Hint: Uzupełnij g + geom_line() + coord_cartesian(ylim = ).
+
+- Class: text
+  Output: Widzisz różnicę? Wygląda to bardziej jak wykres wygenerowany przez funkcję plot(). Wartość odstająca y przy x=50 nie jest pokazana, ale wykres wskazuje, że jest większa niż 3.
+
+- Class: text
+  Output: Zakończymy bardziej skomplikowanym przykładem, aby pokazać Ci pełną moc ggplot i całego pakietu ggplot2. Będziemy kontynuować pracę z zestawem danych mpg.
+
+- Class: cmd_question
+  Output: Zacznij od utworzenia obiektu graficznego g, przypisując mu wywołanie ggplot() z 2 argumentami. Pierwszym jest zbiór danych, a drugim wywołanie funkcji aes(). To wywołanie będzie miało 3 argumenty, x równe displ, y równe hwy i color równe factor(year). To ostatnie pozwoli nam odróżnić dwa lata produkcji (1999 i 2008) w naszych danych.
+  CorrectAnswer: g <- ggplot(mpg, aes(x = displ, y = hwy, color = factor(year)))
+  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(mpg, aes(x = displ,y = hwy, color = factor(year)))')
+  Hint: Uzupełnij g <- ggplot(mpg, aes(x = , y = , color = ))
+
+- Class: text
+  Output: Ojej! Nic się nie stało. Czy g istnieje? Oczywiście, po prostu jeszcze nie jest widoczne, ponieważ nie dodałeś warstwy.
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course?"
+  Output:  Co się stanie, jeśli wpiszesz g w wierszu poleceń?
+  AnswerChoices: pojawiłby się wykres punktowy z 2 kolorami punktów; R wyświetliłby pusty wykres; musiałbym tego spróbować, aby odpowiedzieć na pytanie
+  CorrectAnswer: R wyświetliłby pusty wykres
+  AnswerTests: omnitest(correctVal='R wyświetliłby pusty wykres')
+  Hint: Poinformowałeś ggplot o danych, ale czy powiedziałeś mu, jak ma je wyświetlić?
+
+- Class: cmd_question
+  Output: Zbudujemy wykres krok po kroku. Najpierw dodaj do g wywołanie funkcji geom_point bez żadnych argumentów.
+  CorrectAnswer: g + geom_point()
+  AnswerTests:  omnitest(correctExpr='g + geom_point()')
+  Hint: Wpisz g + geom_point()
+
+- Class: cmd_question
+  Output: Pojawia się prosty, ale pocieszająco znajomy wykres punktowy. Zróbmy dwuwymiarowy wykres wielopanelowy. Przywołaj ostatnie polecenie (strzałka w górę) i dodaj do niego wywołanie funkcji facet_grid(). Podaj jej 2 argumenty. Pierwszy to formuła drv~cyl, a drugi to argument margins równy TRUE. 
+  CorrectAnswer: g + geom_point() + facet_grid(drv~cyl, margins = TRUE)
+  AnswerTests:  omnitest(correctExpr='g + geom_point() + facet_grid(drv~cyl, margins = TRUE)')
+  Hint: Wpisz g + geom_point() + facet_grid(drv~cyl, margins = TRUE)
+
+- Class: text
+  Output: Wykres 4 na 5, co? Argument margins mówi ggplot(), aby wyświetlał sumy dla każdego wiersza i kolumny, więc zamiast widzieć 3 wiersze (liczba czynników drv) i 4 kolumny (liczba czynników cyl) widzimy obraz 4 na 5. Należy zauważyć, że panel w pozycji (4,5) jest małą wersją wykresu punktowego całego zestawu danych.
+
+- Class: cmd_question
+  Output: Teraz dodaj do ostatniego polecenia geom_smooth() z 4 argumentami. Są to metoda ustawiona na „lm”, se ustawiona na FALSE, size ustawiona na 2 i color ustawiona na „black”.
+  CorrectAnswer: g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method="lm", size = 2, se = FALSE, color = "black")
+  AnswerTests:  omnitest(correctExpr='g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", size = 2, se = FALSE, color = "black")')
+  Hint: Uzupełnij g + geom_point() + facet_grid(drv~cyl, margins = ) + geom_smooth(method = "", size = , se = , color="")
+
+- Class: cmd_question
+  Output: Na koniec dodaj do ostatniego polecenia (lub wpisz je ponownie, jeśli wolisz) wywołanie funkcji labs() z 3 argumentami. Są to x ustawione na „Displacement”, y ustawione na „Highway Mileage” i title ustawione na „Swirl Rules!”.
+  CorrectAnswer: g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", size = 2, se = FALSE, color = "black") + labs(x = "Displacement", y = "Highway Mileage", title = "Swirl Rules!")
+  AnswerTests:  omnitest(correctExpr='g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", size = 2, se = FALSE, color = "black") + labs(x = "Displacement", y = "Highway Mileage", title = "Swirl Rules!")')
+  Hint: Wpisz g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", size = 2, se = FALSE, color = "black") + labs(x = "Displacement", y = "Highway Mileage", title = "Swirl Rules!")
+
+- Class: text
+  Output: Mogłeś zrobić te etykiety oddzielnymi wywołaniami funkcji labs(), ale pomyśleliśmy, że już będziesz miał tego dość. Tak czy inaczej, gratulacje! Ukończyłeś część 1 ggplot2. Mamy nadzieję, że wyciągnąłeś wystarczająco dużo z lekcji.
+
+- Class: mult_question
+  Output: "Chcesz otrzymać punkty za tę lekcję?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
   AnswerTests: save_credit()

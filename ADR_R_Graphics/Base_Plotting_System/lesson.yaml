@@ -46,7 +46,7 @@
   Output: Proste, prawda? R nadał tytuł histogramowi i oznaczył obie osie. Jaka jest najczęściej występująca wartość?
   AnswerChoices: Poniżej 25; Pomiędzy 60 a 75; Powyżej 150; Powyżej 100
   CorrectAnswer: Poniżej 25
-  AnswerTests: omnitest(correctVal='Poniżej 25d')
+  AnswerTests: omnitest(correctVal='Poniżej 25')
   Hint: Gdzie jest najwyższy słupek?
 
 - Class: cmd_question
@@ -65,7 +65,7 @@
   Output:  Zauważ, że funkcja boxplot(), w przeciwieństwie do hist(), NIE określiła automatycznie tytułu ani etykiet osi.
 
 - Class: cmd_question
-  Output:  Wywołajmy ponownie boxplot, aby określić etykiety. (Użyj strzałki w górę, aby odzyskać poprzednie polecenie i zaoszczędzić sobie pisania.) Dodamy więcej argumentów do wywołania, aby określić etykiety dla 2 osi. Ustaw xlab na „Month” i ylab na „Ozone (ppb)”. Określ col.axis na „blue” i col.lab na „red”.
+  Output:  Wywołajmy ponownie boxplot, aby określić etykiety. (Użyj strzałki w górę, aby odzyskać poprzednie polecenie i zaoszczędzić sobie pisania.) Dodamy więcej argumentów do wywołania, aby określić etykiety dla 2 osi. Dodaj argumenty xlab równe „Month” i ylab równe „Ozone (ppb)”. Dodaj też col.axis równe „blue” i col.lab równe „red”.
   CorrectAnswer: boxplot(Ozone~Month, airquality, xlab="Month", ylab="Ozone (ppb)",col.axis="blue",col.lab="red")
   AnswerTests: omnitest(correctExpr='boxplot(Ozone~Month, airquality, xlab="Month", ylab="Ozone (ppb)",col.axis="blue",col.lab="red")')
   Hint: Wpisz boxplot(Ozone~Month, airquality, xlab="Month", ylab="Ozone (ppb)", col.axis="blue",col.lab="red")
@@ -165,13 +165,6 @@
 - Class: text
   Output: Widzieliśmy wiele przykładów parametru col() określającego kolor wykresu, zapisanego jako liczba, ciąg znaków lub kod szesnastkowy; funkcja colors() zwraca wektor kolorów według nazwy.
 
-- Class: mult_question
-  Output: Jak myślisz, za co odpowiadają parametry graficzne xlab i ylab?
-  AnswerChoices: nazwy osi x i y; skale osi x i y; 
-  CorrectAnswer: nazwy osi x i y
-  AnswerTests: omnitest(correctVal='nazwy osi x i y')
-  Hint: 'lab' jest skrótem od label.
-
 - Class: text
   Output: Funkcja par() służy do określania globalnych parametrów graficznych, które mają wpływ na wszystkie wykresy w sesji R. (Użyj dev.off lub plot.new, aby przywrócić wartości domyślne). Parametry te można zastąpić, gdy są określone jako argumenty określonych funkcji wykresu. Należą do nich las (orientacja etykiet osi na wykresie), bg (kolor tła), mar (rozmiar marginesu), oma (rozmiar zewnętrznego marginesu), mfrow i mfcol (liczba wykresów na wiersz, kolumnę).
 
@@ -209,37 +202,37 @@
 
 - Class: cmd_question
   Output: Teraz utwórz zmienną o nazwie may, odpowiednio dzieląc tabelę airquality. (Przypomnij sobie, że dane określają miesiące według numeru, a maj jest piątym miesiącem w roku.)
-  CorrectAnswer:  may <- subset(airquality, Month==5)
-  AnswerTests: expr_creates_var("may"); omnitest(correctExpr='may <- subset(airquality, Month==5)')
-  Hint: Wpisz  may <- subset(airquality, Month==5) 
+  CorrectAnswer:  may <- filter(airquality, Month==5)
+  AnswerTests: expr_creates_var("may"); omnitest(correctExpr='may <- filter(airquality, Month==5)')
+  Hint: Wpisz  may <- filter(airquality, Month==5) 
 
 - Class: cmd_question
-  Output: Teraz użyj funkcji points(), aby narysować wiatr i ozon w maju (w tej kolejności) jako ciągłe niebieskie trójkąty. Musisz ustawić kolor i znak wykresu za pomocą dwóch oddzielnych argumentów. Zauważ, że używamy points, ponieważ dodajemy do istniejącego wykresu.
+  Output: Teraz użyj funkcji points(), aby narysować wiatr i ozon w maju (w tej kolejności) jako ciągłe niebieskie trójkąty (pch=17). Musisz ustawić kolor i znak wykresu za pomocą dwóch oddzielnych argumentów. Zauważ, że używamy points, ponieważ dodajemy do istniejącego wykresu.
   CorrectAnswer: points(may$Wind,may$Ozone,col="blue",pch=17)
   AnswerTests: omnitest(correctExpr='points(may$Wind,may$Ozone,col="blue",pch=17)')
   Hint: Kod dla jednolitych niebieskich trójkątów to 17 więc trzeba wpisać points(may$Wind,may$Ozone,col="blue",pch=17) 
 
 - Class: cmd_question
   Output: Teraz utwórz zmienną notmay wybierając odpowiednio podzbiór airquality.
-  CorrectAnswer:  notmay <- subset(airquality, Month!=5)
-  AnswerTests: expr_creates_var("notmay"); omnitest(correctExpr='notmay <- subset(airquality, Month!=5)')
-  Hint: Wpisz  notmay <- subset(airquality, Month!=5)
+  CorrectAnswer:  notmay <- filter(airquality, Month!=5)
+  AnswerTests: expr_creates_var("notmay"); omnitest(correctExpr='notmay <- filter(airquality, Month!=5)')
+  Hint: Wpisz  notmay <- filter(airquality, Month!=5)
 
 
 - Class: cmd_question
-  Output: Teraz użyj odpowiedniej funkcji, aby nanieść te notmay punkty wiatru i ozonu (w tej kolejności) jako czerwone płatki śniegu.
+  Output: Teraz użyj odpowiedniej funkcji, aby nanieść te notmay punkty wiatru i ozonu (w tej kolejności) jako czerwone płatki śniegu (pch=8).
   CorrectAnswer: points(notmay$Wind,notmay$Ozone,col="red",pch=8)
   AnswerTests: omnitest(correctExpr='points(notmay$Wind,notmay$Ozone,col="red",pch=8)')
   Hint: Kod płatków śniegu to 8
 
 - Class: cmd_question
-  Output: Teraz użyjemy funkcji legend(), aby wyjaśnić wykres i jego znaczenie. Funkcja ta ma wiele argumentów, ale użyjemy tylko 4. Pierwszym będzie ciąg „topright”, który wskaże R, gdzie umieścić legendę. Pozostałe 3 argumenty będą 2-elementowymi wektorami utworzonymi przez funkcję concatenate, np. c(). Te argumenty to pch, col i legend. Pierwszym jest wektor (17,8), drugim („blue”, „red”), a trzecim („May”, „Other Months”). Zrób to teraz.
+  Output: Teraz użyjemy funkcji legend(), aby wyjaśnić wykres i jego znaczenie. Funkcja ta ma wiele argumentów, ale użyjemy tylko 4. Pierwszym będzie ciąg „topright”, który wskaże R, gdzie umieścić legendę. Pozostałe 3 argumenty będą 2-elementowymi wektorami utworzonymi przez funkcję concatenate, czyli c(). Te argumenty to pch, col i legend. Pierwszym jest wektor (17,8), drugim („blue”, „red”), a trzecim („May”, „Other Months”). Zrób to teraz.
   CorrectAnswer: legend("topright",pch=c(17,8),col=c("blue","red"),legend=c("May","Other Months"))
   AnswerTests: omnitest(correctExpr='legend("topright",pch=c(17,8),col=c("blue","red"),legend=c("May","Other Months"))')
   Hint: Uzupełnij legend("",pch= ,col= ,legend=).
 
 - Class: cmd_question
-  Output: Teraz dodaj pionową linię w medianie airquality$Wind. Ma być przerywana (lty=2) o szerokości 2.
+  Output: Teraz przy użyciu funkcji abline() dodaj pionową linię w medianie airquality$Wind. Ma być przerywana (lty=2) o szerokości 2.
   CorrectAnswer: abline(v=median(airquality$Wind),lty=2,lwd=2)
   AnswerTests: omnitest(correctExpr='abline(v=median(airquality$Wind),lty=2,lwd=2)')
   Hint: Wpisz abline(v=median(airquality$Wind),lty=2,lwd=2).
@@ -290,7 +283,7 @@
   Figure: goodPlot3.R
 
 - Class: cmd_question
-  Output:  Narysuj airquality$Solar.R i airquality$Ozone z tytułem (argument main) „Ozon i promieniowanie słoneczne”.
+  Output:  Narysuj airquality$Solar.R i airquality$Ozone z tytułem (argument main) „Ozone and Solar Radiation”.
   CorrectAnswer: plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation")
   AnswerTests: omnitest(correctExpr='plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation")')
   Hint: Wpisz plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation").

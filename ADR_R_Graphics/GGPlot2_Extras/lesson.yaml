@@ -7,121 +7,120 @@
   Version: 2.2.0
 
 - Class: text
-  Output:  In this lesson we'll go through a few more qplot examples using diamond data which comes with the ggplot2 package. This data is a little more complicated than the mpg data and it contains information on various characteristics of diamonds.
-
+  Output:  W tej lekcji przejdziemy przez kilka kolejnych przykładów wykorzystania pakietu ggplot.Tym razem wykorzystamy dane o diamentach, które są zawarte w pakiecie ggplot2. Dane te są nieco bardziej skomplikowane niż dane mpg i zawierają informacje o różnych cechach diamentów.
 
 - Class: cmd_question
-  Output:  Run the R command str with the argument diamonds to see what the data looks like.
+  Output:  Uruchom polecenie str() z argumentem diamonds, aby zobaczyć, jak wyglądają dane.
   CorrectAnswer: str(diamonds)
   AnswerTests: omnitest(correctExpr='str(diamonds)')
-  Hint: Type str(diamonds) at the command prompt.
+  Hint: Wpisz str(diamonds)
 
 - Class: mult_question
-  Output: From the output, how many characteristics of diamonds do you think this data contains?
+  Output: Ile cech diamentów zawierają te dane?
   AnswerChoices:  10; 53940; 5394; 53950
   CorrectAnswer:  10
   AnswerTests: omnitest(correctVal='10')
-  Hint: The output says there are 53940 observations of 10 variables. This is followed by a 10-long list of characteristics (carat, cut, color, etc.) that can apply to diamonds.
+  Hint: Wynik mówi, że jest 53940 obserwacji 10 zmiennych. Następnie następuje długa lista 10 cech (karat, szlif, kolor itp.), które mogą dotyczyć diamentów.
 
 - Class: mult_question
-  Output: From the output of str, how many  diamonds are characterized in this dataset?
+  Output: Na podstawie wyników str(), ile diamentów jest opisanych w tym zbiorze danych?
   AnswerChoices:  10; 53940; 5394; 53950
   CorrectAnswer:  53940
   AnswerTests: omnitest(correctVal='53940')
-  Hint: The output says there are 53940 observations of 10 variables. This is followed by a 10-long list of characteristics (carat, cut, color, etc.) that can apply to diamonds.
+  Hint: Wynik mówi, że jest 53940 obserwacji 10 zmiennych. Następnie następuje długa lista 10 cech (karat, szlif, kolor itp.), które mogą dotyczyć diamentów.
 
 - Class: text
-  Output: Now for some ggplots.
+  Output: Teraz czas na ggplots.
 
 - Class: cmd_question
-  Output:  First create a graphical object g by assigning to it the output of a call to the function ggplot with 2 arguments. The first is the dataset diamonds and the second is a call to the function aes with 2 arguments, depth and price. Remember you won't see any result.
-  CorrectAnswer: g <- ggplot(diamonds,aes(depth,price))
-  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(diamonds,aes(depth,price))')
-  Hint: Type g <- ggplot(diamonds,aes(depth,price)) at the command prompt.
+  Output:  Najpierw utwórz obiekt graficzny g, przypisując mu wynik funkcji ggplot() z 2 argumentami. Pierwszym jest zbiór danych diamonds, a drugim funkcja aes() z 2 argumentami, depth i price. Pamiętaj, że nie zobaczysz żadnego wyniku.
+  CorrectAnswer: g <- ggplot(diamonds, aes(depth, price))
+  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(diamonds, aes(depth, price))')
+  Hint: Uzupełnij g <- ggplot(diamonds,aes( , ))
 
 - Class: cmd_question
-  Output:  Does g exist? Yes! Type summary with g as an argument to see what it holds.
+  Output:  Czy g istnieje? Tak! Wpisz summary() z g jako argumentem.
   CorrectAnswer: summary(g)
   AnswerTests: omnitest(correctExpr='summary(g)')
-  Hint: Type summary(g) at the command prompt.
+  Hint: Wpisz summary(g)
 
 - Class: cmd_question
-  Output:  We see that g holds the entire dataset. Now suppose we want to see a scatterplot of the relationship. Add to g a call to the function geom_point with 1 argument, alpha set equal to 1/3.
+  Output:  Widzimy, że g obejmuje cały zbiór danych. Załóżmy teraz, że chcemy zobaczyć wykres punktowy. Dodajmy do g wywołanie funkcji geom_point() z 1 argumentem, alpha równym 1/3.
   CorrectAnswer: g+geom_point(alpha=1/3)
   AnswerTests: omnitest(correctExpr='g+geom_point(alpha=1/3)')
-  Hint: Type g+geom_point(alpha=1/3) at the command prompt.
+  Hint: Uzupełnij g+geom_point(alpha=)
 
 - Class: text
-  Output:  That's somewhat interesting. We see that depth ranges from 43 to 79, but the densest distribution is around 60 to 65. Suppose we want to see if this relationship (between depth and price) is affected by cut or carat. We know cut is a factor with 5 levels (Fair, Good, Very Good, Premium, and Ideal). But carat is  numeric and not a discrete factor. Can we do this?
+  Output:  To jest dość interesujące. Widzimy, że głębokość diamentów waha się od 43 do 79, ale najgęstszy rozkład jest w okolicach od 60 do 65. Załóżmy, że chcemy sprawdzić, czy na tę relację (pomiędzy głębokością a ceną) wpływa szlif lub karat. Wiemy, że szlif jest czynnikiem z 5 poziomami (dostateczny, dobry, bardzo dobry, premium i idealny). Ale karat jest liczbowy, a nie dyskretny. Czy możemy to zrobić?
 
 - Class: text
-  Output: Of course! That's why we asked. R has a handy command, cut, which allows you to divide your data into sets and label each entry as belonging to one of the sets, in effect creating a new factor. First, we'll have to decide where to cut the data. 
+  Output: Oczywiście! R ma przydatną funkcję cut(), która pozwala podzielić dane na przedziały i przydzielić każdy element do jednego z przedziałów, tworząc w efekcie nową zmienną czynnikową. Najpierw musimy zdecydować, jak pociąć dane.
 
 - Class: cmd_question
-  Output: Let's divide the data into 3 pockets, so 1/3 of the data falls into each. We'll use the R command quantile to do this. Create the variable cutpoints and assign to it the output of a call to the function quantile with 3 arguments. The first is the data to cut, namely diamonds$carat; the second is a call to the R function seq. This is also called with 3 arguments, (0, 1, and length set equal to 4). The third argument to the call to quantile is the boolean na.rm set equal to TRUE.
+  Output: Podzielmy dane na 3 przedziały, tak aby 1/3 danych znalazła się w każdej z nich. Użyjemy w tym celu funkcji quantile(). Utwórz zmienną cutpoints i przypisz do niej wynik wywołania funkcji quantile() z 3 argumentami. Pierwszym z nich są dane do podziału, mianowicie diamonds$carat; drugim jest wywołanie funkcji seq(). Jest ona również wywoływana z 3 argumentami (0, 1 i length = 4). Trzecim argumentem wywołania quantile() jest wartość logiczna na.rm równa TRUE.
   CorrectAnswer: cutpoints <- quantile(diamonds$carat,seq(0,1,length=4),na.rm=TRUE)
-  AnswerTests: expr_creates_var("cutpoints"); omnitest(correctExpr='cutpoints <- quantile(diamonds$carat,seq(0,1,length=4),na.rm=TRUE)')
-  Hint: Type cutpoints <- quantile(diamonds$carat,seq(0,1,length=4),na.rm=TRUE) at the command prompt.
+  AnswerTests: expr_creates_var("cutpoints"); omnitest(correctExpr='cutpoints <- quantile(diamonds$carat, seq(0, 1, length = 4), na.rm=TRUE)')
+  Hint: Uzupełnij cutpoints <- quantile(diamonds$carat, seq( ),na.rm=TRUE)
 
 - Class: cmd_question
-  Output: Look at cutpoints now to understand what it is.
+  Output: Przyjrzyjmy się teraz obiektowi cutpoints, aby zrozumieć, o co chodzi.
   CorrectAnswer: cutpoints 
   AnswerTests:  omnitest(correctExpr='cutpoints')
-  Hint: Type cutpoints  at the command prompt.
+  Hint: Wpisz cutpoints
 
 - Class: cmd_question
-  Output: We see a 4-long vector (explaining why length was set equal to 4). We also see that .2 is the smallest carat size in the dataset and 5.01 is the largest. One third of the diamonds are between .2 and .5 carats and another third are between .5 and 1 carat in size. The remaining third are between 1 and 5.01 carats. Now we can use the R command cut to label each of the 53940 diamonds in the dataset as belonging to one of these 3 factors. Create a new name in diamonds, diamonds$car2 by assigning it the output of the call to cut. This command takes 2 arguments, diamonds$carat, which is what we want to cut, and cutpoints, the places where we'll cut.
-  CorrectAnswer: diamonds$car2 <- cut(diamonds$carat,cutpoints); stageVariable("diamonds$car2",diamonds$car2)
-  AnswerTests:   omnitest(correctExpr='diamonds$car2 <- cut(diamonds$carat,cutpoints)')
-  Hint: Type diamonds$car2 <- cut(diamonds$carat,cutpoints)  at the command prompt.
+  Output: Widzimy wektor o długości 4 (dlatego długość została ustawiona na 4). Widzimy również, że .2 to najmniejszy rozmiar karatów w zestawie danych, a 5.01 to największy. Jedna trzecia diamentów ma od .2 do .5 karatów, a kolejna jedna trzecia ma od .5 do 1 karata. Pozostała jedna trzecia ma od 1 do 5.01 karatów. Teraz możemy użyć funkcji cut(), aby oznaczyć każdy z 53940 diamentów w zestawie danych jako należący do jednego z tych 3 czynników (przedziałów). Utwórz nową kolumnę w diamonds, diamonds$car2, przypisując jej wynik wywołania cut(). To polecenie przyjmuje 2 argumenty, diamonds$carat, czyli kolumnę, którą chcemy podzielić, i cutpoints, czyli miejsca, w których będziemy ciąć.
+  CorrectAnswer: diamonds$car2 <- cut(diamonds$carat, cutpoints); stageVariable("diamonds$car2", diamonds$car2)
+  AnswerTests:   omnitest(correctExpr='diamonds$car2 <- cut(diamonds$carat, cutpoints)')
+  Hint: Wpisz diamonds$car2 <- cut(diamonds$carat, cutpoints)
 
 - Class: cmd_question
-  Output: Now we can continue with our multi-facet plot. First we have to reset g since we changed the dataset (diamonds) it contained (by adding a new column). Assign to g the output of a call to ggplot with 2 arguments. The dataset diamonds is the first, and a call to the function aes with 2 arguments (depth,price) is the second.
-  CorrectAnswer: g <- ggplot(diamonds,aes(depth,price))
-  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(diamonds,aes(depth,price))')
-  Hint: Type g <- ggplot(diamonds,aes(depth,price)) at the command prompt.
+  Output: Teraz możemy nasz wieloczęściowy wykres. Najpierw musimy zresetować g, ponieważ zmieniliśmy zestaw danych (diamonds) poprzez dodanie nowej kolumny. Tak jak poprzednio przypisz do g wynik wywołania ggplot() z 2 argumentami. Zestaw danych diamonds jest pierwszy, a wywołanie funkcji aes() z 2 argumentami (depth,price) jest drugim.
+  CorrectAnswer: g <- ggplot(diamonds, aes(depth, price))
+  AnswerTests: expr_creates_var("g"); omnitest(correctExpr='g <- ggplot(diamonds, aes(depth, price))')
+  Hint: Uzupełnij g <- ggplot( , aes( , ))
 
 - Class: cmd_question
-  Output: Now add to g  calls to 2 functions. This first is a call to geom_point with the argument alpha set equal to 1/3. The second is a call to the function facet_grid using the formula cut ~ car2 as its argument.
-  CorrectAnswer: g+geom_point(alpha=1/3)+facet_grid(cut~car2)
-  AnswerTests:  omnitest(correctExpr='g+geom_point(alpha=1/3)+facet_grid(cut~car2)')
-  Hint: Type g+geom_point(alpha=1/3)+facet_grid(cut~car2)  at the command prompt.
+  Output: Teraz dodaj do g wywołanie 2 funkcji. Pierwsza to geom_point() z argumentem alpha ustawionym na 1/3. Druga to funkcja facet_grid() z formułą cut ~ car2 jako argumentem.
+  CorrectAnswer: g + geom_point(alpha = 1/3) + facet_grid(cut~car2)
+  AnswerTests:  omnitest(correctExpr='g + geom_point(alpha = 1/3) + facet_grid(cut~car2)')
+  Hint: Wpisz g + geom_point(alpha = 1/3) + facet_grid(cut~car2)
 
 - Class: text
-  Output: We see a multi-facet plot with 5 rows, each corresponding to a cut factor. Not surprising. What is surprising is the number of columns. We were expecting 3 and got 4. Why?
+  Output: Widzimy wieloczęściowy wykres z 5 wierszami, z których każdy odpowiada innemu czynnikowi cięcia. Nic zaskakującego. Zaskakująca jest liczba kolumn. Spodziewaliśmy się 3, a dostaliśmy 4. Dlaczego?
 
 - Class: cmd_question
-  Output: The first 3 columns are labeled with the cutpoint boundaries. The fourth is labeled NA and shows us where the data points with missing data (NA or Not Available) occurred. We see that there were only a handful (12 in fact) and they occurred in Very Good, Premium, and Ideal cuts. We created a vector, myd,  containing the indices of these datapoints. Look at these entries in diamonds by typing the expression diamonds[myd,]. The myd tells R what rows to show and the empty column entry says to print all the columns. 
+  Output: Pierwsze 3 kolumny są oznaczone granicami punktów odcięcia. Czwarta jest oznaczona jako NA i pokazuje nam, gdzie wystąpiły punkty danych z brakującymi danymi (NA lub Not Available). Widzimy, że było ich tylko kilka (w rzeczywistości 12) i wystąpiły w cięciach Very Good, Premium i Ideal. Stworzyliśmy wektor, myd, zawierający indeksy tych punktów danych. Spójrz na te wpisy w diamentach, wpisując wyrażenie diamonds[myd,]. Myd mówi R, jakie wiersze pokazać, a pusty wpis kolumny mówi, aby wydrukować wszystkie kolumny.
   CorrectAnswer: diamonds[myd,]
   AnswerTests:  omnitest(correctExpr='diamonds[myd,]')
-  Hint: Type diamonds[myd,]  at the command prompt.
+  Hint: Wpisz diamonds[myd,]  w konsoli.
 
 - Class: text
-  Output: We see these entries match the plots. Whew - that's a relief. The car2 field is, in fact, NA for these entries, but the carat field shows they each had a carat size of .2. What's going on here?
+  Output: Widzimy, że te wyniki pasują do wykresów. Kolumna car2 zawiera rzeczywiście NA dla tych wierszy, ale pole carat pokazuje, że każdy z nich miał rozmiar karata 0,2. Co się tu dzieje?
 
 - Class: text
-  Output: Actually our plot answers this question. The boundaries for each column appear in the gray labels at the top of each column, and we see that the first column is labeled (0.2,0.5]. This indicates that this column contains data greater than .2 and less than or equal to .5. So diamonds with carat size .2 were excluded from the car2 field. 
+  Output: Tak właściwie to nasz wykres odpowiada na to pytanie. Granice każdej kolumny pojawiają się na szarych etykietach u góry każdej kolumny i widzimy, że pierwsza kolumna jest oznaczona (0.2,0.5]. Oznacza to, że ta kolumna zawiera dane większe niż .2 i mniejsze lub równe .5. Tak więc diamenty o masie karata .2 zostały wyłączone z kolumny car2.
 
 - Class: cmd_question
-  Output: Finally, recall the last plotting command (g+geom_point(alpha=1/3)+facet_grid(cut~car2)) or retype it if you like and add another call. This one to the function geom_smooth. Pass it 3 arguments, method set equal to the string "lm", size set equal to 3, and color equal to the string "pink".
+  Output: Na koniec przypomnij sobie ostatnie polecenie tworzące wykres (g + geom_point(alpha = 1/3) + facet_grid(cut~car2)) lub wpisz je ponownie, jeśli chcesz, i dodaj kolejną funkcję geom_smooth(). Przekaż jej 3 argumenty, method ustaw na „lm”, rozmiar na 3, a kolor na „pink”.
   CorrectAnswer: g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")
   AnswerTests:  omnitest(correctExpr='g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")')
   Hint: Type g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")  at the command prompt.
 
 - Class: text
-  Output: Nice thick regression lines which are somewhat interesting. You can add labels to the plot if you want but we'll let you experiment on your own.
+  Output: Pojawiły się interesujące ładne, grube linie regresji. Możesz dodać etykiety do wykresu, jeśli chcesz.
 
 - Class: cmd_question
-  Output: Lastly, ggplot2 can, of course, produce boxplots. This final exercise is the sum of 3 function calls. The first call is to ggplot with 2 arguments, diamonds and a call to aes with carat and price as arguments. The second call is to geom_boxplot with no arguments. The third is to facet_grid with one argument, the formula . ~ cut. Try this now.
+  Output: Na koniec, ggplot2 może oczywiście tworzyć wykresy pudełkowe. To ostatnie ćwiczenie to suma 3 wywołań funkcji. Pierwsze to ggplot() z 2 argumentami, diamonds i aes() z carat i price jako argumentami. Druga funkcja to geom_boxplot() bez argumentów. Trzecia to facet_grid() z jednym argumentem, formułą . ~ cut. 
   CorrectAnswer: ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)
   AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)')
-  Hint: Type ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut) at the command prompt.
+  Hint: Wpisz ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)
 
 - Class: text
-  Output: Yes! A boxplot looking like marshmallows about to be roasted. Well done and  congratulations! You've finished this jewel of a lesson. Hope it paid off!
+  Output: Tak! Boxplot wyglądający jak pianki przed pieczeniem. Dobra robota i gratulacje! Skończyłeś ten klejnot lekcji. Mam nadzieję, że się opłaciło!
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course?"
+  Output: "Chcesz otrzymać punkty za tę lekcję?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
   AnswerTests: save_credit()
