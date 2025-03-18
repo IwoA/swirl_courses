@@ -7,7 +7,7 @@
   Version: 2.2.0
 
 - Class: text
-  Output:  Ta lekcja dotyczy używania kolorów w R. Uzupełnia lekcje o tworzeniu wykresów z pakietami base i lattice, które zawierają funkcje przyjmujące argument col.
+  Output:  Ta lekcja dotyczy używania kolorów w R. Uzupełnia lekcje o tworzeniu wykresów z pakietami base i ggplot, które zawierają funkcje przyjmujące argument col.
 
 - Class: text
   Output: Oczywiście, wybór koloru jest kwestią drugorzędną w stosunku do danych i sposobu ich analizy, jednak skuteczne wykorzystanie kolorów może uatrakcyjnić wykresy i prezentacje, podkreślając ważne informacje, które próbujesz przekazać.

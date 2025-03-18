@@ -115,10 +115,10 @@
   Hint: Uzupełnij g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") + labs(x= , y= ) 
 
 - Class: cmd_question
-  Output: Zauważ, że w poprzednim przykładzie mogliśmy połączyć dwa wywołania funkcji labs(). Teraz przećwiczymy dopracowanie szczegółów na przykładzie geom_smooth(). Użyj g i dodaj do niego wywołanie geom_point(), dopasowując kolor do typu drv (pamiętaj, aby użyć funkcji aes()), rozmiar ustaw na 2 i alpha na 1/2. Następnie dodaj wywołanie geom_smooth() z 4 argumentami. Ustaw rozmiar równy 4, typ linii (linetype) na 3, metodę na „lm” i se na FALSE.
-  CorrectAnswer: g + geom_point(aes(color = drv),size = 2,alpha = 1/2) + geom_smooth(size = 4, linetype = 3,method ="lm", se = FALSE)
-  AnswerTests: ANY_of_exprs('g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4,linetype = 3, method = "lm", se = FALSE)','g + geom_point(aes(color = drv), size = 2, alpha = .5) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)')
-  Hint: Uzupełnij g + geom_point(aes(color = ), size = , alpha = ) + geom_smooth(size = ,linetype = , method = "", se = )
+  Output: Zauważ, że w poprzednim przykładzie mogliśmy połączyć dwa wywołania funkcji labs(). Teraz przećwiczymy dopracowanie szczegółów na przykładzie geom_smooth(). Użyj g i dodaj do niego wywołanie geom_point(), dopasowując kolor do typu drv (pamiętaj, aby użyć funkcji aes()), rozmiar ustaw na 2 i alpha na 1/2. Następnie dodaj wywołanie geom_smooth() z 4 argumentami. Ustaw rozmiar linii (linewidth) równy 4, typ linii (linetype) na 3, metodę na „lm” i se na FALSE.
+  CorrectAnswer: g + geom_point(aes(color = drv),size = 2,alpha = 1/2) + geom_smooth(linewidth = 4, linetype = 3,method ="lm", se = FALSE)
+  AnswerTests: ANY_of_exprs('g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(linewidth = 4,linetype = 3, method = "lm", se = FALSE)','g + geom_point(aes(color = drv), size = 2, alpha = .5) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)')
+  Hint: Uzupełnij g + geom_point(aes(color = ), size = , alpha = ) + geom_smooth(linewidth = ,linetype = , method = "", se = )
 
 - Class: text
   Output: Co te argumenty robią? Method wybiera regresję liniową (zauważ ujemne nachylenie wskazujące, że im większe przemieszczenie, tym mniejsze zużycie paliwa), typ linii określa, że powinna być przerywana, rozmiar sprawia, że linie są duże, a flaga se każe ggplot wyłączenie szarych cieni wskazujących błędy standardowe.

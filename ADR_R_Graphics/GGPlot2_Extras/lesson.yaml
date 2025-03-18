@@ -116,8 +116,20 @@
   AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)')
   Hint: Wpisz ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)
 
+- Class: cmd_question
+  Output: A tak całkiem na koniec dodajmy trochę koloru do naszych nudnych czarnych pudełek. Do funkcji geom_boxplot() dodaj estetykę aes() fill zależną od wartości w kolumnie cut.
+  CorrectAnswer: ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut))+facet_grid(.~cut)
+  AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut))+facet_grid(.~cut)')
+  Hint: Uzupełnij ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = ))+facet_grid(.~cut)
+  
+- Class: cmd_question
+  Output: A jednak to nie był koniec :P Pozbądźmy się jeszcze tej niepotrzebnej legendy. Wystarczy w funkcji geom_boxplot dodać argument show.legend = FALSE
+  CorrectAnswer: ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut), show.legend = FALSE) + facet_grid(.~cut)
+  AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut), show.legend = FALSE) + facet_grid(.~cut)')
+  Hint: Uzupełnij ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = ), show.legend = FALSE) + facet_grid(.~cut)
+  
 - Class: text
-  Output: Tak! Boxplot wyglądający jak pianki przed pieczeniem. Dobra robota i gratulacje! Skończyłeś ten klejnot lekcji. Mam nadzieję, że się opłaciło!
+  Output: Dobra robota i gratulacje! Skończyłeś ten klejnot lekcji. Mam nadzieję, że się opłaciło!
 
 - Class: mult_question
   Output: "Chcesz otrzymać punkty za tę lekcję?"

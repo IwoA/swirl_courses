@@ -96,7 +96,7 @@
   Output: Do takiej transformacji potrzebujemy funkcji pivot_longer z pakietu 'tidyr'. Problem w tym, że nie jest ona załadowana i potrzebujemy jej tylko raz.
 
 - Class: cmd_question
-  Output: W tym przypadku lepiej jest wywołać pakiet bezpośrednio z nazwą funkcji, której potrzebujesz. W R robimy to za pomocą dwóch dwukropków. Utwórzmy nową zmienną data_long z danych za pomocą funkcji tidyr::pivot_longer. Umieść nazwy w kolumnie „Indices”.
+  Output: W tym przypadku lepiej jest wywołać pakiet bezpośrednio z nazwą funkcji, której potrzebujesz. W R robimy to za pomocą dwóch dwukropków. Utwórzmy nową zmienną data_long z danych za pomocą funkcji tidyr::pivot_longer. Umieść nazwy w kolumnie „Indices”. Pamiętaj, że przekształcamy wszystkie 4 kolumny.
   CorrectAnswer: data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")
   AnswerTests: any_of_exprs('data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to="Indices")','data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to = "Indices")', 'data_long <- tidyr::pivot_longer(data, cols=DAX:FTSE, names_to="Indices")', 'tidyr::pivot_longer(data, cols = DAX:FTSE, names_to = "Indices")')
   Hint: Uzupełnij data_long <- tidyr::pivot_longer(data, cols = 1:4, names_to=" "). '1:4' oczywiście oznacza kolumny, które chcemy zwinąć do nowej kolumny 'Indices'.
