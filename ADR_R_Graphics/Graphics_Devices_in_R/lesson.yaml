@@ -99,7 +99,7 @@
   Output: Chociaż możliwe jest otwarcie wielu urządzeń graficznych (ekran, plik lub oba), podczas jednoczesnego wyświetlania wielu wykresów, rysowanie może odbywać się tylko na jednym urządzeniu graficznym naraz.
 
 - Class: cmd_question
-  Output: Aktualnie aktywne urządzenie graficzne można znaleźć, wywołując `dev.cur()`. Spróbuj teraz, aby zobaczyć, jaki numer jest przypisany do Twojego urządzenia (pliku) PDF.
+  Output: Aktualnie aktywne urządzenie graficzne można znaleźć, wywołując dev.cur(). Spróbuj teraz, aby zobaczyć, jaki numer jest przypisany do Twojego urządzenia (pliku) PDF.
   CorrectAnswer: dev.cur()
   AnswerTests: omnitest(correctExpr='dev.cur()')
   Hint: Wpisz dev.cur()
@@ -111,7 +111,7 @@
   Hint: Wpisz dev.off()
 
 - Class: cmd_question
-  Output: Teraz ponownie uruchom `dev.cur()`, aby sprawdzić, jaki numer jest przypisany do okna wykresu.
+  Output: Teraz ponownie uruchom dev.cur(), aby sprawdzić, jaki numer jest przypisany do okna wykresu.
   CorrectAnswer: dev.cur()
   AnswerTests: omnitest(correctExpr='dev.cur()')
   Hint: Wpisz dev.cur() w konsoli.
@@ -120,34 +120,38 @@
   Output: Urządzenie wróciło do stanu początkowego. Jak można się domyślić, każde otwarte urządzenie graficzne otrzymuje numer całkowity większy lub równy 2. Możesz zmienić aktywne urządzenie graficzne za pomocą `dev.set(<integer>)`, gdzie `<integer>` to numer przypisany do urządzenia graficznego, na które chcesz się przełączyć.
 
 - Class: text
-  Output: Możesz również skopiować wykres z jednego urządzenia na drugie. Może to zaoszczędzić trochę czasu, ale uwaga! Kopiowanie wykresu nie jest operacją dokładną, więc wynik może nie być identyczny z oryginałem. R oferuje kilka funkcji ułatwiających to zadanie. Funkcja `dev.copy` kopiuje wykres z jednego urządzenia na drugie, a `dev.copy2pdf` służy do kopiowania wykresu bezpośrednio do pliku PDF.
+  Output: Działa to podobnie dla wykresów ggplot
+  
+ 
+- Class: cmd_question
+  Output: Wpisz polecenie pdf(file="myplot1.pdf"), aby utworzyć plik pdf myplot1.pdf w katalogu roboczym.
+  CorrectAnswer: pdf(file="myplot1.pdf")
+  AnswerTests: omnitest(correctExpr='pdf(file="myplot1.pdf")')
+  Hint: Wpisz pdf(file="myplot1.pdf")
 
 - Class: cmd_question
-  Output:  Dla zabawy, ponownie uruchom polecenie z użyciem komendy with(), with(faithful, plot(eruptions, waiting)), aby wykreślić dane z Old Faithful. Użyj klawisza strzałki w górę, aby odzyskać polecenie, jeśli nie masz ochoty pisać go ponownie.
-  CorrectAnswer: with(faithful, plot(eruptions, waiting))
-  AnswerTests: omnitest(correctExpr='with(faithful, plot(eruptions, waiting))')
-  Hint: Wpisz with(faithful, plot(eruptions, waiting))
- 
+  Output: Tym razem wpisz polecenie ggplot(faithful, aes(eruptions, waiting)) + geom_point()
+  CorrectAnswer: ggplot(faithful, aes(eruptions, waiting)) + geom_point()
+  AnswerTests: omnitest(correctExpr='ggplot(faithful, aes(eruptions, waiting)) + geom_point()')
+  Hint: Wpisz ggplot(faithful, aes(eruptions, waiting)) + geom_point()
+
 - Class: cmd_question
-  Output: Teraz wykonaj ponownie polecenie title(), title(main = "Old Faithful Geyser data"), aby dodać adnotację do wykresu. (Klawisze strzałek w górę są świetne!)
-  CorrectAnswer: title(main = "Old Faithful Geyser data")
-  AnswerTests: omnitest(correctExpr='title(main = "Old Faithful Geyser data")')
-  Hint: Wpisz title(main = "Old Faithful Geyser data")
- 
-- Class: cmd_question
-  Output: Teraz uruchom dev.copy z 2 argumentami. Pierwszy to png, a drugi to file równy "geyserplot.png". Spowoduje to skopiowanie wykresu ekranu do pliku png w katalogu roboczym, który możesz wyświetlić PO zamknięciu urządzenia.
-  CorrectAnswer: dev.copy(png, file = "geyserplot.png")
-  AnswerTests: omnitest(correctExpr='dev.copy(png, file = "geyserplot.png")')
-  Hint: Wpisz dev.copy(png, file = "geyserplot.png")
- 
-- Class: cmd_question
-  Output: Nie zapomnij zamknąć połączenia z plikiem PNG! Zrób to TERAZ!!! Wtedy będziesz mógł zobaczyć plik.
+  Output: Nie zapomnij zamknąć połączenia z plikiem PNG! Zrób to TERAZ!!!
   CorrectAnswer: dev.off()
   AnswerTests: omnitest(correctExpr='dev.off()')
-  Hint: Type dev.off() at the command prompt.
+  Hint: Wpisz dev.off()
+  
+- Class: cmd_question
+  Output: Pakiet ggplot2 ma własną funkcję do zapisu wykresów - ggsave. Wywołaj pomoc do tej funkcji.
+  CorrectAnswer: ?ggsave
+  AnswerTests: omnitest(correctExpr='?ggsave')
+  Hint: Wpisz ?ggsave 
+  
+- Class: text
+  Output: Jak mówi opis funkcji, domyślnie zapisuje ona ostatni wyświetlony wykres.
 
 - Class: text
-  Output: Gratulacje! Możesz teraz zobaczyć pliki, które utworzyłeś.
+  Output: Gratulacje! Możesz teraz zobaczyć pliki, które utworzyłeś. Powinny być widoczne w zakładce Files po prawej stronie.
 
 - Class: mult_question
   Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
