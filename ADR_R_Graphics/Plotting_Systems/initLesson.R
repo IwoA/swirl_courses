@@ -2,6 +2,7 @@ library(ggplot2)
 library(jpeg)
 library(lattice)
 library(datasets)
+library(dplyr)
 data(cars)
 data(mpg)
 

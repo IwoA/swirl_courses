@@ -102,10 +102,10 @@
   Output: Tak właściwie to nasz wykres odpowiada na to pytanie. Granice każdej kolumny pojawiają się na szarych etykietach u góry każdej kolumny i widzimy, że pierwsza kolumna jest oznaczona (0.2,0.5]. Oznacza to, że ta kolumna zawiera dane większe niż .2 i mniejsze lub równe .5. Tak więc diamenty o masie karata .2 zostały wyłączone z kolumny car2.
 
 - Class: cmd_question
-  Output: Na koniec przypomnij sobie ostatnie polecenie tworzące wykres (g + geom_point(alpha = 1/3) + facet_grid(cut~car2)) lub wpisz je ponownie, jeśli chcesz, i dodaj kolejną funkcję geom_smooth(). Przekaż jej 3 argumenty, method ustaw na „lm”, rozmiar na 3, a kolor na „pink”.
-  CorrectAnswer: g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")
-  AnswerTests:  omnitest(correctExpr='g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")')
-  Hint: Type g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",size=3,color="pink")  at the command prompt.
+  Output: Na koniec przypomnij sobie ostatnie polecenie tworzące wykres (g + geom_point(alpha = 1/3) + facet_grid(cut~car2)) lub wpisz je ponownie, jeśli chcesz, i dodaj kolejną funkcję geom_smooth(). Przekaż jej 3 argumenty, method ustaw na „lm”, rozmiar (linewidth) na 3, a kolor na „pink”.
+  CorrectAnswer: g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",linewidth=3,color="pink")
+  AnswerTests:  omnitest(correctExpr='g+geom_point(alpha=1/3)+facet_grid(cut~car2)+geom_smooth(method="lm",linewidth=3,color="pink")')
+  Hint: Type g + geom_point(alpha = 1/3) + facet_grid(cut~car2) + geom_smooth(method = "lm",linewidth = 3, color = "pink")  at the command prompt.
 
 - Class: text
   Output: Pojawiły się interesujące ładne, grube linie regresji. Możesz dodać etykiety do wykresu, jeśli chcesz.
@@ -116,8 +116,20 @@
   AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)')
   Hint: Wpisz ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)
 
+- Class: cmd_question
+  Output: A tak całkiem na koniec dodajmy trochę koloru do naszych nudnych czarnych pudełek. Do funkcji geom_boxplot() dodaj estetykę aes() fill zależną od wartości w kolumnie cut.
+  CorrectAnswer: ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut))+facet_grid(.~cut)
+  AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut))+facet_grid(.~cut)')
+  Hint: Uzupełnij ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = ))+facet_grid(.~cut)
+  
+- Class: cmd_question
+  Output: A jednak to nie był koniec :P Pozbądźmy się jeszcze tej niepotrzebnej legendy i zmieńmy tło na czarno-białe. Wystarczy w funkcji geom_boxplot dodać argument show.legend = FALSE a na końcu odpowiednią funkcję theme_ Pamiętasz jaką?
+  CorrectAnswer: ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut), show.legend = FALSE) + facet_grid(.~cut) + theme_bw()
+  AnswerTests:  omnitest(correctExpr='ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = cut), show.legend = FALSE) + facet_grid(.~cut) + theme_bw()')
+  Hint: Uzupełnij ggplot(diamonds,aes(carat,price))+geom_boxplot(aes(fill = ), show.legend = FALSE) + facet_grid(.~cut) + theme_
+  
 - Class: text
-  Output: Tak! Boxplot wyglądający jak pianki przed pieczeniem. Dobra robota i gratulacje! Skończyłeś ten klejnot lekcji. Mam nadzieję, że się opłaciło!
+  Output: Dobra robota i gratulacje! Skończyłeś ten klejnot lekcji. Mam nadzieję, że się opłaciło!
 
 - Class: mult_question
   Output: "Chcesz otrzymać punkty za tę lekcję?"

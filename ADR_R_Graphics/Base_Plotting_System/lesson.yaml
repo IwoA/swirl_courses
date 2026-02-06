@@ -56,7 +56,7 @@
   Hint: Uzupełnij table( )
  
 - Class: cmd_question
-  Output: Widzimy, że dane obejmują 5 miesięcy, od maja do września. Będziemy potrzebować wykresu pudełkowego ozonu jako funkcji miesiąca, w którym wykonano pomiary, więc użyjemy formuły Ozone ~ Month jako pierwszego argumentu wykresu pudełkowego. Naszym drugim argumentem będzie airquality, zbiór danych, z którego pobrano zmienne pierwszego argumentu. Spróbuj.
+  Output: Widzimy, że dane obejmują 5 miesięcy, od maja do września. Będziemy potrzebować wykresu pudełkowego boxplot() ozonu jako funkcji miesiąca, w którym wykonano pomiary, więc użyjemy formuły Ozone ~ Month jako pierwszego argumentu wykresu pudełkowego. Naszym drugim argumentem będzie airquality, zbiór danych, z którego pobrano zmienne pierwszego argumentu. Spróbuj.
   CorrectAnswer: boxplot(Ozone~Month, airquality)
   AnswerTests: omnitest(correctExpr='boxplot(Ozone~Month, airquality)')
   Hint: Uzupełnij boxplot( , airquality)
@@ -244,7 +244,7 @@
   Hint: Wpisz par(mfrow=c(1,2)).
 
 - Class: cmd_question
-  Output: Teraz narysuj wykres airquality$Wiatr i airquality$Ozon i użyj polecenia main, aby określić tytuł „Ozon i Wiatr”.
+  Output: Teraz narysuj wykres airquality$Wiatr i airquality$Ozon i użyj polecenia main, aby określić tytuł „Ozone and Wind”.
   CorrectAnswer: plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")
   AnswerTests: omnitest(correctExpr='plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")')
   Hint: Wpisz plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind").
