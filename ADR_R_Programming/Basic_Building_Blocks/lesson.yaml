@@ -223,8 +223,8 @@
   Output: Zanim zakończymy tę lekcję, chciałbym pokazać ci kilka trików oszczędzających czas.
 
 - Class: text
-  Output: Wcześniej w lekcji obliczyłeś z * 2 + 100. Załóżmy, że popełniłeś błąd 
-    i chciałeś dodać 1000 zamiast 100. Możesz albo ponownie wpisać wyrażenie, albo...
+  Output: Wcześniej w lekcji obliczyłaś z * 2 + 100. Załóżmy, że popełniłaś błąd 
+    i chciałaś dodać 1000 zamiast 100. Możesz albo ponownie wpisać wyrażenie, albo...
 
 - Class: cmd_question
   Output: W wielu środowiskach programistycznych strzałka w górę pozwala przechodzić 
@@ -236,8 +236,8 @@
   Hint: Jeśli Twoje środowisko nie obsługuje funkcji strzałki w górę, po prostu wpisz poprawione polecenie, aby kontynuować.
 
 - Class: text
-  Output: Na końcu, załóżmy, że chcesz wyświetlić zawartość zmiennej, którą stworzyłeś wcześniej, 
-    ale nie możesz sobie przypomnieć, czy nazwałeś ją `my_div` czy `myDiv`. 
+  Output: Na końcu, załóżmy, że chcesz wyświetlić zawartość zmiennej, którą stworzyłaś wcześniej, 
+    ale nie możesz sobie przypomnieć, czy nazwałaś ją `my_div` czy `myDiv`. 
     Możesz spróbować obu nazw i zobaczyć, która działa, albo...
 
 - Class: cmd_question
