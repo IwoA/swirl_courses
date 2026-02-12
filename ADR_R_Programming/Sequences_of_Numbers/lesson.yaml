@@ -54,7 +54,7 @@
   AnswerTests: any_of_exprs('?`:`', "?':'", '?":"')
   Hint: "Aby wyświetlić dokumentację dla operatora dwukropka, musisz użyć znaków backtick 
     lub cudzysłowów. Jest to wymagane, aby R wiedział, że nie próbujesz używać tego 
-    symbolu w poleceniu. Oto jak to wygląda: `?`:`. Pamiętaj, aby dodać znak zapytania na 
+    symbolu w poleceniu. Oto jak to wygląda: ?`:`. Pamiętaj, aby dodać znak zapytania na 
     początku."
 
 - Class: text
