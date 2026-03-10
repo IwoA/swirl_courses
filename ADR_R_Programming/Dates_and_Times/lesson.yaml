@@ -210,7 +210,7 @@
   Hint: difftime(Sys.time(), t1, units = podaj_jednostkę) poinformuje Cię, ile dni minęło od utworzenia t1 (i lepiej, żeby było mniej niż 1!)
 
 - Class: cmd_question
-  Output: Dla utrwalenia sprawdź ile jeszcze dni zostało do wakacji, zakładając, że zaczynają się 1 lipca.
+  Output: Dla utrwalenia sprawdź ile jeszcze dni zostało do wakacji, zakładając, że zaczynają się 1 lipca. Nie zapomnij użyć funkcji strptime().
   CorrectAnswer: difftime(Sys.time(), strptime("1 lipca", "%d %B"), units = 'days')
   AnswerTests: match_call("difftime(Sys.time(), strptime("1 lipca", "%d %B"), units = 'days')")
   Hint: Pamiętaj o właściwej kolejności, od 1 lipca odejmujemy dzisiejszą datę. Pierwszy lipca to będzie 
