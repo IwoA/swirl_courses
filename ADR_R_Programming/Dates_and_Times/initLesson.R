@@ -1,5 +1,8 @@
 ### MAY END UP USING THIS AT SOME POINT... ###
 
+if (grepl("pl",Sys.getlocale()) == FALSE) {
+  Sys.setlocale("LC_TIME", "pl_PL.UTF-8")
+}
 # Code used to create dataset
 # dob_start <- as.Date('1950-01-01')
 # dob_end <- as.Date('1994-01-01')
