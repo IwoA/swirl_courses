@@ -154,10 +154,10 @@
           wejściowe nie muszą być w określonym formacie (RRRR-MM-DD).
 
 - Class: cmd_question
-  Output: 'Aby zobaczyć jak to działa, zapisz następujący ciąg znaków w zmiennej o nazwie t3: „17 październik 1986 08:24” 
+  Output: 'Aby zobaczyć jak to działa, zapisz następujący ciąg znaków w zmiennej o nazwie t3: „17 października 1986 08:24” 
           (wraz z cudzysłowem).'
-  CorrectAnswer: t3 <- "17 październik 1986 08:24"
-  AnswerTests: omnitest(correctExpr='t3 <- "17 październik 1986 08:24"')
+  CorrectAnswer: t3 <- "17 października 1986 08:24"
+  AnswerTests: omnitest(correctExpr='t3 <- "17 października 1986 08:24"')
   Hint: Zapisz "17 październik 1986 08:24" (wraz z cudzysłowami) w nowej zmiennej t3.
 
 - Class: cmd_question
@@ -175,7 +175,7 @@
   Hint: Zrób to tak jak zwykle.
 
 - Class: cmd_question
-  Output: Takiego formatu oczekiwaliśmy. Co ważne, R rozpoznaje lokalny zapis nazw miesięcy. A teraz sprawdź klasę zmiennej t4.
+  Output: 'Takiego formatu oczekiwaliśmy. Co ważne, R rozpoznaje lokalny zapis nazw miesięcy choć może mieć problemy z odmianą. A teraz sprawdź klasę zmiennej t4.'
   CorrectAnswer: class(t4)
   AnswerTests: omnitest(correctExpr='class(t4)')
   Hint: Funkcja nazywa się prawie tak jak po polsku.
@@ -212,7 +212,7 @@
 - Class: cmd_question
   Output: Dla utrwalenia sprawdź ile jeszcze dni zostało do wakacji, zakładając, że zaczynają się 1 lipca. Nie zapomnij użyć funkcji strptime().
   CorrectAnswer: difftime(Sys.time(), strptime("1 lipca", "%d %B"), units = 'days')
-  AnswerTests: match_call("difftime(Sys.time(), strptime("1 lipca", "%d %B"), units = 'days')")
+  AnswerTests: match_call("difftime(Sys.time(), strptime('1 lipca', '%d %B'), units = 'days')")
   Hint: Pamiętaj o właściwej kolejności, od 1 lipca odejmujemy dzisiejszą datę. Pierwszy lipca to będzie 
         strptime("1 lipca", "tutaj_wstaw_odpowiedni_symbol_dnia_i_miesiąca")
 
