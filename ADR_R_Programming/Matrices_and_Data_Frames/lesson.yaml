@@ -90,8 +90,8 @@
 - Class: cmd_question
   Output: Teraz spójrz na dokumentację funkcji matrix i sprawdź, czy potrafisz wymyślić, jak utworzyć macierz zawierającą te same liczby (1-20) i wymiary (4 wiersze, 5 kolumn) poprzez wywołanie funkcji matrix(). Zapisz wynik w zmiennej o nazwie my_matrix2.
   CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
-  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
-  Hint: Wywołaj funkcję matrix() z trzema argumentami -- 1:20, liczbą wierszy i liczbą kolumn. Pamiętaj, aby określić argumenty według ich nazw własnych i zapisać wynik w my_matrix2 (nie w my_matrix).
+  AnswerTests: omnitest(correctExpr='my_matrix2 <- matrix(1:20, nrow=4, ncol=5)')
+  Hint: "Wywołaj funkcję matrix() z trzema argumentami:  1:20, liczbą wierszy i liczbą kolumn. Pamiętaj, aby określić argumenty według ich nazw własnych i zapisać wynik w my_matrix2 (nie w my_matrix)."
 
 - Class: cmd_question
   Output: Na koniec potwierdźmy, że my_matrix i my_matrix2 są faktycznie identyczne. Funkcja identical() powie nam, czy jej pierwsze dwa argumenty są takie same. Wypróbuj ją.
