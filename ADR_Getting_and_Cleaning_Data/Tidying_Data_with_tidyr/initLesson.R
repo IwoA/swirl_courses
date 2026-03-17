@@ -91,7 +91,7 @@ failed <- students4 %>%
 ### real data examples
 
 .path2sat <- file.path(.lesson_path, 'sat13.csv')
-sat <- tbl_df(read.csv(.path2sat, stringsAsFactors = FALSE))
+sat <- tibble::as_tibble(read.csv(.path2sat, stringsAsFactors = FALSE))
 
 
 
