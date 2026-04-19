@@ -1,6 +1,6 @@
 # Ten skrypt bazuje na poprzednim, dodając
 # wywołanie pivot_wider(), co pozwoli nam zamienić
-# wartości kolumny testowej, midterm i final, na
+# wartości kolumny test czyli midterm i final, na
 # nagłówki kolumn (tj. zmienne).
 #
 # Musisz określić tylko dwa argumenty dla pivot_wider().
