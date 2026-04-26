@@ -7,7 +7,7 @@
   Version: 2.2.0
 
 - Class: text
-  Output:  W innej lekcji przedstawiliśmy przegląd trzech systemów tworzenia wykresów w R. W tej lekcji skupimy się na podstawowym systemie i powiemy więcej o tym, jak można wykorzystać wszystkie jego parametry, aby uzyskać pożądany wykres. Ograniczymy się do wyświetlania grafiki na ekranie, a nie na innych urządzeniach graficznych takich jak pliki.
+  Output:  W pierwszej lekcji przedstawiliśmy przegląd systemów tworzenia wykresów w R. W tej lekcji skupimy się na podstawowym systemie i powiemy więcej o tym, jak można wykorzystać wszystkie jego parametry, aby uzyskać pożądany wykres. Ograniczymy się do wyświetlania grafiki na ekranie, a nie na innych urządzeniach graficznych takich jak pliki.
 
 - Class: text
   Output:  Podstawowy silnik wykresów i grafiki w R jest zawarty w dwóch pakietach. Pierwszy to pakiet graphics, który zawiera funkcje wykresów dla systemu „bazowego”. Funkcje w tym pakiecie obejmują plot, hist, boxplot, barplot itd. Drugim pakietem jest grDevices, który zawiera cały kod implementujący różne urządzenia graficzne, w tym X11, PDF, PostScript, PNG itd.
@@ -226,94 +226,13 @@
   Hint: Kod płatków śniegu to 8
 
 - Class: cmd_question
-  Output: Teraz użyjemy funkcji legend(), aby wyjaśnić wykres i jego znaczenie. Funkcja ta ma wiele argumentów, ale użyjemy tylko 4. Pierwszym będzie ciąg „topright”, który wskaże R, gdzie umieścić legendę. Pozostałe 3 argumenty będą 2-elementowymi wektorami utworzonymi przez funkcję concatenate, czyli c(). Te argumenty to pch, col i legend. Pierwszym jest wektor (17,8), drugim („blue”, „red”), a trzecim („May”, „Other Months”). Zrób to teraz.
-  CorrectAnswer: legend("topright",pch=c(17,8),col=c("blue","red"),legend=c("May","Other Months"))
-  AnswerTests: omnitest(correctExpr='legend("topright",pch=c(17,8),col=c("blue","red"),legend=c("May","Other Months"))')
-  Hint: Uzupełnij legend("",pch= ,col= ,legend=).
-
-- Class: cmd_question
   Output: Teraz przy użyciu funkcji abline() dodaj pionową linię w medianie airquality$Wind. Ma być przerywana (lty=2) o szerokości 2.
   CorrectAnswer: abline(v=median(airquality$Wind),lty=2,lwd=2)
   AnswerTests: omnitest(correctExpr='abline(v=median(airquality$Wind),lty=2,lwd=2)')
   Hint: Wpisz abline(v=median(airquality$Wind),lty=2,lwd=2).
 
-- Class: cmd_question
-  Output: Użyj par() z parametrem mfrow ustawionym na wektor (1,2), aby ustawić okno wykresu dla dwóch wykresów obok siebie. Nie zobaczysz wyniku.
-  CorrectAnswer: par(mfrow=c(1,2))
-  AnswerTests: omnitest(correctExpr='par(mfrow=c(1,2))')
-  Hint: Wpisz par(mfrow=c(1,2)).
-
-- Class: cmd_question
-  Output: Teraz narysuj wykres airquality$Wiatr i airquality$Ozon i użyj polecenia main, aby określić tytuł „Ozone and Wind”.
-  CorrectAnswer: plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")
-  AnswerTests: omnitest(correctExpr='plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")')
-  Hint: Wpisz plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind").
-
-- Class: figure
-  Output: Teraz czas na drugi wykres
-  Figure: goodPlot1.R
-
-- Class: cmd_question
-  Output: Narysuj airquality$Ozone i airquality$Solar.R i użyj argumentu main, aby określić tytuł „Ozone and Solar Radiation”.
-  CorrectAnswer: plot(airquality$Ozone, airquality$Solar.R, main = "Ozone and Solar Radiation")
-  AnswerTests: omnitest(correctExpr='plot(airquality$Ozone, airquality$Solar.R, main = "Ozone and Solar Radiation")')
-  Hint: Uzupełnij plot( $Ozone, $Solar.R, main = "Ozone and Solar Radiation").
-
-- Class: figure
-  Output: Teraz czas na większe wyzwanie.
-  Figure: goodPlot2.R
-
-- Class: cmd_question
-  Output: Tym razem 3 wykresy, aby zilustrować zmianę wewnętrznych i zewnętrznych marginesów. Najpierw ustaw okno wykresu, wpisując par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))
-  CorrectAnswer: par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))
-  AnswerTests: omnitest(correctExpr='par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))')
-  Hint: Wpisz par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0)).
-
 - Class: text
-  Output: Marginesy są określone jako 4-elementowe wektory liczb całkowitych. Każda liczba określa, ile wierszy tekstu pozostawić po każdej stronie. Liczby są przypisywane zgodnie z ruchem wskazówek zegara, zaczynając od dołu. Domyślna wartość dla wewnętrznego marginesu to c(5,1, 4,1, 4,1, 2,1), więc jak widać, zmniejszyliśmy każdy z nich, aby mieć miejsce na zewnętrzny tekst.
-
-- Class: cmd_question
-  Output: Pierwszy wykres powinien być znajomy. Narysuj airquality$Wind i airquality$Ozone z tytułem (argument main) jako „Ozone and Wind”.
-  CorrectAnswer: plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")
-  AnswerTests: omnitest(correctExpr='plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind")')
-  Hint: Wpisz plot(airquality$Wind, airquality$Ozone, main = "Ozone and Wind").
-
-- Class: figure
-  Output: Drugi wykres jest podobny.
-  Figure: goodPlot3.R
-
-- Class: cmd_question
-  Output:  Narysuj airquality$Solar.R i airquality$Ozone z tytułem (argument main) „Ozone and Solar Radiation”.
-  CorrectAnswer: plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation")
-  AnswerTests: omnitest(correctExpr='plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation")')
-  Hint: Wpisz plot(airquality$Solar.R, airquality$Ozone, main = "Ozone and Solar Radiation").
-
-- Class: figure
-  Output: Teraz czas na ostatni panel.
-  Figure: goodPlot4.R
-
-- Class: cmd_question
-  Output: Narysuj airquality$Temp i airquality$Ozone z tytułem (argument main) „Ozone and Temperature”.
-  CorrectAnswer: plot(airquality$Temp, airquality$Ozone, main = "Ozone and Temperature")
-  AnswerTests: omnitest(correctExpr='plot(airquality$Temp, airquality$Ozone, main = "Ozone and Temperature")')
-  Hint: Wpisz plot(airquality$Temp, airquality$Ozone, main = "Ozone and Temperature").
-
-- Class: figure
-  Output: Teraz dodajmy tytuł.
-  Figure: goodPlot5.R
-
-- Class: cmd_question
-  Output: Ponieważ jest to tytuł główny, określamy go poleceniem R mtext. Wywołujemy mtext z ciągiem „Ozone and Weather in New York City” i argumentem outer równym TRUE.
-  CorrectAnswer:  mtext("Ozone and Weather in New York City", outer = TRUE)
-  AnswerTests: omnitest(correctExpr=' mtext("Ozone and Weather in New York City", outer = TRUE)')
-  Hint: Wpisz mtext("Ozone and Weather in New York City", outer = TRUE).
-
-- Class: figure
-  Output: Voila! Piękny, co nie?
-  Figure: goodPlot6.R
-
-- Class: text
-  Output: Gratulacje! Lekcja elegancko ukończona.
+  Output: Obecnie podstawowych funkcji graficznych używa się zazwyczaj do szybkiego podglądu danych. Do bardziej zaawansowanych wizualizacji lepiej korzystać z ggplot.
 
 - Class: mult_question
   Output: "Chcesz otrzymać punkty za ukończenie tej lekcji?"
