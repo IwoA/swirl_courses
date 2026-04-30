@@ -74,21 +74,21 @@
 
 - Class: mult_question
   Output: Który system nie wymaga ładowania dodatkowych pakietów?
-  AnswerChoices:  base; ggplot2; lattice; Winsor&Newton
+  AnswerChoices:  base; ggplot2; Winsor&Newton
   CorrectAnswer: base
   AnswerTests: omnitest(correctVal='base')
   Hint: Nazwa 'bazowy' nie wzięła się znikąd.
 
 - Class: mult_question
   Output: Który system wykresów wykorzystuje gramatykę grafiki?
-  AnswerChoices:  base; ggplot2; lattice; Winsor&Newton
+  AnswerChoices:  base; ggplot2; Winsor&Newton
   CorrectAnswer: ggplot2
   AnswerTests: omnitest(correctVal='ggplot2')
   Hint: Nazwa ci podpowie...
 
 - Class: mult_question
   Output: Która z poniższych firm sprzedaje wysokiej jakości pędzle artystyczne?
-  AnswerChoices:  base; ggplot2; lattice; Winsor&Newton
+  AnswerChoices:  base; ggplot2; Winsor&Newton
   CorrectAnswer: Winsor&Newton
   AnswerTests: omnitest(correctVal='Winsor&Newton')
   Hint: Trudne się wylosowało ;)
