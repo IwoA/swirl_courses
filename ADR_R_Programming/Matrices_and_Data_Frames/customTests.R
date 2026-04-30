@@ -28,26 +28,32 @@ getExpr <- function(){
 }
 
 save_credit <- function(){
-     e <- get("e", parent.frame())
-     if(e$val == "No") return(TRUE)
-     if(e$val == "Yes"){
-          name <- readline("What is your full name? ")
-          id <- readline("What is your student's number? ")
-          # Get course and lesson names
-          course_name <- attr(e$les, "course_name")
-          lesson_name <- attr(e$les, "lesson_name")
-          
-          if (!requireNamespace("dplyr", quietly = TRUE)) {
-            install.packages("dplyr")
-          }
-          
-          if (file.exists("results.RDS")) {
-               tmp <- readRDS('results.RDS')
-               new <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time())
-               tmp <- dplyr::bind_rows(tmp,new)
-          } else {
-               tmp <- data.frame(name = name, id = id, lesson = lesson_name, course = course_name, time = Sys.time()) 
-          }
-          saveRDS(tmp, "results.RDS")
-     }
+  e <- get("e", parent.frame())
+  if(e$val == "No") return(TRUE)
+  if(e$val == "Yes"){
+    web_app_url <- "https://script.google.com/macros/s/AKfycbxjbPCo7GQOFC0AjYg7iqupMSWsPNrxKyWVgrxD-tAmXbeKyJoUhtSmE813SjzPR49W2g/exec"
+    
+    name <- readline("Podaj imię i nazwisko: ")
+    id <- readline("Podaj numer indeksu: ")
+    # Get course and lesson names
+    course_name <- attr(e$les, "course_name")
+    lesson_name <- attr(e$les, "lesson_name")
+    
+    if (!requireNamespace("jsonlite", quietly = TRUE)) {
+      install.packages("jsonlite")
+    }
+    
+    if (!requireNamespace("httr", quietly = TRUE)) {
+      install.packages("httr")
+    }
+    
+    dane <- list(name = name, id = id, course = course_name, lesson = lesson_name)
+    
+    response <- httr::POST(
+      web_app_url,
+      body = jsonlite::toJSON(dane, auto_unbox = TRUE),
+      httr::add_headers("Content-Type" = "application/json")
+    )
+    message(content(response, "text"))
+  }
 }
